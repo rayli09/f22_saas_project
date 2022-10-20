@@ -1,6 +1,10 @@
 # COMS W4152 SaaS Project
 
 ## Team members
+1. Ruize Li
+2. Ken Xiong
+3. Jianyang Duan
+4. Moxin Xu
 
 ## How to build and run locally
 1. Run `bundle install --without production`
