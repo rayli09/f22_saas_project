@@ -1,13 +1,13 @@
 class MoviesController < ApplicationController
 
   def show
-    id = params[:id] # retrieve movie ID from URI route
-    @movie = Movie.find(id) # look up movie by unique ID
+    id = params[:id] # retrieve event ID from URI route
+    @movie = Movie.find(id) # look up event by unique ID
     # will render app/views/movies/show.<extension> by default
   end
 
   def index
-    @movies = Movie.all
+    @emovies = Movie.all
   end
 
   def new

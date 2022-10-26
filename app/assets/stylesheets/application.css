@@ -13,3 +13,19 @@
  *= require_tree .
  *= require_self
  */
+@import "bootstrap";
+
+nav li {  /* active case */
+    font-weight: bold;
+    font-size: 30px;
+    padding: 10px;
+    text-align: center;
+    color: white;
+}
+nav li a {  /* normal, link case */
+    font-weight: normal;
+    font-size: 30px;
+    padding: 10px;
+    text-align: center;
+    color: white;
+}
