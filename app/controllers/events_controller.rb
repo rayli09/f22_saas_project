@@ -8,6 +8,7 @@ class EventsController < ApplicationController
   
     def index
       session[:username] = 'Mysaria' # TODO: record user during login
+      # session[:username] = Uusername.new
       @events = Event.all
     end
   
@@ -25,6 +26,16 @@ class EventsController < ApplicationController
     # TODO refactor this method to edit events
     def edit
       @movie = Movie.find params[:id]
+    end
+
+    def join_event
+      eid = params[:id]
+      username = params[:username]
+      # upon clicking `Join`, add username to event's list of attendees
+      @event = Event.find(eid)
+      @event.add_person_to_event(username)  # returns true or false
+      # TODO change status of button from `Join` to grayed `Joined`
+      redirect_to action: 'show', id: eid
     end
   
     # TODO refactor this method to update events
@@ -60,7 +71,7 @@ class EventsController < ApplicationController
     # Making "internal" methods private is not required, but is a common practice.
     # This helps make clear which methods respond to requests, and which ones do not.
     def movie_params
-      params.require(:movie).permit(:title, :rating, :description, :release_date)
+      params.require(:movie).permit(:title, :rating, :description, :release_date, :username)
     end
   end
   
