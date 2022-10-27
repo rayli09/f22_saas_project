@@ -7,6 +7,7 @@ class EventsController < ApplicationController
     end
   
     def index
+      session[:username] = 'Mysaria' # TODO: record user during login
       @events = Event.all
     end
   
@@ -38,6 +39,18 @@ class EventsController < ApplicationController
       redirect_to movies_path
     end
   
+    def myEvents
+      @username = session[:username]
+      @host_events = Event.find_all_host_events(@username)
+      if @host_events.nil? or @host_events.empty?
+        @host_events = []
+      end
+      @join_events = Event.find_all_join_events(@username)
+      if @join_events.nil? or @join_events.empty?
+        @join_events = []
+      end
+    end
+
     private
     # Making "internal" methods private is not required, but is a common practice.
     # This helps make clear which methods respond to requests, and which ones do not.
