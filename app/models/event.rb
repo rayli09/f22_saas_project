@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-    #self.primary_keys = :event_id
+    has_many :comment   #TODO this is placeholder for comments in T2
     serialize :people, Array
     after_initialize do |event|
         event.people= [] if event.people == nil
@@ -21,7 +21,7 @@ class Event < ActiveRecord::Base
         @participants = @participants.add(uid)
     end
     
-    def get_user_status_per_event(uid)
+    def get_user_status(uid)
         # HELPER method: given uid, return the status to render on HTML
         # e.g. JOINED, JOIN, COMPLETE
         # use this to render the button status
