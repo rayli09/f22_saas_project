@@ -26,6 +26,13 @@ class EventsController < ApplicationController
     def edit
       @movie = Movie.find params[:id]
     end
+
+    def join_event
+      # upon clicking `Join`, add uid to event's list of attendees
+      @event = Event.find(params[:id])
+      @event.add_person_to_event(params[:uid])
+      # TODO change status of button from `Join` to grayed `Joined`
+    end
   
     # TODO refactor this method to update events
     def update
@@ -60,7 +67,7 @@ class EventsController < ApplicationController
     # Making "internal" methods private is not required, but is a common practice.
     # This helps make clear which methods respond to requests, and which ones do not.
     def movie_params
-      params.require(:movie).permit(:title, :rating, :description, :release_date)
+      params.require(:movie).permit(:title, :rating, :description, :release_date, :uid)
     end
   end
   
