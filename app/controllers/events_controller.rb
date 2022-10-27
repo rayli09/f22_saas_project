@@ -28,10 +28,13 @@ class EventsController < ApplicationController
     end
 
     def join_event
+      eid = params[:id]
+      uid = params[:uid]
       # upon clicking `Join`, add uid to event's list of attendees
-      @event = Event.find(params[:id])
-      @event.add_person_to_event(params[:uid])
+      @event = Event.find(eid)
+      @event.add_person_to_event(uid)  # returns true or false
       # TODO change status of button from `Join` to grayed `Joined`
+      redirect_to action: 'show', id: eid
     end
   
     # TODO refactor this method to update events

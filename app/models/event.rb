@@ -1,9 +1,9 @@
 class Event < ActiveRecord::Base
     has_many :comment, :dependent => :destroy  #TODO this is placeholder for comments in T2
     serialize :people, Array
-    after_initialize do |event|
-        event.people= [] if event.people == nil
-    end
+    # after_initialize do |event|
+    #     event.people= [] if event.people == nil
+    # end
     after_initialize :init_event  # better way?
 
     def self.find_all_host_events(username)
@@ -17,8 +17,7 @@ class Event < ActiveRecord::Base
         Event.where("people like ?", "%#{username}%")
     end
     def add_person_to_event(uid)
-        # add a user to the event
-        @participants = @participants.add(uid)
+        @people.append(uid)
     end
     
     def get_user_status(uid)
@@ -32,8 +31,8 @@ class Event < ActiveRecord::Base
         # FULL: can't join right now because it's full
         # ------------------------------------------------------------
         return :CLOSED if @status == :closed
-        return :FULL if @participants.size >= @people_limit
-        return :JOIN if !@participants.include?(uid)
+        return :FULL if @people.size >= @people_limit
+        return :JOIN if !@people.include?(uid)
         return :JOINED
     end
     # INTERNAL
@@ -45,7 +44,8 @@ class Event < ActiveRecord::Base
         # status: :open || :full || :closed
         # people_limit: number of people allowed in this event
         # ----------------------------------------------------
-        @participants = Set.new
+        # @participants = Set.new
+        @people = []
         @status = :open
         @people_limit = 10 #TODO refactor
     end
