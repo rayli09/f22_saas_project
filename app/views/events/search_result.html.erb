@@ -1,0 +1,32 @@
+<h1>Search Result: </h1>
+<table class="table table-striped col-md-12" id="events">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Host</th>
+      <th>Rating</th>
+      <th>Joined</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @events.each do |event| %>
+    <tr>
+      <td>
+        <%= event.title %>
+      </td>
+      <td>
+        <%= event.host %>
+      </td>
+      <td>
+        <%= event.rating %>
+      </td>
+      <td>
+        <%= event.joined %>
+      </td>
+      <td>
+        <%= link_to "Details", event_path(event), :class => 'btn btn-primary'%>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

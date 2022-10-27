@@ -66,12 +66,19 @@ class EventsController < ApplicationController
       end
     end
 
+    def search
+    end
+
+    def search_result
+      @events = Event.find_event_by_name(params[:q])
+    end
+
     # TODO refactor this method to set required params
     private
     # Making "internal" methods private is not required, but is a common practice.
     # This helps make clear which methods respond to requests, and which ones do not.
     def movie_params
-      params.require(:movie).permit(:title, :rating, :description, :release_date, :username)
+      params.require(:movie).permit(:title, :rating, :description, :release_date, :username, :q)
     end
   end
   

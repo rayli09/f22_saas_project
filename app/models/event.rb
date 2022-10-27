@@ -35,6 +35,13 @@ class Event < ActiveRecord::Base
         return :JOIN if !@people.include?(uid)
         return :JOINED
     end
+
+    #Find events by event name or host name
+    def self.find_event_by_name(name)
+        #calling group here is necessary, otherwise duplicate entries will be returned
+        Event.group(:title).where("title LIKE ? OR host LIKE ?", "%#{name}%", "%#{name}%")
+    end
+
     # INTERNAL
     private 
     def init_event
