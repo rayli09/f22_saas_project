@@ -79,6 +79,6 @@ yarn-debug.log*
 !/storage/.keep
 /public/uploads
 
-/log/devlopment.log
+/log/development.log
 /tmp/*
 /db/development.sqlite3
