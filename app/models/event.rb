@@ -4,7 +4,7 @@ class Event < ActiveRecord::Base
     # after_initialize do |event|
     #     event.people= [] if event.people == nil
     # end
-    after_initialize :init_event  # better way?
+    after_initialize :init_event
 
     def self.find_all_host_events(username)
         # events hosted by user
