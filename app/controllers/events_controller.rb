@@ -15,16 +15,19 @@ class EventsController < ApplicationController
       # default: render 'new' template
     end
   
+    # TODO refactor this method to create events
     def create
       @movie = Movie.create!(movie_params)
       flash[:notice] = "#{@movie.title} was successfully created."
       redirect_to movies_path
     end
   
+    # TODO refactor this method to edit events
     def edit
       @movie = Movie.find params[:id]
     end
   
+    # TODO refactor this method to update events
     def update
       @movie = Movie.find params[:id]
       @movie.update_attributes!(movie_params)
@@ -32,6 +35,7 @@ class EventsController < ApplicationController
       redirect_to movie_path(@movie)
     end
   
+    # TODO refactor this method to destroy events
     def destroy
       @movie = Movie.find(params[:id])
       @movie.destroy
@@ -51,6 +55,7 @@ class EventsController < ApplicationController
       end
     end
 
+    # TODO refactor this method to set required params
     private
     # Making "internal" methods private is not required, but is a common practice.
     # This helps make clear which methods respond to requests, and which ones do not.
