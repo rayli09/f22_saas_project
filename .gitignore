@@ -79,7 +79,3 @@ yarn-debug.log*
 !/storage/.keep
 /public/uploads
 
-# Ignore uploaded files
-/tmp/*
-/log/devlopment.log
-/db/development.sqlite3
