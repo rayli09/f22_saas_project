@@ -9,7 +9,13 @@ class EventsController < ApplicationController
     def index
       session[:username] = 'Mysaria' # TODO: record user during login
       # session[:username] = Uusername.new
-      @events = Event.all
+
+      #check for search query string
+      if params[:q].nil? == false
+        return @events = Event.find_event_by_name(params[:q])
+      else
+        return @events = Event.all
+      end
     end
   
     def new
@@ -67,10 +73,7 @@ class EventsController < ApplicationController
     end
 
     def search
-    end
-
-    def search_result
-      @events = Event.find_event_by_name(params[:q])
+      #Default search template TODO: advanced search?
     end
 
     # TODO refactor this method to set required params
