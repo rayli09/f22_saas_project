@@ -20,8 +20,8 @@
                 <tbody>
                     <% if (@host_events.empty?) %>
                         <tr>
+                           <td>You haven't hosted any event</td>
                            <td><%= link_to "HOST NOW🤗", new_event_path() %></td> 
-                           <td></td>
                            <td></td>
                            <td></td>
                         </tr>
@@ -61,8 +61,8 @@
             <tbody>
                 <% if (@join_events.empty?) %>
                     <tr>
+                        <td>You haven't joined any event</td>
                         <td><%= link_to "JOIN NOW👋", events_path %></td>
-                        <td></td>
                         <td></td>
                         <td></td>
                     </tr>
