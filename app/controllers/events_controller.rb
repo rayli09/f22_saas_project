@@ -9,7 +9,13 @@ class EventsController < ApplicationController
     def index
       session[:username] = 'Mysaria' # TODO: record user during login
       # session[:username] = Uusername.new
-      @events = Event.all
+
+      #check for search query string
+      if params[:q].nil? == false
+        return @events = Event.find_event_by_name(params[:q])
+      else
+        return @events = Event.all
+      end
     end
   
     def new
@@ -66,12 +72,16 @@ class EventsController < ApplicationController
       end
     end
 
+    def search
+      #Default search template TODO: advanced search?
+    end
+
     # TODO refactor this method to set required params
     private
     # Making "internal" methods private is not required, but is a common practice.
     # This helps make clear which methods respond to requests, and which ones do not.
     def movie_params
-      params.require(:movie).permit(:title, :rating, :description, :release_date, :username)
+      params.require(:movie).permit(:title, :rating, :description, :release_date, :username, :q)
     end
   end
   

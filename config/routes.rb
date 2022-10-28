@@ -4,4 +4,6 @@ Rottenpotatoes::Application.routes.draw do
   root :to => redirect('/events')
 
   match '/myEvents', to: 'events#myEvents', as: 'myEvents', via: :get 
+  match '/search', to: 'events#search', as: 'search', via: :get
+  match '/search_result', to: 'events#index', as: 'search_result', via: :get
 end
