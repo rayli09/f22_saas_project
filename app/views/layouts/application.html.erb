@@ -21,8 +21,20 @@
             <%= link_to "My Events", myEvents_path(@username) %>
           </li>
           <li>
+            <%= link_to "Advanced Search", search_path %>
+          </li>
+          <li>
+            <%= form_tag search_result_path, method: :get, id: 'search_form1' do %>
+              <%= text_field_tag :q, params[:q], size: 25, placeholder: "Search event name or host name" %>
+              <%= submit_tag "Search", class: "btn btn-primary" %>
+            <% end %>
+          </li>
+          <li>
             <%= link_to "Log in", events_path %>
           </li>
+          <li>
+            <%= link_to "Sign Up", events_path %>
+        </li>
       </ul>
     </nav>
     <div class="container">
