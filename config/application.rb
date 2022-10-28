@@ -64,6 +64,8 @@ module Rottenpotatoes
 
     # Fix for Heroku deploy
     config.assets.initialize_on_precompile = false
+    
+    config.secret_key_base = '<%= ENV["SECRET_KEY_BASE"] %>'
 
   end
 end
