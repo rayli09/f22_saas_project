@@ -1,12 +1,22 @@
-<h2>Edit Existing Movie</h2>
-<%= form_tag movie_path(@movie), :method => :put do %>
-  <%= label :movie, :title, 'Title', :class => 'col-form-label' %>
-  <%= text_field :movie, 'title', :class => 'form-control' %>
-  <%= label :movie, :rating, 'Rating', :class => 'col-form-label'  %>
-  <%= select :movie, :rating, ['G','PG','PG-13','R','NC-17'], {}, {:class => 'form-control col-1'} %>
-  <%= label :movie, :release_date, 'Released On', :class => 'col-form-label'  %>
-  <%= date_select :movie, :release_date, {}, :class => 'form-control col-2 d-inline' %>
+<!--  This file is app/views/events/edit.html.erb -->
+<h2>Edit Event</h2>
+
+<%= form_tag event_path(@event), :method => :put do %>
+  <%= label :event, :title, 'Title', :class => 'col-form-label' %>
+  <%= text_field :event, :title, :class => 'form-control' %>
+  <%= label :event, :host, 'Host', :class => 'col-form-label'  %>
+  <%= text_field :event, :host, :class => 'form-control' %>
+  <br>
+  <%= label :event, :event_time, 'Event Time', :class => 'col-form-label'  %>
+  <%= date_select :event, :event_time, {}, :class => 'form-control col-2 d-inline' %>
+  <br>
+  <%= label :event, :attendee_limit, 'Maximum Number of Attendees', :class => 'col-form-label'  %>
+  <%= text_field :event, :attendee_limit, :class => 'form-control' %>
+  <%= label :event, :description, 'Event Description', :class => 'col-form-label'  %>
+  <%= text_field :event, :description, :class => 'form-control' %>
+  <%= label :event, :status, 'Status', :class => 'col-form-label'  %>
+  <%= select :event, :status, [:open, :closed], {}, {:class => 'form-control col-1'} %>
   <br/>
-  <%= submit_tag 'Update Movie Info', :class => 'btn btn-primary' %>
-  <%= link_to 'Cancel', movies_path, :class => 'btn btn-secondary' %>
+  <%= submit_tag 'Update Event Info', :class => 'btn btn-primary' %>
+  <%= link_to 'Cancel', event_path(@event), :class => 'btn btn-secondary' %>
 <% end %>

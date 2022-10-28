@@ -2,7 +2,7 @@ class EventsController < ApplicationController
 
     def show
       id = params[:id] # retrieve event ID from URI route
-      @events = Event.find(id) # look up event by unique ID
+      @event = Event.find(id) # look up event by unique ID
       # will render app/views/events/show.<extension> by default
     end
   
@@ -21,17 +21,17 @@ class EventsController < ApplicationController
     def new
       # default: render 'new' template
     end
-  
-    # TODO refactor this method to create events
+
     def create
-      @movie = Movie.create!(movie_params)
-      flash[:notice] = "#{@movie.title} was successfully created."
-      redirect_to movies_path
+      @event = Event.create!(event_params)
+      init_attributes = {:rating => '5.0/5.0', :joined => '0', :status => 0, :people => []}
+      @event.update_attributes!(init_attributes)
+      flash[:notice] = "Event '#{@event.title}' was successfully created."
+      redirect_to events_path
     end
-  
-    # TODO refactor this method to edit events
+
     def edit
-      @movie = Movie.find params[:id]
+      @event = Event.find(params[:id])
     end
 
     def join_event
@@ -43,21 +43,19 @@ class EventsController < ApplicationController
       # TODO change status of button from `Join` to grayed `Joined`
       redirect_to action: 'show', id: eid
     end
-  
-    # TODO refactor this method to update events
+
     def update
-      @movie = Movie.find params[:id]
-      @movie.update_attributes!(movie_params)
-      flash[:notice] = "#{@movie.title} was successfully updated."
-      redirect_to movie_path(@movie)
+      @event = Event.find(params[:id])
+      @event.update_attributes!(event_params)
+      flash[:notice] = "Event '#{@event.title}' was successfully updated."
+      redirect_to event_path(@event)
     end
-  
-    # TODO refactor this method to destroy events
+
     def destroy
-      @movie = Movie.find(params[:id])
-      @movie.destroy
-      flash[:notice] = "Movie '#{@movie.title}' deleted."
-      redirect_to movies_path
+      @event = Event.find(params[:id])
+      @event.destroy
+      flash[:notice] = "Event '#{@event.title}' was deleted."
+      redirect_to events_path
     end
   
     def myEvents
@@ -80,8 +78,8 @@ class EventsController < ApplicationController
     private
     # Making "internal" methods private is not required, but is a common practice.
     # This helps make clear which methods respond to requests, and which ones do not.
-    def movie_params
-      params.require(:movie).permit(:title, :rating, :description, :release_date, :username, :q)
+    def event_params
+      params.require(:event).permit(:title, :host, :rating, :joined, :people, :status, :event_time, :attendee_limit, :description, :q)
     end
   end
   
