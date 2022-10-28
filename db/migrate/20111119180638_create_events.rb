@@ -6,7 +6,7 @@ class CreateEvents < ActiveRecord::Migration
       t.string :rating
       t.string :joined
       t.text   :people
-      t.string :status
+      t.integer :status # enum type, 0: open, 1: closed
       # Add fields that let Rails automatically keep track
       # of when movies are added or modified:
       t.timestamps

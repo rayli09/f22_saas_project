@@ -29,3 +29,13 @@ nav li a {  /* normal, link case */
     text-align: center;
     color: white;
 }
+
+#search_btn_nav{
+    color: white;
+    border-color: white;
+}
+
+#search_form_nav{
+    font-size: 20px;
+    padding-top: 5px;
+}

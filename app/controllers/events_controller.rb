@@ -7,8 +7,8 @@ class EventsController < ApplicationController
     end
   
     def index
-      session[:username] = 'Mysaria' # TODO: record user during login
-      # session[:username] = Uusername.new
+      # TODO: record user during login
+      # session[:username] = Username.new
 
       #check for search query string
       if params[:q].nil? == false
@@ -36,7 +36,7 @@ class EventsController < ApplicationController
 
     def join_event
       eid = params[:id]
-      username = params[:username]
+      username = params[:username] #TODO: use session[:username]
       # upon clicking `Join`, add username to event's list of attendees
       @event = Event.find(eid)
       @event.add_person_to_event(username)  # returns true or false
@@ -61,7 +61,7 @@ class EventsController < ApplicationController
     end
   
     def myEvents
-      @username = session[:username]
+      @username = 'Mysaria' # TODO: session[:username]
       @host_events = Event.find_all_host_events(@username)
       if @host_events.nil? or @host_events.empty?
         @host_events = []

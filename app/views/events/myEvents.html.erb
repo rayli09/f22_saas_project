@@ -18,21 +18,30 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% @host_events.each do |event| %>
-                    <tr>
-                    <td>
-                        <%= event.title %>
-                    </td>
-                    <td>
-                        <%= event.status %>
-                    </td>
-                    <td>
-                        <%= link_to "Details", event_path(event), :class => 'btn btn-primary'%>
-                    </td>
-                    <td>
-                        <%= link_to "Rate", event_path(event), :class => 'btn btn-primary'%>
-                    </td>
-                    </tr>
+                    <% if (@host_events.empty?) %>
+                        <tr>
+                           <td>You haven't hosted any event</td>
+                           <td><%= link_to "HOST NOW🤗", new_event_path() %></td> 
+                           <td></td>
+                           <td></td>
+                        </tr>
+                    <% else %>
+                        <% @host_events.each do |event| %>
+                        <tr>
+                        <td>
+                            <%= event.title %>
+                        </td>
+                        <td>
+                            <%= event.status %>
+                        </td>
+                        <td>
+                            <%= link_to "Details", event_path(event), :class => 'btn btn-primary'%>
+                        </td>
+                        <td>
+                            <!-- <%= link_to "Rate", event_path(event), :class => 'btn btn-primary'%>-->
+                        </td>
+                        </tr>
+                        <% end %>
                     <% end %>
                 </tbody>
             </table>
@@ -50,21 +59,30 @@
                 </tr>
             </thead>
             <tbody>
-                <% @join_events.each do |event| %>
-                <tr>
-                <td>
-                    <%= event.title %>
-                </td>
-                <td>
-                    <%= event.status %>
-                </td>
-                <td>
-                    <%= link_to "Details", event_path(event), :class => 'btn btn-primary'%>
-                </td>
-                <td>
-                    <%= link_to "Rate", event_path(event), :class => 'btn btn-primary'%>
-                </td>
-                </tr>
+                <% if (@join_events.empty?) %>
+                    <tr>
+                        <td>You haven't joined any event</td>
+                        <td><%= link_to "JOIN NOW👋", events_path %></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                <% else %>
+                    <% @join_events.each do |event| %>
+                    <tr>
+                    <td>
+                        <%= event.title %>
+                    </td>
+                    <td>
+                        <%= event.status %>
+                    </td>
+                    <td>
+                        <%= link_to "Details", event_path(event), :class => 'btn btn-primary'%>
+                    </td>
+                    <td>
+                       <!-- <%= link_to "Rate", event_path(event), :class => 'btn btn-primary'%>-->
+                    </td>
+                    </tr>
+                    <% end %>
                 <% end %>
             </tbody>
         </table>
