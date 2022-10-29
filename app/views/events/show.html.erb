@@ -38,7 +38,7 @@
   <%= link_to 'Delete', event_path(@event), 'data-method' => 'delete', 'data-confirm' => 'Are you sure?', :class => 'btn btn-danger col-2' %>
   <%= link_to 'Back to event list', events_path, :class => 'btn btn-primary col-2' %>
   <%# Below handles join/unjoin %>
-  <% if (@is_viewer_host) %>
-  <%= link_to @join_text, join_path({:id=>@event.id}), :class => @join_btn_style %>
+  <% if (!@is_viewer_host) %>
+  <%= link_to @join_text, join_path({:id=>@event.id}), :class => @join_btn_style, :id => 'join_btn'%>
   <% end %>
 </div>

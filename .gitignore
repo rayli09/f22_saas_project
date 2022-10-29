@@ -80,3 +80,9 @@ yarn-debug.log*
 /storage/*
 !/storage/.keep
 /public/uploads
+
+# ignore some makefile object
+.make.bundle
+.make.db-migrate
+.make.db-setup
+.make.init

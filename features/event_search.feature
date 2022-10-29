@@ -1,11 +1,9 @@
-# TODO: rename this file and its content
-#
-#
-Feature: search for movies by director
+# POC: @KenXiong123
 
+Feature: search for events by hosts
   As a event host
   So that I can create a new event
-  I want to include and search on director information in movies I enter
+  I want to include and search on host information in events I enter
 
 Background: events in database
 

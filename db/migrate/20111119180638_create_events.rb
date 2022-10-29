@@ -4,7 +4,7 @@ class CreateEvents < ActiveRecord::Migration
       t.string :title
       t.string :host
       t.string :rating
-      t.string :joined
+      t.integer :joined
       t.text   :people
       t.integer :status # enum type, 0: open, 1: closed
       t.text :description
