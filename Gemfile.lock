@@ -42,6 +42,7 @@ GEM
     autoprefixer-rails (10.4.7.0)
       execjs (~> 2)
     backports (3.23.0)
+    bcrypt (3.1.18)
     bootstrap-sass (3.4.1)
       autoprefixer-rails (>= 5.2.1)
       sassc (>= 2.0.0)
@@ -233,6 +234,7 @@ PLATFORMS
 
 DEPENDENCIES
   ZenTest (= 4.11.2)
+  bcrypt
   bootstrap-sass
   byebug
   capybara (= 2.4.4)

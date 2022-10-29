@@ -36,7 +36,12 @@
             <% end %>
           </li>
           <li>
-            <%= link_to "Log in/Sign up", events_path %>
+            
+            <% if logged_in? %>
+              <%= link_to  current_user.username, logout_path %>
+            <%else%>
+              <%= link_to "Login/Signup", login_signup_path %>
+            <%end%>
           </li>
       </ul>
     </nav>

@@ -2,17 +2,18 @@ class EventsController < ApplicationController
 
     def show
       id = params[:id] # retrieve event ID from URI route
-      u = session[:username]
+      # u = session[:username]
+      u = current_user.username
       @event = Event.find(id) # look up event by unique ID
       # will render app/views/events/show.<extension> by default
       @join_text = @event.people.include?(u) ? :Unjoin : :Join
-      @join_btn_style = get_join_button_style(session[:username])
+      @join_btn_style = get_join_button_style(u)
       @is_viewer_host = @event.host == u
     end
   
     def index
       # TODO: record user during login
-      session[:username] = 'testuser'
+      # session[:username] = 'testuser'
 
       #check for search query string
       if params[:q].nil? == false
@@ -40,7 +41,7 @@ class EventsController < ApplicationController
     end
 
     def join
-      u = session[:username]
+      u = current_user.username
       @event = Event.find(params[:id])
       is_unjoin = @event.people.include?(u)
       atts = @event.attributes
@@ -67,7 +68,7 @@ class EventsController < ApplicationController
     end
   
     def myEvents
-      @username = session[:username] # TODO: session[:username]
+      @username = current_user.username # TODO: session[:username]
       @host_events = Event.find_all_host_events(@username)
       @host_events = [] if @host_events.nil? or @host_events.empty?
       @join_events = Event.find_all_join_events(@username)
