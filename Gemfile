@@ -3,9 +3,12 @@ source 'https://rubygems.org'
 ruby '2.6.6'
 gem 'rails', '4.2.10'
 gem 'uuid'  # used for generate UUID
+# gem 'pg', '~> 0.20'
+
 # for Heroku deployment 
 group :development, :test do
-  gem 'sqlite3', '1.3.11'
+  gem 'pg', '~> 0.20'
+  # gem 'sqlite3', '1.3.11'
   gem 'byebug'
   gem 'database_cleaner', '1.4.1'
   gem 'capybara', '2.4.4'
@@ -21,7 +24,7 @@ group :test do
   gem 'simplecov', :require => false
 end
 group :production do
-  gem 'pg'
+  gem 'pg', '~> 0.20'
 end
 
 # Gems used only for assets and not required

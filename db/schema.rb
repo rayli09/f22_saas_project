@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20221028230500) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "comments", force: :cascade do |t|
     t.string  "content"
     t.integer "event_id"
@@ -23,7 +26,7 @@ ActiveRecord::Schema.define(version: 20221028230500) do
     t.string   "title"
     t.string   "host"
     t.string   "rating"
-    t.string   "joined"
+    t.integer  "joined"
     t.text     "people"
     t.integer  "status"
     t.text     "description"
