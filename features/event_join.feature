@@ -20,8 +20,7 @@ Scenario: attendee can join event
   Then I should see "Unjoin"
   And I should see "You've joined it!"
 
-# TODO Idk why this fails @KenXiong123
-
+# TODO #20
 Scenario: attendee can unjoin event
   Given I am on the home page
   And I follow "Go To Gym today afternoon"
