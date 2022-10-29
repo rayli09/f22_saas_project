@@ -25,7 +25,7 @@
           </li>
           <li>
             <%= form_tag search_result_path, method: :get, id: 'search_form_nav' do %>
-              <%= text_field_tag :q, params[:q], size: 25, placeholder: "Search event/host/attendee name" %>
+              <%= text_field_tag :q, params[:q], size: 25, placeholder: "Search..." %>
               <%= submit_tag "Search", class: "btn btn-primary", id: "search_btn_nav" %>
             <% end %>
           </li>
