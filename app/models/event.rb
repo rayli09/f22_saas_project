@@ -21,7 +21,7 @@ class Event < ActiveRecord::Base
     #Find events by event name or host name
     def self.find_event_by_name(name)
         #calling group here is necessary, otherwise duplicate entries will be returned
-        Event.group(:title).where("title LIKE ? OR host LIKE ? OR people LIKE ?", "%#{name}%", "%#{name}%", "%#{name}%")
+        Event.where("title LIKE ? OR host LIKE ? OR people LIKE ?", "%#{name}%", "%#{name}%", "%#{name}%")
     end
     
     # INTERNAL
