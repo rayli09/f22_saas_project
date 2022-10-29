@@ -7,6 +7,7 @@ class EventsController < ApplicationController
       # will render app/views/events/show.<extension> by default
       @join_text = @event.people.include?(u) ? :Unjoin : :Join
       @join_btn_style = get_join_button_style(session[:username])
+      @is_viewer_host = @event.host == u
     end
   
     def index
