@@ -1,6 +1,6 @@
 <div style = "margin: 0 auto; padding-top: 100px; padding-left: 300px">
 <%= form_tag search_result_path, method: :get, id: 'search_form' do %>
-    <%= text_field_tag :q, params[:q], size: 50, placeholder: "Search event name or host name or attendee name" %>
-    <%= submit_tag "Search", class: "btn btn-primary" %>
+    <%= text_field_tag :q, params[:q], size: 50, placeholder: "Search event/host/attendee name" %>
+    <%= submit_tag "Search", class: "btn btn-primary", id: "search_result" %>
 <% end %>
 </div>
