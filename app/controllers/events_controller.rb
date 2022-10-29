@@ -2,13 +2,17 @@ class EventsController < ApplicationController
 
     def show
       id = params[:id] # retrieve event ID from URI route
-      @events = Event.find(id) # look up event by unique ID
+      u = session[:username]
+      @event = Event.find(id) # look up event by unique ID
       # will render app/views/events/show.<extension> by default
+      @join_text = @event.people.include?(u) ? :Unjoin : :Join
+      @join_btn_style = get_join_button_style(session[:username])
+      @is_viewer_host = @event.host == u
     end
   
     def index
       # TODO: record user during login
-      # session[:username] = Username.new
+      session[:username] = 'testuser'
 
       #check for search query string
       if params[:q].nil? == false
@@ -21,55 +25,52 @@ class EventsController < ApplicationController
     def new
       # default: render 'new' template
     end
-  
-    # TODO refactor this method to create events
+
     def create
-      @movie = Movie.create!(movie_params)
-      flash[:notice] = "#{@movie.title} was successfully created."
-      redirect_to movies_path
-    end
-  
-    # TODO refactor this method to edit events
-    def edit
-      @movie = Movie.find params[:id]
+      @event = Event.create!(event_params)
+      init_attributes = {:rating => '5.0/5.0', :joined => '0', :status => 0, :people => []}
+      @event.update_attributes!(init_attributes)
+      flash[:notice] = "Event '#{@event.title}' was successfully created."
+      redirect_to events_path
     end
 
-    def join_event
-      eid = params[:id]
-      username = params[:username] #TODO: use session[:username]
-      # upon clicking `Join`, add username to event's list of attendees
-      @event = Event.find(eid)
-      @event.add_person_to_event(username)  # returns true or false
-      # TODO change status of button from `Join` to grayed `Joined`
-      redirect_to action: 'show', id: eid
+    def edit
+      puts params
+      @event = Event.find(params[:id])
     end
-  
-    # TODO refactor this method to update events
+
+    def join
+      u = session[:username]
+      @event = Event.find(params[:id])
+      is_unjoin = @event.people.include?(u)
+      atts = @event.attributes
+      atts[:people] = is_unjoin ? @event.people - [u] : @event.people.append(u)
+      @event.update_attributes!(atts)
+      @join_btn_style = get_join_button_style(u)
+      flash[:notice] = is_unjoin ? "You've unjoined it." : "You've joined it!"
+      redirect_to event_path(@event)
+    end
+
     def update
-      @movie = Movie.find params[:id]
-      @movie.update_attributes!(movie_params)
-      flash[:notice] = "#{@movie.title} was successfully updated."
-      redirect_to movie_path(@movie)
+      @event = Event.find(params[:id])
+      @event.update_attributes!(event_params)
+      flash[:notice] = "Event '#{@event.title}' was successfully updated."
+      redirect_to event_path(@event)
     end
-  
-    # TODO refactor this method to destroy events
+
     def destroy
-      @movie = Movie.find(params[:id])
-      @movie.destroy
-      flash[:notice] = "Movie '#{@movie.title}' deleted."
-      redirect_to movies_path
+      @event = Event.find(params[:id])
+      @event.destroy
+      flash[:notice] = "Event '#{@event.title}' was deleted."
+      redirect_to events_path
     end
   
     def myEvents
-      @username = 'Mysaria' # TODO: session[:username]
+      @username = session[:username] # TODO: session[:username]
       @host_events = Event.find_all_host_events(@username)
-      if @host_events.nil? or @host_events.empty?
-        @host_events = []
-      end
+      @host_events = [] if @host_events.nil? or @host_events.empty?
       @join_events = Event.find_all_join_events(@username)
-      if @join_events.nil? or @join_events.empty?
-        @join_events = []
-      end
+      @join_events = [] if @join_events.nil? or @join_events.empty?
     end
 
     def search
@@ -80,8 +81,14 @@ class EventsController < ApplicationController
     private
     # Making "internal" methods private is not required, but is a common practice.
     # This helps make clear which methods respond to requests, and which ones do not.
-    def movie_params
-      params.require(:movie).permit(:title, :rating, :description, :release_date, :username, :q)
+    def event_params
+      params.require(:event).permit(:title, :host, :rating, :joined, :people, :status, :event_time, :attendee_limit, :description, :q)
+    end
+
+    private
+    def get_join_button_style(uname)
+      return @event.people.include?(uname) ? 'btn btn-secondary col-2' :
+      'btn btn-success col-2'
     end
   end
   
