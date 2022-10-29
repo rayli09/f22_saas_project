@@ -6,7 +6,7 @@
 3. Jianyang Duan
 4. Moxin Xu
 ## Dependency
-1. install `postgreSql` on your local computer.
+1. install `postgreSql` on your local computer. [Reference here](https://www.postgresql.org/download/)
 
 ## For Fast Development
 1. Run `make serve` to streamline dev process. It'll setup env, prepare database, and start server.
