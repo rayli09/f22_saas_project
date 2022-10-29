@@ -22,12 +22,13 @@ Scenario: attendee can join event
 
 # TODO Idk why this fails @KenXiong123
 
-# Scenario: attendee can unjoin event
-#   Given I am on the home page
-#   And I follow "Enjoy Lunch at Junzi2"
-#   # And I follow "Unjoin"
-#   And I verify event
-#   Then I should see "Join"
-#   And I should see "You've unjoined it!"
+Scenario: attendee can unjoin event
+  Given I am on the home page
+  And I follow "Go To Gym today afternoon"
+  And I follow "Join"
+  Then I should see "Unjoin"
+  And I should see "You've joined it!"
+  Then I follow "Unjoin"
+  And I should see "You've unjoined it."
 
 
