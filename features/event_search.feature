@@ -1,8 +1,6 @@
-# TODO: rename this file and its content
-#
-#
-Feature: search for events by hosts
+# POC: @KenXiong123
 
+Feature: search for events by hosts
   As a event host
   So that I can create a new event
   I want to include and search on host information in events I enter
