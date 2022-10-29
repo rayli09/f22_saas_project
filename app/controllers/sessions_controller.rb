@@ -16,6 +16,7 @@ class SessionsController < ApplicationController
  
  def logout
   session[:user_id] = nil
+  flash[:notice] = 'You successfully logged out.'
   redirect_to '/welcome'
  end
 
