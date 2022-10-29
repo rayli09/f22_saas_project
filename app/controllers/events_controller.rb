@@ -45,6 +45,7 @@ class EventsController < ApplicationController
       is_unjoin = @event.people.include?(u)
       atts = @event.attributes
       atts[:people] = is_unjoin ? @event.people - [u] : @event.people.append(u)
+      atts[:joined] = atts[:people].size
       @event.update_attributes!(atts)
       @join_btn_style = get_join_button_style(u)
       flash[:notice] = is_unjoin ? "You've unjoined it." : "You've joined it!"
