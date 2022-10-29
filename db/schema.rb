@@ -11,7 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20111119180638) do
+ActiveRecord::Schema.define(version: 20221028230500) do
+
+  create_table "comments", force: :cascade do |t|
+    t.string  "content"
+    t.integer "event_id"
+    t.integer "user_id"
+  end
 
   create_table "events", force: :cascade do |t|
     t.string   "title"
@@ -20,6 +26,9 @@ ActiveRecord::Schema.define(version: 20111119180638) do
     t.string   "joined"
     t.text     "people"
     t.integer  "status"
+    t.text     "description"
+    t.datetime "event_time"
+    t.integer  "attendee_limit"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
