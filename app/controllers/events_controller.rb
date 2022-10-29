@@ -2,13 +2,16 @@ class EventsController < ApplicationController
 
     def show
       id = params[:id] # retrieve event ID from URI route
+      u = session[:username]
       @event = Event.find(id) # look up event by unique ID
       # will render app/views/events/show.<extension> by default
+      @join_text = @event.people.include?(u) ? :Unjoin : :Join
+      @join_btn_style = get_join_button_style(session[:username])
     end
   
     def index
       # TODO: record user during login
-      # session[:username] = Username.new
+      session[:username] = 'testuser'
 
       #check for search query string
       if params[:q].nil? == false
@@ -31,17 +34,19 @@ class EventsController < ApplicationController
     end
 
     def edit
+      puts params
       @event = Event.find(params[:id])
     end
 
-    def join_event
-      eid = params[:id]
-      username = params[:username] #TODO: use session[:username]
-      # upon clicking `Join`, add username to event's list of attendees
-      @event = Event.find(eid)
-      @event.add_person_to_event(username)  # returns true or false
-      # TODO change status of button from `Join` to grayed `Joined`
-      redirect_to action: 'show', id: eid
+    def join
+      u = session[:username]
+      @event = Event.find(params[:id])
+      is_unjoin = @event.people.include?(u)
+      puts @join_text
+      @event.update_attribute(:people, is_unjoin ? @event.people - [u] : @event.people.append(u))
+      @join_btn_style = get_join_button_style(u)
+      flash[:notice] = is_unjoin ? "You've unjoined it." : "You've joined it!"
+      redirect_to event_path(@event)
     end
 
     def update
@@ -59,15 +64,11 @@ class EventsController < ApplicationController
     end
   
     def myEvents
-      @username = 'Mysaria' # TODO: session[:username]
+      @username = session[:username] # TODO: session[:username]
       @host_events = Event.find_all_host_events(@username)
-      if @host_events.nil? or @host_events.empty?
-        @host_events = []
-      end
+      @host_events = [] if @host_events.nil? or @host_events.empty?
       @join_events = Event.find_all_join_events(@username)
-      if @join_events.nil? or @join_events.empty?
-        @join_events = []
-      end
+      @join_events = [] if @join_events.nil? or @join_events.empty?
     end
 
     def search
@@ -80,6 +81,12 @@ class EventsController < ApplicationController
     # This helps make clear which methods respond to requests, and which ones do not.
     def event_params
       params.require(:event).permit(:title, :host, :rating, :joined, :people, :status, :event_time, :attendee_limit, :description, :q)
+    end
+
+    private
+    def get_join_button_style(uname)
+      return @event.people.include?(uname) ? 'btn btn-secondary col-2' :
+      'btn btn-success col-2'
     end
   end
   
