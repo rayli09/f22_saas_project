@@ -42,8 +42,9 @@ class EventsController < ApplicationController
       u = session[:username]
       @event = Event.find(params[:id])
       is_unjoin = @event.people.include?(u)
-      puts @join_text
-      @event.update_attribute(:people, is_unjoin ? @event.people - [u] : @event.people.append(u))
+      atts = @event.attributes
+      atts[:people] = is_unjoin ? @event.people - [u] : @event.people.append(u)
+      @event.update_attributes!(atts)
       @join_btn_style = get_join_button_style(u)
       flash[:notice] = is_unjoin ? "You've unjoined it." : "You've joined it!"
       redirect_to event_path(@event)
