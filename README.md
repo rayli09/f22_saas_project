@@ -6,6 +6,9 @@
 3. Jianyang Duan
 4. Moxin Xu
 
+## For Fast Development
+1. Run `make serve` to streamline dev process. It'll setup env, prepare database, and start server.
+ 
 ## How to build and run locally
 1. Run `bundle install --without production` to install dependencies
 2. Run `rake db:seed` to load initial values
