@@ -19,5 +19,11 @@ describe Event do
             event2 = Event.create! :people => ['person B']
             expect(Event.find_event_by_name("person")).to include(event1, event2)
         end
+
+        it "shouldn't return a event when host name is not matched" do
+            event1 = Event.create! :host => 'Event A'
+            event2 = Event.create! :host => 'Event B'
+            expect(Event.find_event_by_name("foo")).not_to include(event1, event2)
+        end
     end
 end

@@ -12,12 +12,6 @@ describe EventsController do
                 expect(response).to render_template("index")
             end
         end
-
-        context "When search David" do
-            it "should render search result page" do
-                get :index
-            end
-        end
     end
 
     describe "#search" do
@@ -33,9 +27,9 @@ describe EventsController do
         end
 
         context "When search David" do
-            it "should render search result page" do
-                allow(Event).to receive(:find_event_by_name).with('David').and_return(event)
-                expect(event.title).to match("Lunch")
+            it "should render event related to David" do
+                expect(Event).to receive(:find_event_by_name).with('David').and_return(event)
+                Event.find_event_by_name('David')
             end
         end
     end
