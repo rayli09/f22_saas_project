@@ -31,3 +31,8 @@ Given /I joined the event "([^"]*)"$/ do |title|
   step %{I follow "#{title}"}
   step %{I follow "Join"}
 end
+
+Then /the Maximum Number of Attendees of event "([^"]*)" should be "([^"]*)"$/ do |title, value|
+  event = Event.find_by(title: title)
+  expect(event.attendee_limit).to eq(value.to_i)
+end
