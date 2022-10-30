@@ -46,7 +46,7 @@ jobs:
           POSTGRES_USER: root
           POSTGRES_PASSWORD: dbuserdbuser
         run: |
-          rake db:create db:seed db:migrate
+          bundle exec rake db:create db:seed db:migrate
       - name: Run tests
         env:
           PGHOST: localhost
