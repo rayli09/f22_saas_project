@@ -14,11 +14,13 @@ Background: events in database
   | Lunch at Max Cafe         | 4.8/5.0 | Mysaria           | 3      |
 
 Scenario: see all events on home page
+  Given I logged in as "Alicent Hightower"
   When I go to the home page
   Then I should see all the events
 
 Scenario: find event with host name
-  Given I am on the search page
+  Given I logged in as "Alicent Hightower"
+  And I am on the search page
   When  I fill in "Search event/host/attendee name" with "Mysaria"
   And   I press "search_result"
   Then  I should be on the search result page

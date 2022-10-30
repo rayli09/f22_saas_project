@@ -8,8 +8,26 @@ Given /the following events exist/ do |events_table|
 end
 
 Then /I should see all the events/ do
-  # Make sure that all the movies in the app are visible in the table
+  # Make sure that all the events in the app are visible in the table
   Event.all.each do |event|
-    step %{I should see "#{event.title}"}
+    "I should see '#{event.title}'"
   end
+end
+  
+Given /I logged in as "([^"]*)"$/ do |username|
+    @user = User.create!({:username => username, :password => 'test'})
+    visit '/login'
+    fill_in "username", :with => username
+    fill_in "password", :with => "test"
+    click_button "Login"
+end
+
+Given /I hosted the event "([^"]*)"$/ do |title|
+    Event.create!({:title => title, :host => @user.username, :joined => 0})
+end
+
+Given /I joined the event "([^"]*)"$/ do |title|
+  step %{I am on the home page}
+  step %{I follow "#{title}"}
+  step %{I follow "Join"}
 end
