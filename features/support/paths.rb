@@ -18,6 +18,7 @@ module NavigationHelpers
     when /^the search page$/ then '/search'
     when /^the search result page$/ then '/search_result'
     when /^the myEvents page$/ then '/myEvents'
+    when /^the event detail page of '(.*)'$/ then event_path(Event.find_by(title: $1))
     when /^the welcome page$/ then '/welcome'
     when /^the post event page$/ then '/events/new'
     when /^the event details page for "(.*)"$/ then "/events/#{Event.find_by(title:$1).id}"
