@@ -28,11 +28,18 @@ class EventsController < ApplicationController
     end
 
     def create
-      @event = Event.create!(event_params)
-      init_attributes = {:rating => '5.0/5.0', :joined => '0', :status => 0, :people => []}
-      @event.update_attributes!(init_attributes)
-      flash[:notice] = "Event '#{@event.title}' was successfully created."
-      redirect_to events_path
+      check_result = is_event_params_valid(event_params)
+      if check_result[:is_valid]
+        @event = Event.create!(event_params)
+        init_attributes = {:rating => '5.0/5.0', :joined => '0', :status => 0, :people => []}
+        @event.update_attributes!(init_attributes)
+        flash[:notice] = "Event '#{@event.title}' was successfully created."
+        redirect_to events_path
+      else
+        flash[:warning] = "Field '#{check_result[:invalid_field]}' must be correctly filled in."
+        # temporarily redirect to a new post event page
+        redirect_to new_event_path
+      end
     end
 
     def edit
@@ -55,9 +62,15 @@ class EventsController < ApplicationController
 
     def update
       @event = Event.find(params[:id])
-      @event.update_attributes!(event_params)
-      flash[:notice] = "Event '#{@event.title}' was successfully updated."
-      redirect_to event_path(@event)
+      check_result = is_event_params_valid(event_params)
+      if check_result[:is_valid]
+        @event.update_attributes!(event_params)
+        flash[:notice] = "Event '#{@event.title}' was successfully updated."
+        redirect_to event_path(@event)
+      else
+        flash[:warning] = "Field '#{check_result[:invalid_field]}' must be correctly filled in."
+        redirect_to edit_event_path(@event)
+      end
     end
 
     def destroy
@@ -85,6 +98,22 @@ class EventsController < ApplicationController
     # This helps make clear which methods respond to requests, and which ones do not.
     def event_params
       params.require(:event).permit(:title, :host, :rating, :joined, :people, :status, :event_time, :attendee_limit, :description, :q)
+    end
+
+    private
+    def is_event_params_valid(params)
+      result = {:is_valid => true, :invalid_field => 'None'}
+      if params["title"].nil? or params["title"].blank?
+        result[:is_valid] = false
+        result[:invalid_field] = 'Title'
+      elsif params["host"].nil? or params["host"].blank?
+        result[:is_valid] = false
+        result[:invalid_field] = 'Host'
+      elsif params["attendee_limit"].nil? or params["attendee_limit"].blank?
+        result[:is_valid] = false
+        result[:invalid_field] = 'Maximum Number of Attendees'
+      end
+      return result
     end
 
     private
