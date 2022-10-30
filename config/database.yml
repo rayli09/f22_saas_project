@@ -6,7 +6,7 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  username: postgres
+  username: root
   password: dbuserdbuser #<-- which you have defiend while installing postgresql
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
@@ -36,7 +36,7 @@ production:
   # timeout: 5000
   <<: *default
   database: project_production
-  username: username
+  username: root
   password: <%= ENV['PROJECT_DATABASE_PASSWORD'] %>
 
 cucumber:
