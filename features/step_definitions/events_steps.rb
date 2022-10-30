@@ -1,5 +1,4 @@
 require 'json'  # parse people array
-require 'capybara'
 
 Given /the following events exist/ do |events_table|
   events_table.hashes.each do |event|
@@ -14,18 +13,21 @@ Then /I should see all the events/ do
     "I should see '#{event.title}'"
   end
 end
-
+  
 Given /I logged in as "([^"]*)"$/ do |username|
-  password = 'test'
-  # use webdriver, need to start the server
-  #session = Capybara::Session.new(:selenium)
-  #session.visit 'http://localhost:3000/login'
-  #session.fill_in 'username', visible: false, with: username
-  #session.fill_in 'password', visible: false, with: password
+    @user = User.create!({:username => username, :password => 'test'})
+    visit '/login'
+    fill_in "username", :with => username
+    fill_in "password", :with => "test"
+    click_button "Login"
+end
 
-  # not working bc the field is invisible
-  get '/login'
-  fill_in 'username', :with => username
-  fill_in 'password', :with => password
-  click_button "Login"
-end 
+Given /I hosted the event "([^"]*)"$/ do |title|
+    Event.create!({:title => title, :host => @user.username, :joined => 0})
+end
+
+Given /I joined the event "([^"]*)"$/ do |title|
+  "Given I am on the home page"
+  "I follow '#{title}'"
+  "And I follow 'Join'"
+end

@@ -5,12 +5,9 @@ Feature: show all my events
   So that I can see my history of hosting/joining evetns
 
 Background: events in database
-
   Given the following events exist:
   | title                     | rating  | host              | joined     |  people          |
-  | Go To Gym today afternoon | 4.9/5.0 | Alicent Hightower | 19 |                  |
-  | Enjoy Lunch at Junzi2      | 4.9/5.0 | Daemon Targaryen  | 10 |  "Mysaria"  |
-  | Lunch at Max Cafe         | 4.8/5.0 | Mysaria           | 2 |      "Alicent Hightower"   |
+  | Lunch at Max Cafe         | 4.8/5.0 | Mysaria           | 2 |                  |
 
 Scenario: the user who didn't host or join any event
   Given I logged in as "TestUser"
@@ -22,6 +19,8 @@ Scenario: the user who didn't host or join any event
 
 Scenario: the user hosted and joined some events
   Given I logged in as "Alicent Hightower"
+  And I hosted the event "Go To Gym today afternoon"
+  And I joined the event "Lunch at Max Cafe"
   When I go to the myEvents page
   Then I should see "Go To Gym today afternoon"
   And I should see "Lunch at Max Cafe"
