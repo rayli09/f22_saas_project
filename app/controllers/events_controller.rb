@@ -17,9 +17,11 @@ class EventsController < ApplicationController
 
       #check for search query string
       if params[:q].nil? == false
-        return @events = Event.find_event_by_name(params[:q])
+        @events = Event.find_event_by_name(params[:q])
+        @page_name = "Search Result"
       else
-        return @events = Event.all
+        @events = Event.all
+        @page_name = "Home"
       end
     end
   
