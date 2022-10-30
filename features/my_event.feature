@@ -7,7 +7,7 @@ Feature: show all my events
 Background: events in database
   Given the following events exist:
   | title                     | rating  | host              | joined     |  people          |
-  | Lunch at Max Cafe         | 4.8/5.0 | Mysaria           | 2 |                  |
+  | Lunch at Max Cafe         | 4.8/5.0 | Mysaria           | 0 |                  |
 
 Scenario: the user who didn't host or join any event
   Given I logged in as "TestUser"

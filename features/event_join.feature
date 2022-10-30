@@ -14,7 +14,8 @@ Background: events in database
   | TestEvent                 | 4.8/5.0 | testuser          | 3 |                  |
 
 Scenario: attendee can join event
-  Given I am on the home page
+  Given I logged in as "testuser"
+  And I am on the home page
   And I follow "Go To Gym today afternoon"
   And I follow "Join"
   Then I should see "Unjoin"
@@ -22,7 +23,8 @@ Scenario: attendee can join event
 
 # TODO #20
 Scenario: attendee can unjoin event
-  Given I am on the home page
+  Given I logged in as "testuser"
+  And I am on the home page
   And I follow "Go To Gym today afternoon"
   And I follow "Join"
   Then I should see "Unjoin"

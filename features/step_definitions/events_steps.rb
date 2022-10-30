@@ -27,7 +27,7 @@ Given /I hosted the event "([^"]*)"$/ do |title|
 end
 
 Given /I joined the event "([^"]*)"$/ do |title|
-  "Given I am on the home page"
-  "I follow '#{title}'"
-  "And I follow 'Join'"
+  step %{I am on the home page}
+  step %{I follow "#{title}"}
+  step %{I follow "Join"}
 end
