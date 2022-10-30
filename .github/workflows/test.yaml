@@ -25,15 +25,15 @@ jobs:
           --health-retries 5
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
       - name: Set up Ruby
         uses: actions/setup-ruby@v1
         with:
-          ruby-version: 2.6.6
-      - name: Set up Node
-        uses: actions/setup-node@v1
-        with:
-          node-version: 10.13.0
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+        run:
+          bundle exec rake
+        # with:
+          # ruby-version: 2.6.6
       - name: Install dependencies
         run: |
           sudo apt-get -yqq install libpq-dev build-essential libcurl4-openssl-dev
