@@ -30,8 +30,7 @@ jobs:
         uses: actions/setup-ruby@v1
         with:
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-        # with:
-          # ruby-version: 2.6.6
+          ruby-version: 2.6.6
       - name: Install dependencies
         run: |
           sudo apt-get update
