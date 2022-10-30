@@ -35,6 +35,7 @@ jobs:
       - name: Install dependencies
         run: |
           bundle install --jobs 4 --retry 3
+          bundle update
       - name: Set up database
         run: rake db:migrate:redo
         # env:
