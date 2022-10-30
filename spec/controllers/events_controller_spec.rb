@@ -3,7 +3,9 @@ require 'rails_helper'
 describe EventsController do
     describe "#index" do
         let!(:event) {FactoryGirl.create(:event)}
+        let!(:user) {FactoryGirl.build(:user)}
         before do
+            sign_in user
             get :index
         end
         
@@ -16,10 +18,12 @@ describe EventsController do
 
     describe "#search" do
         let!(:event) {FactoryGirl.create(:event)}
+        let!(:user) {FactoryGirl.build(:user)}
         before do
+            sign_in user
             get :search
         end
-        
+    
         context "When go to the search page" do
             it "should render search template" do                     
                 expect(response).to render_template("search")

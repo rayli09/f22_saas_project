@@ -19,6 +19,7 @@ group :development, :test do
 end
 
 group :test do
+  gem "devise"
   gem "factory_girl", "~> 4.0"
   gem 'cucumber-rails', :require => false
   gem 'cucumber-rails-training-wheels'
