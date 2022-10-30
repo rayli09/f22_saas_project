@@ -18,7 +18,7 @@ class Event < ActiveRecord::Base
         Event.select { |event| event.people.include?("#{username}") }
     end
     
-    #Find events by event name or host name
+    #Find events by event name or host name or attendee name
     def self.find_event_by_name(name)
         #calling group here is necessary, otherwise duplicate entries will be returned
         Event.where("title LIKE ? OR host LIKE ? OR people LIKE ?", "%#{name}%", "%#{name}%", "%#{name}%")
