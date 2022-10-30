@@ -2,7 +2,7 @@ name: WeMeet CI/CD
 on:
   push:
     branches:
-      - main
+      - master
       - 'releases/**'
 jobs:
   test:
