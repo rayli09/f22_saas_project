@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '2.6.6'
 gem 'rails', '4.2.10'
 gem 'uuid'  # used for generate UUID
-# gem 'pg', '~> 0.20'
+gem 'bcrypt'
 
 # for Heroku deployment 
 group :development, :test do

@@ -1,0 +1,47 @@
+name: WeMeet CI/CD
+on:
+  push:
+    branches:
+      - main
+      - 'releases/**'
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres
+        ports: ['5432:5432']
+        env:
+          POSTGRES_USER: root
+          POSTGRES_PASSWORD: dbuserdbuser
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      # - name: Set up Node.js
+      #   uses: actions/setup-node@v1
+      #   with:
+      #     node-version: '14.x'
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.6.6
+          bundler-cache: true
+      - name: Install dependencies
+        run: |
+          bundle install --jobs 4 --retry 3
+      - name: Set up database
+        run: bundle exec rails db:prepare
+        # env:
+        #    DATABASE_PASSWORD: postgres
+      - name: Run Cucumber Tests (BDD)
+        run: rake cucumber
+      - name: Run Spec Tests (TDD)
+        run: rake spec
+        # env:
+        #    RAILS_ENV: test
+          #  SOCIAL_NETWORK_DATABASE_PASSWORD: postgres

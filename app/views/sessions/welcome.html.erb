@@ -1,0 +1,9 @@
+<h1>Welcome</h1>
+<% if logged_in? %>
+    <h1>You are Logged In, <%= current_user.username %></h1>
+<% else %>
+    <div class = "row">
+    <%= button_to "Login", '/login', method: :get, :class => 'btn btn-primary' %>
+    <%= button_to "Sign Up", '/users/new', method: :get, :class => 'btn btn-secondary' %>
+    </div>
+<%end%>
