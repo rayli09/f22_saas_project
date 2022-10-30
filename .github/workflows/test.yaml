@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - master
+      - 't1-fix-cicid'  # temporary
       - 'releases/**'
 jobs:
   test:
