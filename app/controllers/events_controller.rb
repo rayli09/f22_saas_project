@@ -17,7 +17,7 @@ class EventsController < ApplicationController
 
       #check for search query string
       q = params[:q].to_s.strip
-      if q.length > 0
+      if not q.blank? 
         @events = Event.find_event_by_name(q)
         @page_name = "Search Result for '#{q}'"
       else
