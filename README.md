@@ -1,5 +1,7 @@
 # COMS W4152 SaaS Project
 
+Heroku Deployment: https://f22-saas-wemeet.herokuapp.com/
+
 ## Team members
 1. Ruize Li
 2. Ken Xiong
