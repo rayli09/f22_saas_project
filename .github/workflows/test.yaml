@@ -45,8 +45,7 @@ jobs:
           POSTGRES_USER: root
           POSTGRES_PASSWORD: dbuserdbuser
         run: |
-          cp config/database.ci.yml config/database.yml
-          rake db:create db:migrate
+          rake db:create db:seed db:migrate
       - name: Run tests
         env:
           PGHOST: localhost
