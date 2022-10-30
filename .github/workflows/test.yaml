@@ -35,7 +35,7 @@ jobs:
         run: |
           bundle install --jobs 4 --retry 3
       - name: Set up database
-        run: bundle exec rails db:prepare
+        run: rake db:migrate:redo
         # env:
         #    DATABASE_PASSWORD: postgres
       - name: Run Cucumber Tests (BDD)
