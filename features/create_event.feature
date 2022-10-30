@@ -14,28 +14,16 @@ Scenario: the user successfully posts a new event
   When I go to the post event page
   Then I should see "Post New Event"
   When I fill in "Title" with "Test Party Event"
-  And I fill in "Host" with "TestUser"
   And I fill in "Maximum Number of Attendees" with "4"
   And I press "Post Event"
   Then I should be on the home page
   And I should see "Test Party Event"
 
-Scenario: the user fails to post a new event because of empty host value
-  Given I logged in as "TestUser"
-  When I go to the post event page
-  Then I should see "Post New Event"
-  When I fill in "Title" with "Test Party Event"
-  And I fill in "Maximum Number of Attendees" with "4"
-  And I press "Post Event"
-  Then I should be on the post event page
-  And I should see "Field 'Host' must be correctly filled in."
-
 Scenario: the user fails to post a new event because of empty title value
   Given I logged in as "TestUser"
   When I go to the post event page
   Then I should see "Post New Event"
-  When I fill in "Host" with "TestUser"
-  And I fill in "Maximum Number of Attendees" with "4"
+  When I fill in "Maximum Number of Attendees" with "4"
   And I press "Post Event"
   Then I should be on the post event page
   And I should see "Field 'Title' must be correctly filled in."
@@ -45,7 +33,6 @@ Scenario: the user cancels the new event
   When I go to the post event page
   Then I should see "Post New Event"
   When I fill in "Title" with "Test Party Event"
-  And I fill in "Host" with "TestUser"
   And I fill in "Maximum Number of Attendees" with "4"
   And I follow "Cancel"
   Then I should be on the home page

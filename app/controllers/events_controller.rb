@@ -28,10 +28,11 @@ class EventsController < ApplicationController
     end
 
     def create
+      user = current_user.username
       check_result = is_event_params_valid(event_params)
       if check_result[:is_valid]
         @event = Event.create!(event_params)
-        init_attributes = {:rating => '5.0/5.0', :joined => '0', :status => 0, :people => []}
+        init_attributes = {:host => user, :rating => '5.0/5.0', :joined => '0', :status => 0, :people => []}
         @event.update_attributes!(init_attributes)
         flash[:notice] = "Event '#{@event.title}' was successfully created."
         redirect_to events_path
@@ -106,9 +107,6 @@ class EventsController < ApplicationController
       if params["title"].nil? or params["title"].blank?
         result[:is_valid] = false
         result[:invalid_field] = 'Title'
-      elsif params["host"].nil? or params["host"].blank?
-        result[:is_valid] = false
-        result[:invalid_field] = 'Host'
       elsif params["attendee_limit"].nil? or params["attendee_limit"].blank?
         result[:is_valid] = false
         result[:invalid_field] = 'Maximum Number of Attendees'
