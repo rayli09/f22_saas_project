@@ -20,6 +20,9 @@ module NavigationHelpers
     when /^the myEvents page$/ then '/myEvents'
     when /^the event detail page of '(.*)'$/ then event_path(Event.find_by(title: $1))
     when /^the welcome page$/ then '/welcome'
+    when /^the post event page$/ then '/events/new'
+    when /^the event details page for "(.*)"$/ then "/events/#{Event.find_by(title:$1).id}"
+    when /^the edit event page for "(.*)"$/ then "/events/#{Event.find_by(title:$1).id}/edit"
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

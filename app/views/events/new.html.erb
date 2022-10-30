@@ -4,8 +4,6 @@
 <%= form_tag events_path, :class => 'form' do %>
   <%= label :event, :title, 'Title', :class => 'col-form-label' %>
   <%= text_field :event, :title, :class => 'form-control' %>
-  <%= label :event, :host, 'Host', :class => 'col-form-label'  %>
-  <%= text_field :event, :host, :class => 'form-control' %>
   <br>
   <%= label :event, :event_time, 'Event Time', :class => 'col-form-label'  %>
   <%= date_select :event, :event_time, {}, :class => 'form-control col-2 d-inline' %>

@@ -2,7 +2,7 @@
 
 Feature: show all my events
   As a user
-  So that I can see my history of hosting/joining evetns
+  So that I can see my history of hosting/joining events
 
 Background: events in database
   Given the following events exist:
