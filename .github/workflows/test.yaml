@@ -4,6 +4,7 @@ on:
     branches:
       - master
       - 'releases/**'
+      - t1-fix
 jobs:
   verify:
     name: Build
@@ -44,7 +45,7 @@ jobs:
           POSTGRES_USER: root
           POSTGRES_PASSWORD: dbuserdbuser
         run: |
-          bundle exec rake db:reset db:migrate
+          bundle exec rake db:migrate:reset
       - name: Run tests
         env:
           PGHOST: localhost
