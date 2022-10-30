@@ -7,16 +7,14 @@ Feature: Join event
 Background: events in database
 
   Given the following events exist:
-  | title                     | rating  | host              | joined     |  people          |
-  | Go To Gym today afternoon | 4.9/5.0 | Alicent Hightower | 19 |                  |
-  | Enjoy Lunch at Junzi2      | 4.9/5.0 | Daemon Targaryen  | 10 |  "testuser"  |
-  | Lunch at Max Cafe         | 4.8/5.0 | Mysaria           | 2 |                  |
-  | TestEvent                 | 4.8/5.0 | testuser          | 3 |                  |
+  | title                     | rating  | host              | joined     |  people    |
+  | TestEvent1                | 4.9/5.0 | Alicent Hightower | 19         |            |
+  | TestEvent2                | 4.9/5.0 | Daemon Targaryen  | 10         |  testuser  |
 
 Scenario: attendee can join event
   Given I logged in as "testuser"
-  And I am on the home page
-  And I follow "Go To Gym today afternoon"
+  And I am on the event detail page of 'TestEvent1'
+  # And I debug
   And I follow "Join"
   Then I should see "Unjoin"
   And I should see "You've joined it!"
@@ -24,11 +22,8 @@ Scenario: attendee can join event
 # TODO #20
 Scenario: attendee can unjoin event
   Given I logged in as "testuser"
-  And I am on the home page
-  And I follow "Go To Gym today afternoon"
-  And I follow "Join"
-  Then I should see "Unjoin"
-  And I should see "You've joined it!"
+  And I am on the event detail page of 'TestEvent2'
+  # And I debug
   Then I follow "Unjoin"
   And I should see "You've unjoined it."
 
