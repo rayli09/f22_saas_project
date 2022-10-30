@@ -31,3 +31,7 @@ Given /I joined the event "([^"]*)"$/ do |title|
   step %{I follow "#{title}"}
   step %{I follow "Join"}
 end
+# helper method for printing the page to browser for debugging
+And /I debug$/ do
+  save_and_open_page
+end
