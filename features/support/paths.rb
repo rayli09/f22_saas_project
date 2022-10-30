@@ -17,7 +17,7 @@ module NavigationHelpers
     when /^the home page$/ then '/events'
     when /^the search page$/ then '/search'
     when /^the search result page$/ then '/search_result'
-
+    when /^the myEvents page$/ then '/myEvents'
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
