@@ -14,7 +14,7 @@ jobs:
       postgres:
         image: postgres:15
         env:
-          POSTGRES_USER: root
+          POSTGRES_USER: postgres
           POSTGRES_DB: project_test
           POSTGRES_PASSWORD: dbuserdbuser
         ports: ["5432:5432"]
@@ -42,7 +42,7 @@ jobs:
           RAILS_ENV: test
           PGHOST: localhost
           POSTGRES_DB: project_test
-          POSTGRES_USER: root
+          POSTGRES_USER: postgres
           POSTGRES_PASSWORD: dbuserdbuser
         run: |
           bundle exec rake db:migrate:reset
@@ -50,7 +50,7 @@ jobs:
         env:
           PGHOST: localhost
           POSTGRES_DB: project_test
-          POSTGRES_USER: root
+          POSTGRES_USER: postgres
           POSTGRES_PASSWORD: dbuserdbuser
           PGPORT: ${{ job.services.postgres.ports[5432] }}
           RAILS_ENV: test
