@@ -27,7 +27,7 @@ RSpec.describe SessionsController, type: :controller do
   end
 
   describe "GET #welcome" do
-    it "returns http success" do
+    it "should goto welcome page for login/signup" do
       get :welcome
       expect(response).to render_template("welcome")
     end
@@ -38,7 +38,7 @@ RSpec.describe SessionsController, type: :controller do
     before do
       sign_in user
     end
-    it "logs out and goes back to welcome" do
+    it "should logs out and goes back to welcome" do
       get :logout
       expect(response).to redirect_to '/welcome'
       expect(response).to_not include 'testuser'
