@@ -3,8 +3,6 @@ on:
   push:
     branches:
       - master
-      - 'releases/**'
-      - t1-rspec
 jobs:
   verify:
     name: Build
