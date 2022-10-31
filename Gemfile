@@ -4,6 +4,7 @@ ruby '2.6.6'
 gem 'rails', '4.2.10'
 gem 'uuid'  # used for generate UUID
 gem 'bcrypt'
+gem 'devise'
 
 # for Heroku deployment 
 group :development, :test do

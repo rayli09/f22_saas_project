@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Event do
+RSpec.describe Event, type: :model do
     describe "#find_event_by_name" do
         it "should return a event by title" do
             event1 = Event.create! :title => 'Event A'

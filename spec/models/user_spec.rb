@@ -1,5 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  # TODO no methods for users need to be tested yet
+  # more features coming up in iteration 2
 end
