@@ -4,6 +4,7 @@ ruby '2.6.6'
 gem 'rails', '4.2.10'
 gem 'uuid'  # used for generate UUID
 gem 'bcrypt'
+gem 'devise'
 
 # for Heroku deployment 
 group :development, :test do
@@ -19,6 +20,7 @@ group :development, :test do
 end
 
 group :test do
+  gem "devise"
   gem "factory_girl", "~> 4.0"
   gem 'cucumber-rails', :require => false
   gem 'cucumber-rails-training-wheels'
