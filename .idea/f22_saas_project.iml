@@ -57,6 +57,7 @@
     <orderEntry type="library" scope="PROVIDED" name="cucumber-tag_expressions (v1.1.1, rbenv: 2.6.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="cucumber-wire (v0.0.1, rbenv: 2.6.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="database_cleaner (v1.4.1, rbenv: 2.6.6) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="devise (v4.8.1, rbenv: 2.6.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="diff-lcs (v1.5.0, rbenv: 2.6.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="docile (v1.4.0, rbenv: 2.6.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="erubis (v2.7.0, rbenv: 2.6.6) [gem]" level="application" />
@@ -86,6 +87,7 @@
     <orderEntry type="library" scope="PROVIDED" name="nenv (v0.3.0, rbenv: 2.6.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="nokogiri (v1.13.9, rbenv: 2.6.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="notiffany (v0.1.3, rbenv: 2.6.6) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="orm_adapter (v0.5.0, rbenv: 2.6.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="pg (v0.21.0, rbenv: 2.6.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="pry (v0.14.1, rbenv: 2.6.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="public_suffix (v5.0.0, rbenv: 2.6.6) [gem]" level="application" />
@@ -100,6 +102,7 @@
     <orderEntry type="library" scope="PROVIDED" name="rake (v13.0.6, rbenv: 2.6.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rb-fsevent (v0.11.2, rbenv: 2.6.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rb-inotify (v0.10.1, rbenv: 2.6.6) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="responders (v2.4.1, rbenv: 2.6.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rspec-core (v3.7.1, rbenv: 2.6.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rspec-expectations (v3.7.0, rbenv: 2.6.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rspec-mocks (v3.7.0, rbenv: 2.6.6) [gem]" level="application" />
@@ -122,11 +125,122 @@
     <orderEntry type="library" scope="PROVIDED" name="tzinfo (v1.2.10, rbenv: 2.6.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="uglifier (v4.2.0, rbenv: 2.6.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="uuid (v2.3.9, rbenv: 2.6.6) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="warden (v1.2.7, rbenv: 2.6.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="xpath (v2.1.0, rbenv: 2.6.6) [gem]" level="application" />
   </component>
   <component name="RModuleSettingsStorage">
     <LOAD_PATH number="0" />
     <I18N_FOLDERS number="1" string0="$MODULE_DIR$/config/locales" />
+  </component>
+  <component name="RailsGeneratorsCache">
+    <option name="generators">
+      <list>
+        <option value="active_record:devise" />
+        <option value="active_record:migration" />
+        <option value="active_record:model" />
+        <option value="assets" />
+        <option value="controller" />
+        <option value="cucumber:install" />
+        <option value="cucumber_rails_training_wheels:feature" />
+        <option value="cucumber_rails_training_wheels:install" />
+        <option value="devise" />
+        <option value="devise:controllers" />
+        <option value="devise:install" />
+        <option value="devise:views" />
+        <option value="generator" />
+        <option value="helper" />
+        <option value="integration_test" />
+        <option value="job" />
+        <option value="js:assets" />
+        <option value="mailer" />
+        <option value="migration" />
+        <option value="model" />
+        <option value="mongoid:devise" />
+        <option value="resource" />
+        <option value="responders:install" />
+        <option value="responders_controller" />
+        <option value="rspec:controller" />
+        <option value="rspec:feature" />
+        <option value="rspec:helper" />
+        <option value="rspec:install" />
+        <option value="rspec:integration" />
+        <option value="rspec:job" />
+        <option value="rspec:mailer" />
+        <option value="rspec:model" />
+        <option value="rspec:observer" />
+        <option value="rspec:request" />
+        <option value="rspec:scaffold" />
+        <option value="rspec:view" />
+        <option value="scaffold" />
+        <option value="scaffold_controller" />
+        <option value="scss:assets" />
+        <option value="scss:scaffold" />
+        <option value="task" />
+        <option value="test_unit:controller" />
+        <option value="test_unit:generator" />
+        <option value="test_unit:helper" />
+        <option value="test_unit:integration" />
+        <option value="test_unit:job" />
+        <option value="test_unit:mailer" />
+        <option value="test_unit:model" />
+        <option value="test_unit:plugin" />
+        <option value="test_unit:scaffold" />
+      </list>
+    </option>
+    <option name="myGenerators">
+      <list>
+        <option value="active_record:devise" />
+        <option value="active_record:migration" />
+        <option value="active_record:model" />
+        <option value="assets" />
+        <option value="controller" />
+        <option value="cucumber:install" />
+        <option value="cucumber_rails_training_wheels:feature" />
+        <option value="cucumber_rails_training_wheels:install" />
+        <option value="devise" />
+        <option value="devise:controllers" />
+        <option value="devise:install" />
+        <option value="devise:views" />
+        <option value="generator" />
+        <option value="helper" />
+        <option value="integration_test" />
+        <option value="job" />
+        <option value="js:assets" />
+        <option value="mailer" />
+        <option value="migration" />
+        <option value="model" />
+        <option value="mongoid:devise" />
+        <option value="resource" />
+        <option value="responders:install" />
+        <option value="responders_controller" />
+        <option value="rspec:controller" />
+        <option value="rspec:feature" />
+        <option value="rspec:helper" />
+        <option value="rspec:install" />
+        <option value="rspec:integration" />
+        <option value="rspec:job" />
+        <option value="rspec:mailer" />
+        <option value="rspec:model" />
+        <option value="rspec:observer" />
+        <option value="rspec:request" />
+        <option value="rspec:scaffold" />
+        <option value="rspec:view" />
+        <option value="scaffold" />
+        <option value="scaffold_controller" />
+        <option value="scss:assets" />
+        <option value="scss:scaffold" />
+        <option value="task" />
+        <option value="test_unit:controller" />
+        <option value="test_unit:generator" />
+        <option value="test_unit:helper" />
+        <option value="test_unit:integration" />
+        <option value="test_unit:job" />
+        <option value="test_unit:mailer" />
+        <option value="test_unit:model" />
+        <option value="test_unit:plugin" />
+        <option value="test_unit:scaffold" />
+      </list>
+    </option>
   </component>
   <component name="RakeTasksCache">
     <option name="myRootTask">
