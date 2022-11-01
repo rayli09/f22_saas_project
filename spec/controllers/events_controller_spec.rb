@@ -15,6 +15,13 @@ describe EventsController do
             end
         end 
 
+        context "Search 'David' in the search bar" do
+            it "should render search" do
+                get :index, :q => 'David'
+                expect(Event).to receive(:find_event_by_name).with('David').and_return(event)
+                Event.find_event_by_name('David')
+            end
+        end
     end
 
     describe "#search" do
