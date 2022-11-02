@@ -1,6 +1,7 @@
 # COMS W4152 SaaS Project
 
-Heroku Deployment: https://f22-saas-wemeet.herokuapp.com/
+## Deployment
+Deployed on Heroku: https://f22-saas-wemeet.herokuapp.com/
 
 ## Team members
 1. Ruize Li
@@ -9,9 +10,6 @@ Heroku Deployment: https://f22-saas-wemeet.herokuapp.com/
 4. Moxin Xu
 ## Dependency
 1. install `postgreSql` on your local computer. [Reference here](https://www.postgresql.org/download/)
-
-## For Fast Development
-1. Run `make serve` to streamline dev process. It'll setup env, prepare database, and start server.
  
 ## How to build and run locally
 1. Run `bundle install --without production` to install dependencies
@@ -26,8 +24,7 @@ Heroku Deployment: https://f22-saas-wemeet.herokuapp.com/
 
 ## API Documentation
 (TODO)
-## Third-party code in use
-(TODO)
+
 ## How To Deploy(TODO)
 1. install `pg` using brew and `bundle install` again.(TBD)
 2. 
