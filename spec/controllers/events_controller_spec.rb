@@ -189,4 +189,20 @@ describe EventsController do
         end
 
     end 
+    describe "#join" do
+        let!(:event) {FactoryGirl.create(:event)}
+        let!(:user) {FactoryGirl.build(:user)}
+        before do
+            sign_in user
+            get :join, {:id=>event.id}
+        end
+
+        context "user joining event" do
+            it "should update join button to unjoin and update people" do
+                expect(flash[:notice]).to be_present
+                expect(response).to redirect_to(event_path(event))
+            end 
+        end
+
+    end 
 end
