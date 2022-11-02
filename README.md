@@ -4,10 +4,10 @@
 Deployed on Heroku: https://f22-saas-wemeet.herokuapp.com/
 
 ## Team members
-1. Ruize Li
-2. Ken Xiong
-3. Jianyang Duan
-4. Moxin Xu
+1. Ruize Li (rl3250)
+2. Ken Xiong (kx2175)
+3. Jianyang Duan (jd3794)
+4. Moxin Xu (mx2237)
 ## Dependency
 1. install `postgreSql` on your local computer. [Reference here](https://www.postgresql.org/download/)
  
