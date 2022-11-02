@@ -16,6 +16,9 @@ module NavigationHelpers
     # when /^the (RottenPotatoes )?home\s?page$/ then '/movies'
     when /^the home page$/ then '/events'
     when /^the search page$/ then '/search'
+    when /^the login page$/ then '/login'
+    when /^the logout page$/ then '/logout'
+    when /^the new user page$/ then '/users/new'
     when /^the search result page$/ then '/search_result'
     when /^the myEvents page$/ then '/myEvents'
     when /^the event detail page of '(.*)'$/ then event_path(Event.find_by(title: $1))
