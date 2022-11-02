@@ -9,6 +9,18 @@ Background: events in database
     | title                | host             | rating  | event_time              | status | joined |
     | Enjoy Lunch at Junzi | Daemon Targaryen | 4.9/5.0 | 2022-10-30 00:00:00 UTC | open   | 1      |
 
+Scenario: the user logout
+  Given I logged in as "TestUser"
+  When I go to the logout page
+  Then I should be on the welcome page
+
+Scenario: the user doesn't exist
+  Given I hacked in as "FakeUser"
+  When I go to the login page
+  And I press "Login"
+  Then I should be on the login page
+  And I should see "User does not exist"
+
 Scenario: the user successfully posts a new event
   Given I logged in as "TestUser"
   When I go to the post event page

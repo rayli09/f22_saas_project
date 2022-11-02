@@ -22,6 +22,14 @@ Given /I logged in as "([^"]*)"$/ do |username|
     click_button "Login"
 end
 
+Given /I hacked in as "([^"]*)"$/ do |username|
+  @user = User.create!({:username => username, :password => 'test'})
+  visit '/login'
+  fill_in "username", :with => "foo"
+  fill_in "password", :with => "foo"
+  click_button "Login"
+end
+
 Given /I hosted the event "([^"]*)"$/ do |title|
     Event.create!({:title => title, :host => @user.username, :joined => 0})
 end
