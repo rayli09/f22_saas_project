@@ -44,3 +44,34 @@
   <%= link_to @join_text, join_path({:id=>@event.id}), :class => @join_btn_style, :id => 'join_btn'%>
   <% end %>
 </div>
+
+<h3>📒Number of comments: <%= @event.comments.length %></h3>
+<table class="table table-striped col-md-12" id="comments">
+  <thead>
+    <tr>
+      <th>👤User</th>
+      <th>🖊️Comment</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @event.comments.each do |comment| %>
+      <tr>
+        <td>
+          <%= comment.user.username %>
+        </td>
+        <td>
+          <%= comment.content %>
+        </td>
+        <td>
+          <% if (comment.user.username == @username) %>
+            <%= link_to 'Edit', edit_event_comment_path(@event, comment.id), :class => 'btn btn-success col-4' %>
+            <%= link_to 'Delete', event_comment_path(@event, comment.id), 'data-method' => 'delete', 'data-confirm' => 'Are you sure?', :class => 'btn btn-danger col-4' %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'New Comment', new_event_comment_path(@event), :class => 'btn btn-info col-2'%>

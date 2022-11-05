@@ -1,6 +1,6 @@
 class Event < ActiveRecord::Base
     enum status: [:open, :closed]
-    has_many :comment, :dependent => :destroy  #TODO this is placeholder for comments in T2
+    has_many :comments, :dependent => :destroy #TODO this is placeholder for comments in T2
     serialize :people, Array
     # after_initialize do |event|
     #     event.people= [] if event.people == nil
