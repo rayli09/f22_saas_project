@@ -9,6 +9,7 @@ class EventsController < ApplicationController
       @join_text = @event.people.include?(u) ? :Unjoin : :Join
       @join_btn_style = get_join_button_style(u)
       @is_viewer_host = @event.host == u
+      @username = u
     end
   
     def index
