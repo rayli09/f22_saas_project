@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 20221030194138) do
     t.datetime "remember_created_at"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", using: :btree # TODO: add unique: true when email feat is ready
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end

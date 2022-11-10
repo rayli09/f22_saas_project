@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  skip_before_action :authorized, only: [:new, :create, :welcome, :logout]
+  skip_before_action :authorized, only: [:new, :create, :welcome, :logout, :omniauth]
   def new
   end
 
@@ -21,5 +21,17 @@ class SessionsController < ApplicationController
  end
 
  def page_requires_login
+ end
+
+ def omniauth
+   @user = User.from_omniauth(auth)
+   @user.save
+   session[:user_id] = @user.id
+   redirect_to '/welcome'
+ end
+
+ private
+ def auth
+   request.env['omniauth.auth']
  end
 end

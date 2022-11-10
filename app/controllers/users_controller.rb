@@ -10,5 +10,5 @@ class UsersController < ApplicationController
     :password))
     session[:user_id] = @user.id
     redirect_to '/welcome'
- end
+  end
 end
