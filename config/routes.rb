@@ -17,5 +17,6 @@ Rottenpotatoes::Application.routes.draw do
   match '/search', to: 'events#search', as: 'search', via: :get   #TODO? why is this GET?
   match '/search_result', to: 'events#index', as: 'search_result', via: :get
   match '/join', to: 'events#join', as: 'join', via: :get
-
+  
+  get '/auth/:provider/callback' => 'sessions#omniauth'
 end
