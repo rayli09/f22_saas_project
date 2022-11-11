@@ -5,6 +5,10 @@ gem 'rails', '4.2.10'
 gem 'uuid'  # used for generate UUID
 gem 'bcrypt'
 gem 'devise'
+gem 'omniauth'
+gem 'dotenv-rails'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection', '~> 1.0'
 
 # for Heroku deployment 
 group :development, :test do
