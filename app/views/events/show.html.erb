@@ -46,7 +46,7 @@
 </div>
 
 <br>
-<h3 class="details_padding">📒Number of comments: <%= @event.comments.length %></h3>
+<h3 class="details_padding">📒Comments </h3>
 <table class="table table-striped col-md-12" id="comments">
   <thead>
     <tr>
@@ -66,7 +66,7 @@
         </td>
         <td>
           <% if (comment.user.username == @username) %>
-            <%= link_to 'Edit', edit_event_comment_path(@event, comment.id), :class => 'btn btn-success col-4' %>
+            <%= link_to 'Edit', edit_event_comment_path(@event, comment.id), :class => 'btn btn-secondary col-4' %>
             <%= link_to 'Delete', event_comment_path(@event, comment.id), 'data-method' => 'delete', 'data-confirm' => 'Are you sure?', :class => 'btn btn-danger col-4' %>
           <% end %>
         </td>
@@ -77,7 +77,7 @@
 
 <%= form_tag event_comments_path(@event), :class => 'form' do %>
   <%= label :comment, '', :class => 'col-form-label' %>
-  <%= text_field :comment, :content, :class => 'form-control', placeholder: 'Leave a quick comment' %>
+  <%= text_field :comment, :content, :class => 'form-control', placeholder: 'Leave a quick comment (length limit: 100)', maxlength: 100 %>
   <br>
   <%= submit_tag 'Post Comment', :class => 'btn btn-primary' %>
 <% end %>
