@@ -45,7 +45,8 @@
   <% end %>
 </div>
 
-<h3>📒Number of comments: <%= @event.comments.length %></h3>
+<br>
+<h3 class="details_padding">📒Number of comments: <%= @event.comments.length %></h3>
 <table class="table table-striped col-md-12" id="comments">
   <thead>
     <tr>
@@ -74,4 +75,10 @@
   </tbody>
 </table>
 
-<%= link_to 'New Comment', new_event_comment_path(@event), :class => 'btn btn-info col-2'%>
+<%= form_tag event_comments_path(@event), :class => 'form' do %>
+  <%= label :comment, '', :class => 'col-form-label' %>
+  <%= text_field :comment, :content, :class => 'form-control', placeholder: 'Leave a quick comment' %>
+  <br>
+  <%= submit_tag 'Post Comment', :class => 'btn btn-primary' %>
+<% end %>
+</div>
