@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
 
   # GET /comments/new
     def new
-        @comment = current_user.comments.build 
+        #@comment = current_user.comments.build 
     end
 
   # GET /comments/1/edit
@@ -27,8 +27,8 @@ class CommentsController < ApplicationController
             flash[:notice] = 'Comment was successfully created.'
             redirect_to event_path(@event)
         else
-            flash[:notice] = "Error creating comment: #{@comment.errors}"
-            redirect_to event_comment_path(@event, @comment)
+            flash[:warning] = "Comment shoudn't be empty."
+            redirect_to event_path(@event)
         end
     end
 
@@ -58,7 +58,7 @@ class CommentsController < ApplicationController
         # the comment shouldn't be empty
     def is_comment_valid(params)
         content = params["content"].to_s.strip
-        if content.blank?
+        if content.blank? or content.length > 100
             return false
         end
         return true
