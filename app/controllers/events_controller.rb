@@ -120,8 +120,9 @@ class EventsController < ApplicationController
 
     private
     def get_join_button_style(uname)
-      return @event.people.include?(uname) ? 'btn btn-secondary col-2' :
-      'btn btn-success col-2'
+      return 'btn btn-secondary col-2' if @event.people.include?(uname)
+      return 'btn btn-success col-2 disabled' if @event.people.size >= @event.attendee_limit
+      return 'btn btn-success col-2'
     end
   end
   
