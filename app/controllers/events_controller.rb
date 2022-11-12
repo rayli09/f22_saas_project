@@ -115,6 +115,9 @@ class EventsController < ApplicationController
       elsif params["attendee_limit"].nil? or params["attendee_limit"].blank?
         result[:is_valid] = false
         result[:invalid_field] = 'Maximum Number of Attendees'
+      elsif Date.parse(params['event_time(1i)'] + '-' + params['event_time(2i)'] + '-' + params['event_time(3i)']).past?
+        result[:is_valid] = false
+        result[:invalid_field] = 'Event Time'
       end
       return result
     end
