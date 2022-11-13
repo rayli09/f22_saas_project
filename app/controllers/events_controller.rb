@@ -18,8 +18,13 @@ class EventsController < ApplicationController
 
       #check for search query string
       q = params[:q].to_s.strip
-      if not q.blank? 
-        @events = Event.find_event_by_name(q)
+      
+      if not q.blank?
+        event1 = Event.find_event_by_date(params[:select][:year], params[:select][:month])
+        event2 = Event.find_event_by_rating(params[:rating_selected])
+        event3 = Event.find_event_by_status(params[:status_selected])
+        event4 = Event.find_event_by_name(q)
+        @events = [ event1, event2, event3, event4 ].reject( &:nil? ).reduce( :& )
         @page_name = "Search Result for '#{q}'"
       else
         @events = Event.all
@@ -93,10 +98,7 @@ class EventsController < ApplicationController
       @join_events = [] if @join_events.nil? or @join_events.empty?
     end
 
-    def search
-      #Default search template TODO: advanced search?
-    end
-
+    # TODO refactor this method to set required params
     private
     # Making "internal" methods private is not required, but is a common practice.
     # This helps make clear which methods respond to requests, and which ones do not.

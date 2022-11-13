@@ -1,6 +1,28 @@
 <!--  This file is app/views/events/index.html.erb -->
 <h1><%= @page_name %></h1>
 
+<hr>
+<div>
+<%= form_tag search_result_path, method: :get, id: 'search_form' do %>
+    <%= text_field_tag :q, nil, :required => true, size: 50, placeholder: "Search event/host/attendee name" %> 
+    <%= submit_tag "Search", class: "btn btn-primary", id: "search_result" %>
+    
+    <div> Available Events in: 
+    <%= select_year(0, {:prompt => "Year", :start_year => DateTime.now.year,:end_year => DateTime.now.year - 5, prefix: 'select'},{:field_name => 'year', :id => 'start-year'}) %>
+    <%= select_month(0, {:prompt => "Month", prefix: 'select'},{:field_name => 'month', :id => 'start-month'}) %>
+    </div>
+
+    <div> Rating of the Host:
+    <%= select_tag "rating_selected", options_for_select(["Rating","5.0/5.0","4.9/5.0","4.8/5.0","4.7/5.0","4.6/5.0","4.5/5.0"], "Rating") %>
+    <div>
+
+    <div> Status of the event:
+    <%= select_tag "status_selected", options_for_select(["Status","Open","Closed"], "Status") %>
+    <div>
+<% end %>
+</div>
+<hr>
+
 <%#  Part 2: Start here... %>
 
 <table class="table table-striped col-md-12" id="events">
