@@ -36,7 +36,7 @@ class EventsController < ApplicationController
       check_result = is_event_params_valid(event_params)
       if check_result[:is_valid]
         @event = Event.create!(event_params)
-        init_attributes = {:host => user, :rating => '5.0/5.0', :joined => '0', :status => 0, :people => []}
+        init_attributes = {:host => user, :rating => '5.0/5.0', :joined => '0', :status => 0, :people => [], :attendee_limit => 0}
         @event.update_attributes!(init_attributes)
         flash[:notice] = "Event '#{@event.title}' was successfully created."
         redirect_to events_path
@@ -97,7 +97,6 @@ class EventsController < ApplicationController
       #Default search template TODO: advanced search?
     end
 
-    # TODO refactor this method to set required params
     private
     # Making "internal" methods private is not required, but is a common practice.
     # This helps make clear which methods respond to requests, and which ones do not.

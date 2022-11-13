@@ -8,10 +8,10 @@ Feature: search for events by hosts
 Background: events in database
 
   Given the following events exist:
-  | title                     | rating  | host              | joined |
-  | Go To Gym today afternoon | 4.9/5.0 | Alicent Hightower | 0      | 
-  | Enjoy Lunch at Junzi      | 4.9/5.0 | Daemon Targaryen  | 1      |
-  | Lunch at Max Cafe         | 4.8/5.0 | Mysaria           | 3      |
+  | title                     | rating  | host              | joined | attendee_limit |
+  | Go To Gym today afternoon | 4.9/5.0 | Alicent Hightower | 0      | 2              |
+  | Enjoy Lunch at Junzi      | 4.9/5.0 | Daemon Targaryen  | 1      | 2              |
+  | Lunch at Max Cafe         | 4.8/5.0 | Mysaria           | 3      | 2              |
 
 Scenario: see all events on home page
   Given I logged in as "Alicent Hightower"

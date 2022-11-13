@@ -4,5 +4,6 @@ FactoryGirl.define do
         title 'Lunch'
         host 'David'
         people ['Ben']
+        attendee_limit 2
     end
   end

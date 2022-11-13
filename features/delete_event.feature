@@ -6,9 +6,9 @@ Feature: Delete event
 
 Background: events in database
   Given the following events exist:
-    | title                | host             | rating  | event_time              | status | joined |
-    | Enjoy Lunch at Junzi | Daemon Targaryen | 4.9/5.0 | 2022-10-30 00:00:00 UTC | open   | 1      |
-    | TestEvent            | testuser         | 4.8/5.0 | 2022-11-05 00:00:00 UTC | open   | 10     |
+    | title                | host             | rating  | event_time              | status | joined | attendee_limit |
+    | Enjoy Lunch at Junzi | Daemon Targaryen | 4.9/5.0 | 2022-10-30 00:00:00 UTC | open   | 1      | 2 |
+    | TestEvent            | testuser         | 4.8/5.0 | 2022-11-05 00:00:00 UTC | open   | 10     | 2 |
 
 Scenario: the user successfully deletes his own event
   Given I logged in as "testuser"
