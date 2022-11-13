@@ -20,18 +20,10 @@ class Event < ActiveRecord::Base
         elsif year.empty? && month.empty?
             return nil
         elsif year.empty?
-            return find_event_by_month(month)   
+            return Event.where("date_part('month',event_time) = ?", "#{month}")
         else
-            return find_event_by_year(year)
+            return Event.where("date_part('year',event_time) = ?", "#{year}")
         end
-    end
-
-    def self.find_event_by_year(year)
-        Event.where("date_part('year',event_time) = ?", "#{year}")
-    end
-
-    def self.find_event_by_month(month)
-        Event.where("date_part('month',event_time) = ?", "#{month}")
     end
 
     def self.find_event_by_rating(rating)
