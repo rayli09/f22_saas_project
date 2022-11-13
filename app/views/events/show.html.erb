@@ -9,13 +9,13 @@
   <li>
     ✏️&nbsp;<b>Host Rating</b>
     &nbsp;
-    <% @user_rating.times do %>
+    <% (@user_rating.nil? ? 5 : @user_rating).times do %>
       ⭐️
     <% end %>
   </li>
   <li>
     📅&nbsp;<b>Event Time</b>
-    &nbsp;<%= @event.event_time %>
+    &nbsp;<%= @event.event_time.nil? ? "TBD" : @event.event_time.strftime("%m-%d-%Y") %>
   </li>
   <li>
     ⏳&nbsp;<b>Event Status</b>

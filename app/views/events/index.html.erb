@@ -52,7 +52,7 @@
           <% end %>
         </td>
         <td>
-          <%= event.event_time %>
+          <%= event.event_time.nil? ? "TBD" : event.event_time.strftime("%m-%d-%Y") %>
         </td>
         <td>
           <%= event.status %>

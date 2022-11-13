@@ -50,7 +50,7 @@ describe EventsController do
 
         context 'When successfully post a new event' do
             it 'should store the event in the database and redirect to home page' do
-                params = ActionController::Parameters.new(:title => 'Test lunch', :description => 'Eat together', :event_time => '05-Nov-2022', :attendee_limit => 4)
+                params = ActionController::Parameters.new(:title => 'Test lunch', :description => 'Eat together', :event_time => '11-05-2022', :attendee_limit => 4)
                 expect{post :create, {:event => params}}.to change{Event.count}.by(1)
                 expect(response).to redirect_to(events_path)
             end
@@ -58,7 +58,7 @@ describe EventsController do
 
         context 'When failed to post a new event due to missing title' do
             it 'should not store the event in the database and should redirect to new event page' do
-                params = ActionController::Parameters.new(:description => 'Eat together', :event_time => '05-Nov-2022', :attendee_limit => 4)
+                params = ActionController::Parameters.new(:description => 'Eat together', :event_time => '11-05-2022', :attendee_limit => 4)
                 expect{post :create, {:event => params}}.to change{Event.count}.by(0)
                 expect(response).to redirect_to(new_event_path)
             end

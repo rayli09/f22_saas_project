@@ -7,9 +7,9 @@ Feature: Join event
 Background: events in database
 
   Given the following events exist:
-  | title                     | rating  | host              | joined     |  people    | attendee_limit  |
-  | TestEvent1                | 4.9/5.0 | Alicent Hightower | 19         |            | 2               |
-  | TestEvent2                | 4.9/5.0 | Daemon Targaryen  | 10         |  testuser  | 2               |
+  | title                     | host              | joined     |  people    | attendee_limit  |
+  | TestEvent1                | Alicent Hightower | 19         |            | 2               |
+  | TestEvent2                | Daemon Targaryen  | 10         |  testuser  | 2               |
 
 Scenario: attendee can join event
   Given I logged in as "testuser"
