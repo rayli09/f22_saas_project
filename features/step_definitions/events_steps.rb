@@ -3,6 +3,7 @@ require 'json'  # parse people array
 Given /the following events exist/ do |events_table|
   events_table.hashes.each do |event|
     event[:people] = event[:people].to_s.strip.split(',') if !event[:people].nil?
+    event[:attendee_limit] = 1 if event[:attendee_limit].nil?
     Event.create event
   end
 end
