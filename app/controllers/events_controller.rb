@@ -5,6 +5,7 @@ class EventsController < ApplicationController
       # u = session[:username]
       u = current_user.username
       @event = Event.find(id) # look up event by unique ID
+      @user_rating = User.find_by(username: @event.host).rating
       # will render app/views/events/show.<extension> by default
       @join_text = @event.people.include?(u) ? :Unjoin : :Join
       @join_btn_style = get_join_button_style(u)
@@ -28,6 +29,11 @@ class EventsController < ApplicationController
         @page_name = "Search Result for '#{q}'"
       else
         @events = Event.all
+        @user_ratings = {}
+        @events.each do |event|
+          user_rating = User.find_by(username: event.host).rating
+          @user_ratings[event.host] = user_rating
+        end
         @page_name = "Home"
       end
     end
@@ -41,7 +47,7 @@ class EventsController < ApplicationController
       check_result = is_event_params_valid(event_params)
       if check_result[:is_valid]
         @event = Event.create!(event_params)
-        init_attributes = {:host => user, :rating => '5.0/5.0', :joined => '0', :status => 0, :people => [], :attendee_limit => 0}
+        init_attributes = {:host => user, :joined => '0', :status => 0, :people => [], :attendee_limit => 0}
         @event.update_attributes!(init_attributes)
         flash[:notice] = "Event '#{@event.title}' was successfully created."
         redirect_to events_path

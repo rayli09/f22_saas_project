@@ -25,7 +25,6 @@ ActiveRecord::Schema.define(version: 20221030194138) do
   create_table "events", force: :cascade do |t|
     t.string   "title"
     t.string   "host"
-    t.string   "rating"
     t.integer  "joined"
     t.text     "people"
     t.integer  "status"
@@ -41,6 +40,7 @@ ActiveRecord::Schema.define(version: 20221030194138) do
     t.string   "password_digest"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.integer  "rating"
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"

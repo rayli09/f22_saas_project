@@ -14,11 +14,11 @@
 
     <div> Rating of the Host:
     <%= select_tag "rating_selected", options_for_select(["Rating","5.0/5.0","4.9/5.0","4.8/5.0","4.7/5.0","4.6/5.0","4.5/5.0"], "Rating") %>
-    <div>
+    </div>
 
     <div> Status of the event:
     <%= select_tag "status_selected", options_for_select(["Status","Open","Closed"], "Status") %>
-    <div>
+    </div>
 <% end %>
 </div>
 <hr>
@@ -30,7 +30,7 @@
     <tr>
       <th>Title</th>
       <th>Host</th>
-      <th>Rating</th>
+      <th>Host Rating</th>
       <th>Time</th>
       <th>Status</th>
       <th>Joined</th>
@@ -47,7 +47,7 @@
           <%= event.host %>
         </td>
         <td>
-          <%= event.rating %>
+          <%= @user_ratings.fetch(event.host) %>
         </td>
         <td>
           <%= event.event_time %>

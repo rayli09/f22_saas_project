@@ -17,8 +17,8 @@ Deployed on Heroku: https://f22-saas-wemeet.herokuapp.com/
  
 ## How to build and run locally
 1. Run `bundle install --without production` to install dependencies and related gems
-2. Run `rake db:seed` to load initial values
-3. Run `rake db:migrate:reset` to load up all migrations
+2. Run `rake db:migrate:reset` to load up all migrations
+3. Run `rake db:seed` to load initial values
 4. RUn `rails s` to start the server
 
 ## How to run tests
