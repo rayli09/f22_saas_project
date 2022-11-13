@@ -143,7 +143,7 @@ describe EventsController do
 
         context "Search 'David' in the search bar" do
             it "should render search" do
-                get :index, :q => 'David'
+                get :index, :q => 'David', :select => {:year => "", :month => ""}
                 expect(Event).to receive(:find_event_by_name).with('David').and_return(event)
                 Event.find_event_by_name('David')
             end
@@ -155,12 +155,12 @@ describe EventsController do
         let!(:user) {FactoryGirl.build(:user)}
         before do
             sign_in user
-            get :search
+            get :index
         end
     
         context "When go to the search page" do
             it "should render search template" do                     
-                expect(response).to render_template("search")
+                expect(response).to render_template("index")
             end
         end
 

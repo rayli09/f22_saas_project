@@ -20,7 +20,7 @@ Scenario: see all events on home page
 
 Scenario: find event with host name
   Given I logged in as "Alicent Hightower"
-  And I am on the search page
+  And I am on the home page
   When  I fill in "Search event/host/attendee name" with "Mysaria"
   And   I press "search_result"
   Then  I should be on the search result page
