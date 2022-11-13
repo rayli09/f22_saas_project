@@ -47,7 +47,9 @@
           <%= event.host %>
         </td>
         <td>
-          <%= @user_ratings.fetch(event.host) %>
+          <% @user_ratings.fetch(event.host).to_i.times do %>
+            ⭐️
+          <% end %>
         </td>
         <td>
           <%= event.event_time %>
