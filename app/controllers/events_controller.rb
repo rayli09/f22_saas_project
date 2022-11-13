@@ -22,29 +22,21 @@ class EventsController < ApplicationController
       if not q.blank?
         event1 = Event.find_event_by_date(params[:select][:year], params[:select][:month])
         event2 = Event.find_event_by_rating(params[:rating_selected])
-        event3 = Event.find_event_by_name(q)
-        @events = [ event1, event2, event3 ].reject( &:nil? ).reduce( :& )
-        # if event1.blank? || event2.blank? || event3.blank?
-        #   @events = []
-        # else
-        #   @events = event1 & event2 & event3
-        # end
+        event3 = Event.find_event_by_status(params[:status_selected])
+        event4 = Event.find_event_by_name(q)
+        @events = [ event1, event2, event3, event4 ].reject( &:nil? ).reduce( :& )
         @page_name = "Search Result for '#{q}'"
       else
-        if params[:select].blank? && params[:rating_selected].blank? #landing on home; render all
-          @events = Event.all
-        elsif params[:select][:year].blank? && params[:select][:month].blank? && params[:rating_selected] == "Rating" #hitting search with no query
-          @events = Event.all
-        else
-          event1 = Event.find_event_by_date(params[:select][:year], params[:select][:month])
-          event2 = Event.find_event_by_rating(params[:rating_selected])
-          @events = [ event1, event2, Event.all ].reject( &:nil? ).reduce( :& )
-          # if event1.blank? || event2.blank?
-          #   @events = []
-          # else
-          #   @events = event1 & event2
-          # end
-        end
+        # if params[:select].blank? && params[:rating_selected].blank? #landing on home; render all
+        #   @events = Event.all
+        # elsif params[:select][:year].blank? && params[:select][:month].blank? && params[:rating_selected] == "Rating" #hitting search with no query
+        #   @events = Event.all
+        # else
+        #   event1 = Event.find_event_by_date(params[:select][:year], params[:select][:month])
+        #   event2 = Event.find_event_by_rating(params[:rating_selected])
+        #   @events = [ event1, event2, Event.all ].reject( &:nil? ).reduce( :& )
+        # end
+        @events = Event.all
         @page_name = "Home"
       end
     end

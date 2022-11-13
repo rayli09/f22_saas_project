@@ -42,6 +42,16 @@ class Event < ActiveRecord::Base
         end
     end
 
+    def self.find_event_by_status(status)
+        if status == "Status"
+            return nil
+        elsif status == "Open"
+            Event.where("status = 0")
+        else
+            Event.where("status = 1")
+        end
+    end
+
     # INTERNAL
     private 
     def init_event
