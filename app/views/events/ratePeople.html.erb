@@ -1,0 +1,24 @@
+<%= form_tag rate_user_path(@event), method: :put, id: 'rate_form' do %>
+    <% if @is_viewer_host %>
+        <% @event.people.each do |person| %>
+            <div>
+            <%= person %>&nbsp;&nbsp;&nbsp;
+            <%= select_tag "#{person}", options_for_select([5,4,3,2,1], 5) %>
+            </div>
+        <% end %>
+
+        <div>
+            <%= submit_tag "Submit", class: "btn btn-primary", id: "rate_submit" %>
+        </div>
+    <% else %>
+        <div>
+        <%= @event.host %>&nbsp;&nbsp;&nbsp;
+        <%= select_tag "#{ @event.host}", options_for_select([5,4,3,2,1], 5) %>
+        </div>
+
+        <div>
+        <%= submit_tag "Submit", class: "btn btn-primary", id: "rate_submit" %>
+        </div>
+    <% end %>
+
+<% end %>
