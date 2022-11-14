@@ -43,3 +43,30 @@ nav li a {  /* normal, link case */
 #search_query{
     color: black;
 }
+
+ul{
+    list-style-type: none;
+}
+
+ul li {
+    padding: 7px 0px;
+}
+
+details {
+    display: inline;
+    padding: .5em .5em 0;
+}
+
+summary {
+    margin: -.5em -.5em 0;
+    padding: .5em;
+}
+
+details[open] {
+    padding: .5em;
+}
+
+details[open] summary {
+    margin-bottom: .5em;
+}
+

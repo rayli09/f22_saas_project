@@ -1,6 +1,7 @@
 class Event < ActiveRecord::Base
     enum status: [:open, :closed]
     has_many :comments, :dependent => :destroy
+    has_and_belongs_to_many :users
     serialize :people, Array
     after_initialize :init_event
 
@@ -30,7 +31,8 @@ class Event < ActiveRecord::Base
         if rating == "Rating"
             return nil
         else 
-            Event.where("rating = ?", "#{rating}")
+            # https://stackoverflow.com/questions/23633301/how-to-query-a-model-based-on-attribute-of-another-model-which-belongs-to-the-fi
+            Event.joins(:users).where("users.rating = ?", rating)
         end
     end
 

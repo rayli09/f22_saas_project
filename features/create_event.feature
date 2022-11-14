@@ -6,8 +6,8 @@ Feature: Create event
 
 Background: events in database
   Given the following events exist:
-    | title                | host             | rating  | event_time              | status | joined | attendee_limit |
-    | Enjoy Lunch at Junzi | Daemon Targaryen | 4.9/5.0 | 2022-10-30 00:00:00 UTC | open   | 1      | 2 |
+    | title                | host              | event_time              | status | joined | attendee_limit |
+    | Enjoy Lunch at Junzi | Daemon Targaryen  | 2022-10-30 00:00:00 UTC | open   | 1      | 2 |
 
 Scenario: the user logout
   Given I logged in as "TestUser"

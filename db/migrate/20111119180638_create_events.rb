@@ -3,7 +3,6 @@ class CreateEvents < ActiveRecord::Migration
     create_table :events do |t|
       t.string :title
       t.string :host
-      t.string :rating
       t.integer :joined
       t.text   :people
       t.integer :status # enum type, 0: open, 1: closed

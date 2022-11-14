@@ -3,28 +3,44 @@
 
 <ul id="details">
   <li>
-    Host:
-    <%= @event.host %>
+    🗣&nbsp;<b>Host</b>
+    &nbsp;<%= @event.host %>
   </li>
   <li>
-    Rating:
-    <%= @event.rating %>
+    ✏️&nbsp;<b>Host Rating</b>
+    &nbsp;
+    <% (@user_rating.nil? ? 5 : @user_rating).times do %>
+      ⭐️
+    <% end %>
   </li>
   <li>
-    Event Time:
-    <%= @event.event_time %>
+    📅&nbsp;<b>Event Time</b>
+    &nbsp;<%= @event.event_time.nil? ? "TBD" : @event.event_time.strftime("%m-%d-%Y") %>
   </li>
   <li>
-    Event Status:
-    <%= @event.status %>
+    ⏳&nbsp;<b>Event Status</b>
+    &nbsp;<%= @event.status %>
   </li>
   <li>
-    Maximum Number of Attendees:
-    <%= @event.attendee_limit %>
+    🧐&nbsp;<b>Maximum Number of Attendees</b>
+    &nbsp;<%= @event.attendee_limit %>
   </li>
   <li>
-    People:
-    <%= @event.people %>
+    <% if @event.people.length < 6 %>
+      👥&nbsp;<b>Attending People</b>
+      &nbsp;
+      <% @event.people.each do |person| %>
+        <%= person %>&nbsp;&nbsp;&nbsp;
+      <% end %>
+    <% else %>
+      👥&nbsp;<b>Attending People</b>
+      <details>
+        <summary>Click to view all attendees</summary>
+        <% @event.people.each do |person| %>
+          <%= person %>&nbsp;&nbsp;&nbsp;
+        <% end %>
+      </details>
+    <% end %>
   </li>
 </ul>
 
@@ -32,6 +48,7 @@
 <p id="description">
   <%= @event.description %>
 </p>
+<br>
 
 <div class="row">
   <% if (@is_viewer_host) %>
@@ -44,6 +61,7 @@
   <%= link_to @join_text, join_path({:id=>@event.id}), :class => @join_btn_style, :id => 'join_btn'%>
   <% end %>
 </div>
+<br>
 
 <br>
 <h3 class="details_padding">📒Comments </h3>
