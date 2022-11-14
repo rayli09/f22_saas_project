@@ -11,6 +11,8 @@ Background: events in database
 
 Scenario: a new use creates user info
   When I go to the new user page
+  And I fill in "Username" with "newUser"
+  And I fill in "Password" with "pass123"
   And I press "Create User"
   Then I should be on the welcome page
 

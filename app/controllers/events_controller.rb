@@ -25,6 +25,11 @@ class EventsController < ApplicationController
         event3 = Event.find_event_by_status(params[:status_selected])
         event4 = Event.find_event_by_name(q)
         @events = [ event1, event2, event3, event4 ].reject( &:nil? ).reduce( :& )
+        @user_ratings = {}
+        @events.each do |event|
+          u = User.find_by(username: event.host)
+          @user_ratings[event.host] = u.nil? ? 5 : u.rating
+        end
         @page_name = "Search Result for '#{q}'"
       else
         @events = Event.all
