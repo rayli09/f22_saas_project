@@ -17,28 +17,17 @@ class UsersController < ApplicationController
   end
 
   def rateUser
-    # host rates all attendee &&
-    # attendee rate one host
+    # host rates all attendee && attendee rate one host
     event = Event.find(params[:id])
     u = current_user.username
     is_viewer_host = event.host == u
     if !is_viewer_host
       user =  User.find_by(username: event.host)
-      # user.update_attribute(:rating, params[event.host])
-      puts "_______"
-      puts params
-      puts "\n\n"
-      puts "printing event .host"
-      puts event.host
       update_user_rating(user, params[event.host])
-      
     else
       event.people.each do |u|
         user =  User.find_by(username: u)
-        # user.update_attribute(:rating, params[u])
         update_user_rating(user, params[u])
-
-        # TODO 
       end
     end
     event.update_attribute(:rated_users, event.rated_users.push(u))
@@ -52,11 +41,10 @@ class UsersController < ApplicationController
   end
   private
   def update_user_rating(u, new_r)
+    # update user rating, given new rating
     # if new_r.nil? return
     old_r = u.rating
     cnt = u.num_rating_got
-    # puts "new rting below!!!!!"
-    # puts u.rating
     u.update_attribute(:rating, ((old_r * cnt + new_r.to_i)/(cnt+1)).floor)
     u.update_attribute(:num_rating_got, cnt + 1)
   end

@@ -22,8 +22,8 @@ class EventsController < ApplicationController
       q = params[:q].to_s.strip
       
       if not q.blank?
+        # TODO issue #70
         event1 = Event.find_event_by_date(params[:select][:year], params[:select][:month])
-        # event2 = Event.find_event_by_rating(params[:rating_selected])
         event3 = Event.find_event_by_status(params[:status_selected])
         event4 = Event.find_event_by_name(q)
         @events = [ event1, event3, event4 ].reject( &:nil? ).reduce( :& )
