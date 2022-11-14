@@ -51,7 +51,7 @@ class EventsController < ApplicationController
       check_result = is_event_params_valid(event_params)
       if check_result[:is_valid]
         @event = Event.create!(event_params)
-        init_attributes = {:host => user, :joined => '0', :status => 0, :people => [], :attendee_limit => 0}
+        init_attributes = {:host => user, :joined => '0', :status => 0, :people => []}
         @event.update_attributes!(init_attributes)
         flash[:notice] = "Event '#{@event.title}' was successfully created."
         redirect_to events_path
