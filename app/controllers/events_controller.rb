@@ -38,7 +38,6 @@ class EventsController < ApplicationController
         @user_ratings = {}
         @events.each do |event|
           u = User.find_by(username: event.host)
-          puts u.rating
           @user_ratings[event.host] = u.nil? ? 5 : u.rating
         end
         @page_name = "Home"
