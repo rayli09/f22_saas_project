@@ -13,7 +13,7 @@ Background: events in database
 
 Scenario: attendee can join event
   Given I logged in as "testuser"
-  And I am on the event detail page of 'TestEvent1'
+  And I am on the event details page for "TestEvent1"
   # And I debug
   And I follow "Join"
   Then I should see "Unjoin"
@@ -22,7 +22,7 @@ Scenario: attendee can join event
 # TODO #20
 Scenario: attendee can unjoin event
   Given I logged in as "testuser"
-  And I am on the event detail page of 'TestEvent2'
+  And I am on the event details page for "TestEvent2"
   # And I debug
   Then I follow "Unjoin"
   And I should see "You've unjoined it."

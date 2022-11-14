@@ -126,11 +126,9 @@ class EventsController < ApplicationController
       elsif params["attendee_limit"].nil? or params["attendee_limit"].blank?
         result[:is_valid] = false
         result[:invalid_field] = 'Maximum Number of Attendees'
-      # elsif Date.parse(params['event_time(1i)'] + '-' + params['event_time(2i)'] + '-' + params['event_time(3i)']).past?
-      # TODO this is failing because :event_time in controller test cases. It's annoying and i suggest we remove it
-      # elsif date.past?
-      #   result[:is_valid] = false
-      #   result[:invalid_field] = 'Event Time'
+      elsif Date.parse(params['event_time(1i)'] + '-' + params['event_time(2i)'] + '-' + params['event_time(3i)']).past?
+        result[:is_valid] = false
+        result[:invalid_field] = 'Event Time'
       end
       puts params[:event_time]
       return result

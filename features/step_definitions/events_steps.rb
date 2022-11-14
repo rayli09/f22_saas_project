@@ -41,6 +41,14 @@ Given /I joined the event "([^"]*)"$/ do |title|
   step %{I follow "Join"}
 end
 
+And /I fill in "([^"]*)" Event Time with "([^"]*),([^"]*),([^"]*)"$/ do |title, year, month, day|
+  event = Event.find_by(title: title)
+  visit "/events/#{event.id}/edit"
+  select year, :from => 'event_event_time_1i'
+  select month, :from => 'event_event_time_2i'
+  select day, :from => 'event_event_time_3i'
+  fill_in "Maximum Number of Attendees",:with => 4
+end
 
 Then /the Maximum Number of Attendees of event "([^"]*)" should be "([^"]*)"$/ do |title, value|
   event = Event.find_by(title: title)
