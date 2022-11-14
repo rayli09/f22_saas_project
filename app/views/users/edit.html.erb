@@ -1,0 +1,10 @@
+<!--  This file is app/views/users/edit.html.erb -->
+<h2>Edit User</h2>
+
+<%= form_tag user_path(@user), :method => :put do %>
+  <%= label :user, :email, 'Email', :class => 'col-form-label' %>
+  <%= text_field :user, :email, :class => 'form-control' %>
+  <br>
+  <%= submit_tag 'Update User Profile', :class => 'btn btn-primary' %>
+  <%= link_to 'Cancel', user_path(@user), :class => 'btn btn-secondary' %>
+<% end %>
