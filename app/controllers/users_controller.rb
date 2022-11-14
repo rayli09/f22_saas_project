@@ -11,6 +11,7 @@ class UsersController < ApplicationController
       redirect_to '/users/new?' and return
     end
     @user = User.create(user_params)
+    @user.update_attributes!({:rating => 3})
     session[:user_id] = @user.id
     redirect_to '/welcome'
   end

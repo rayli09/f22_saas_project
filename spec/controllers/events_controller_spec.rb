@@ -50,7 +50,7 @@ describe EventsController do
 
         context 'When successfully post a new event' do
             it 'should store the event in the database and redirect to home page' do
-                params = ActionController::Parameters.new(:title => 'Test lunch', :description => 'Eat together', :event_time => '05-Nov-2022', :attendee_limit => 4)
+                params = ActionController::Parameters.new(:title => 'Test lunch', :description => 'Eat together', 'event_time(1i)' => '2022', 'event_time(2i)'=> '11', 'event_time(3i)' => '28', :attendee_limit => 4)
                 expect{post :create, {:event => params}}.to change{Event.count}.by(1)
                 expect(response).to redirect_to(events_path)
             end
@@ -58,7 +58,7 @@ describe EventsController do
 
         context 'When failed to post a new event due to missing title' do
             it 'should not store the event in the database and should redirect to new event page' do
-                params = ActionController::Parameters.new(:description => 'Eat together', :event_time => '05-Nov-2022', :attendee_limit => 4)
+                params = ActionController::Parameters.new(:description => 'Eat together', 'event_time(1i)' => '2022', 'event_time(2i)'=> '11', 'event_time(3i)' => '28', :attendee_limit => 4)
                 expect{post :create, {:event => params}}.to change{Event.count}.by(0)
                 expect(response).to redirect_to(new_event_path)
             end
@@ -90,7 +90,7 @@ describe EventsController do
 
         context 'When successfully update an existing event' do
             it 'should store the update in the database and redirect to event details page' do
-                params = ActionController::Parameters.new(:title => 'Test lunch', :description => 'Change description', :attendee_limit => 10)
+                params = ActionController::Parameters.new(:title => 'Test lunch', :description => 'Change description', :attendee_limit => 10, 'event_time(1i)' => '2022', 'event_time(2i)'=> '11', 'event_time(3i)' => '28',)
                 put :update, {:id => event.id, :event => params}
                 event.reload
                 expect(event.title).to eq('Test lunch')

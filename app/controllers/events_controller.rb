@@ -2,10 +2,10 @@ class EventsController < ApplicationController
 
     def show
       id = params[:id] # retrieve event ID from URI route
-      # u = session[:username]
       u = current_user.username
       @event = Event.find(id) # look up event by unique ID
-      # will render app/views/events/show.<extension> by default
+      host = User.find_by(username: @event.host)
+      @user_rating = host.nil? ? 5 : host.rating
       @join_text = @event.people.include?(u) ? :Unjoin : :Join
       @join_btn_style = get_join_button_style(u)
       @is_viewer_host = @event.host == u
@@ -25,9 +25,19 @@ class EventsController < ApplicationController
         event3 = Event.find_event_by_status(params[:status_selected])
         event4 = Event.find_event_by_name(q)
         @events = [ event1, event2, event3, event4 ].reject( &:nil? ).reduce( :& )
+        @user_ratings = {}
+        @events.each do |event|
+          u = User.find_by(username: event.host)
+          @user_ratings[event.host] = u.nil? ? 5 : u.rating
+        end
         @page_name = "Search Result for '#{q}'"
       else
         @events = Event.all
+        @user_ratings = {}
+        @events.each do |event|
+          u = User.find_by(username: event.host)
+          @user_ratings[event.host] = u.nil? ? 5 : u.rating
+        end
         @page_name = "Home"
       end
     end
@@ -41,7 +51,7 @@ class EventsController < ApplicationController
       check_result = is_event_params_valid(event_params)
       if check_result[:is_valid]
         @event = Event.create!(event_params)
-        init_attributes = {:host => user, :rating => '5.0/5.0', :joined => '0', :status => 0, :people => [], :attendee_limit => 0}
+        init_attributes = {:host => user, :joined => '0', :status => 0, :people => [], :attendee_limit => 0}
         @event.update_attributes!(init_attributes)
         flash[:notice] = "Event '#{@event.title}' was successfully created."
         redirect_to events_path
@@ -103,19 +113,24 @@ class EventsController < ApplicationController
     # Making "internal" methods private is not required, but is a common practice.
     # This helps make clear which methods respond to requests, and which ones do not.
     def event_params
-      params.require(:event).permit(:title, :host, :rating, :joined, :people, :status, :event_time, :attendee_limit, :description, :q)
+      params.require(:event).permit(:title, :host, :joined, :people, :status, :event_time, :attendee_limit, :description, :q)
     end
 
     private
     def is_event_params_valid(params)
       result = {:is_valid => true, :invalid_field => 'None'}
+      # date = Date.strptime(params['event_time(1i)'] + '-' + params['event_time(2i)'] + '-' + params['event_time(3i)'],"%Y-%m-%d")
       if params["title"].nil? or params["title"].blank?
         result[:is_valid] = false
         result[:invalid_field] = 'Title'
       elsif params["attendee_limit"].nil? or params["attendee_limit"].blank?
         result[:is_valid] = false
         result[:invalid_field] = 'Maximum Number of Attendees'
+      elsif Date.parse(params['event_time(1i)'] + '-' + params['event_time(2i)'] + '-' + params['event_time(3i)']).past?
+        result[:is_valid] = false
+        result[:invalid_field] = 'Event Time'
       end
+      puts params[:event_time]
       return result
     end
 
