@@ -21,10 +21,10 @@ class EventsController < ApplicationController
       
       if not q.blank?
         event1 = Event.find_event_by_date(params[:select][:year], params[:select][:month])
-        event2 = Event.find_event_by_rating(params[:rating_selected])
+        # event2 = Event.find_event_by_rating(params[:rating_selected])
         event3 = Event.find_event_by_status(params[:status_selected])
         event4 = Event.find_event_by_name(q)
-        @events = [ event1, event2, event3, event4 ].reject( &:nil? ).reduce( :& )
+        @events = [ event1, event3, event4 ].reject( &:nil? ).reduce( :& )
         @user_ratings = {}
         @events.each do |event|
           u = User.find_by(username: event.host)
@@ -137,7 +137,7 @@ class EventsController < ApplicationController
     private
     def get_join_button_style(uname)
       return 'btn btn-secondary col-2' if @event.people.include?(uname)
-      return 'btn btn-success col-2 disabled' if @event.people.size >= @event.attendee_limit
+      return 'btn btn-success col-2 disabled' if @event.people.size >= @event.attendee_limit or @event.status == "closed"
       return 'btn btn-success col-2'
     end
   end
