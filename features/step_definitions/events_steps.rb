@@ -65,3 +65,17 @@ Then /the Maximum Number of Attendees of event "([^"]*)" should be "([^"]*)"$/ d
 And /I debug$/ do
   save_and_open_page
 end
+
+# make sure all the comments of an event are visible
+Then /I should see all the comments of "([^"]*)"$/ do |title|
+  event = Event.find_by(title: title)
+  event.comments.all.each do |comment|
+    "I should see '#{comment.content}'"
+  end
+end
+
+Given /I commented the event "([^"]*)" with "([^"]*)"$/ do |title, content|
+  step %{I am on the event details page for "#{title}"}
+  step %{I fill in "comment[content]" with "#{content}"}
+  step %{I press "Post Comment"}
+end

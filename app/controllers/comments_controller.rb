@@ -1,17 +1,6 @@
 class CommentsController < ApplicationController
-    before_action only: [:index, :edit, :update, :destroy, :create]
+    before_action only: [:edit, :update, :destroy, :create]
     before_action :set_event
-
-  # GET /event/comments
-    def index
-        id = params[:id]
-        @comments = @event.comments.all
-    end
-
-  # GET /comments/new
-    def new
-        #@comment = current_user.comments.build 
-    end
 
   # GET /comments/1/edit
     def edit
@@ -42,7 +31,7 @@ class CommentsController < ApplicationController
             redirect_to event_path(@event)
         else
             flash[:notice] = "Comment content shouldn't be empty."
-            redirect_to event_comment_path(@event, @comment)
+            redirect_to edit_event_comment_path(@event, @comment)
         end
     end
 
