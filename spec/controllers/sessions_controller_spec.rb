@@ -45,5 +45,17 @@ RSpec.describe SessionsController, type: :controller do
     end
   end
 
+  describe "omniauth SSO" do
+    let!(:user) {FactoryGirl.build(:user)}
+    before do
+      allow(User).to receive(:from_omniauth).and_return(user)
+      expect(user).to receive(:save).and_return(user)
+    end
+    it "should call omiauth to perform SSO" do
+      get :omniauth, {provider: 'google_oauth2'}
+      expect(response).to redirect_to '/welcome'
+    end
+  end
+
 
 end
