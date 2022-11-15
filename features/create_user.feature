@@ -30,6 +30,6 @@ Scenario: a new user fails to create user info due to duplicate username
 
 Scenario: a new user successfully uses Google to SSO login
   When I go to the login_signup page
-  And I follow "Log In with Google"
-  Then I should be on the login_signup page
-  And I should see "Choose an account"
+  # And I debug
+  And I press "Log In with Google"
+  Then I should be redirected to the Google Login Page
