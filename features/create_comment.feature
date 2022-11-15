@@ -9,6 +9,10 @@ Background: events in database
     | title                | host              | event_time              | status | joined | attendee_limit |
     | Enjoy Lunch at Junzi | Daemon Targaryen  | 2022-10-30 00:00:00 UTC | open   | 1      | 2 |
 
+  Given the following users exist:
+    | username         | password | email                     |
+    | Daemon Targaryen | dt123    | daemontargaryen@gmail.com |
+
 Scenario: the user posts a valid comment in an event detail page
   Given I logged in as "TestUser"
   And I commented the event "Enjoy Lunch at Junzi" with "Test Comment"
