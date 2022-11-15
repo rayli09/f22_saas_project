@@ -4,12 +4,12 @@
 <ul id="details">
   <li>
     🗣&nbsp;<b>Host</b>
-    &nbsp;<%= @event.host %>
+    &nbsp;<%= link_to @event.host, user_path(@host) %>
   </li>
   <li>
     ✏️&nbsp;<b>Host Rating</b>
     &nbsp;
-    <% (@user_rating.nil? ? 5 : @user_rating).times do %>
+    <% (@host.rating.nil? ? 5 : @host.rating).times do %>
       ⭐️
     <% end %>
   </li>
@@ -30,14 +30,14 @@
       👥&nbsp;<b>Attending People</b>
       &nbsp;
       <% @event.people.each do |person| %>
-        <%= person %>&nbsp;&nbsp;&nbsp;
+        <%= link_to person, user_path(@attendees.fetch(person)) %>&nbsp;&nbsp;&nbsp;
       <% end %>
     <% else %>
       👥&nbsp;<b>Attending People</b>
       <details>
         <summary>Click to view all attendees</summary>
         <% @event.people.each do |person| %>
-          <%= person %>&nbsp;&nbsp;&nbsp;
+          <%= link_to person, user_path(@attendees.fetch(person)) %>&nbsp;&nbsp;&nbsp;
         <% end %>
       </details>
     <% end %>
@@ -51,14 +51,24 @@
 <br>
 
 <div class="row">
-  <% if (@is_viewer_host) %>
+  <% if @is_viewer_host %>
     <%= link_to 'Edit', edit_event_path(@event), :class => 'btn btn-primary col-2' %>
     <%= link_to 'Delete', event_path(@event), 'data-method' => 'delete', 'data-confirm' => 'Are you sure?', :class => 'btn btn-danger col-2' %>
+    
+    <% if @event.status == "closed" %>
+      <%= link_to 'Rate your attendees', rate_path(@event, @is_viewer_host), :class => @rate_btn_style %>
+    <% end %>
+
   <% end %>
   <%= link_to 'Back to event list', events_path, :class => 'btn btn-primary col-2' %>
   <%# Join: if user is not host && there's space %>
-  <% if (!@is_viewer_host) %>
+  <% if !@is_viewer_host %>
   <%= link_to @join_text, join_path({:id=>@event.id}), :class => @join_btn_style, :id => 'join_btn'%>
+  
+    <% if @event.status == "closed" && @is_user_joined %>
+        <%= link_to 'Rate your host', rate_path(@event, @is_viewer_host), :class => @rate_btn_style %>
+    <% end %>
+
   <% end %>
 </div>
 <br>
@@ -83,7 +93,7 @@
           <%= comment.content %>
         </td>
         <td>
-          <% if (comment.user.username == @username) %>
+          <% if comment.user.username == @username %>
             <%= link_to 'Edit', edit_event_comment_path(@event, comment.id), :class => 'btn btn-secondary col-4' %>
             <%= link_to 'Delete', event_comment_path(@event, comment.id), 'data-method' => 'delete', 'data-confirm' => 'Are you sure?', :class => 'btn btn-danger col-4' %>
           <% end %>
@@ -99,4 +109,3 @@
   <br>
   <%= submit_tag 'Post Comment', :class => 'btn btn-primary' %>
 <% end %>
-</div>

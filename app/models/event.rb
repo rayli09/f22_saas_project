@@ -3,6 +3,7 @@ class Event < ActiveRecord::Base
     has_many :comments, :dependent => :destroy
     has_and_belongs_to_many :users
     serialize :people, Array
+    serialize :rated_users, Array
     after_initialize :init_event
 
     def self.find_all_host_events(username)
@@ -50,6 +51,7 @@ class Event < ActiveRecord::Base
     private 
     def init_event
         @people = []
+        @rated_users = []
         @status = :open
         @attendee_limit = 10 #TODO refactor
     end
