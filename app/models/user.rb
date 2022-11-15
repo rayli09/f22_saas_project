@@ -9,5 +9,5 @@ class User < ActiveRecord::Base
           user.email = auth.info.email
           user.password = SecureRandom.hex
         end
-      end
+    end
 end
