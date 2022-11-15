@@ -6,8 +6,12 @@ Feature: show all my events
 
 Background: events in database
   Given the following events exist:
-  | title                      | host              | joined      |  people |  attendee_limit |
-  | Lunch at Max Cafe          | Mysaria           | 0           |         | 2 |
+    | title                      | host              | joined      |  people |  attendee_limit |
+    | Lunch at Max Cafe          | Mysaria           | 0           |         | 2 |
+
+  Given the following users exist:
+    | username          | password | email             |
+    | Mysaria           | my456    | mysaria@gmail.com |
 
 Scenario: the user who didn't host or join any event
   Given I logged in as "TestUser"

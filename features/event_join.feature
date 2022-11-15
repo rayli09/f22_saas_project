@@ -7,9 +7,14 @@ Feature: Join event
 Background: events in database
 
   Given the following events exist:
-  | title                     | host              | joined     |  people    | attendee_limit  |
-  | TestEvent1                | Alicent Hightower | 19         |            | 2               |
-  | TestEvent2                | Daemon Targaryen  | 10         |  testuser  | 2               |
+    | title                     | host              | joined     |  people    | attendee_limit  |
+    | TestEvent1                | Alicent Hightower | 19         |            | 2               |
+    | TestEvent2                | Daemon Targaryen  | 10         |  testuser  | 2               |
+
+  Given the following users exist:
+    | username          | password | email                      |
+    | Alicent Hightower | ah456    | alicenthightower@gmail.com |
+    | Daemon Targaryen  | dt123    | daemontargaryen@gmail.com  |
 
 Scenario: attendee can join event
   Given I logged in as "testuser"

@@ -4,14 +4,17 @@ class EventsController < ApplicationController
       id = params[:id] # retrieve event ID from URI route
       u = current_user.username
       @event = Event.find(id) # look up event by unique ID
-      host = User.find_by(username: @event.host)
-      @user_rating = host.nil? ? 5 : host.rating
+      @host = User.find_by(username: @event.host)
       @is_user_joined = @event.people.include?(u)
       @join_text = @is_user_joined ? :Unjoin : :Join
       @join_btn_style = get_join_button_style(u)
       @is_viewer_host = @event.host == u
       @username = u
       @rate_btn_style = get_rate_button_style(u)
+      @attendees = {}
+      @event.people.each do |person|
+        @attendees[person] = User.find_by(username: person)
+      end
     end
   
     def index
@@ -27,18 +30,18 @@ class EventsController < ApplicationController
         event3 = Event.find_event_by_status(params[:status_selected])
         event4 = Event.find_event_by_name(q)
         @events = [ event1, event3, event4 ].reject( &:nil? ).reduce( :& )
-        @user_ratings = {}
+        @users = {}
         @events.each do |event|
           u = User.find_by(username: event.host)
-          @user_ratings[event.host] = u.nil? ? 5 : u.rating
+          @users[event.host] = u
         end
         @page_name = "Search Result for '#{q}'"
       else
         @events = Event.all
-        @user_ratings = {}
+        @users = {}
         @events.each do |event|
           u = User.find_by(username: event.host)
-          @user_ratings[event.host] = u.nil? ? 5 : u.rating
+          @users[event.host] = u
         end
         @page_name = "Home"
       end

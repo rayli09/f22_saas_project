@@ -43,10 +43,10 @@
           <%= link_to event.title, event_path(event)%>
         </td>
         <td>
-          <%= event.host %>
+          <%= link_to event.host, user_path(@users.fetch(event.host)) %>
         </td>
         <td>
-          <% @user_ratings.fetch(event.host).to_i.times do %>
+          <% (@users.fetch(event.host).rating.nil? ? 5 : @users.fetch(event.host).rating).times do %>
             ⭐️
           <% end %>
         </td>

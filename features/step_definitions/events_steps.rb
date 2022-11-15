@@ -8,6 +8,12 @@ Given /the following events exist/ do |events_table|
   end
 end
 
+Given /the following users exist/ do |users_table|
+  users_table.hashes.each do |user|
+    User.create user
+  end
+end
+
 Then /I should see all the events/ do
   # Make sure that all the events in the app are visible in the table
   Event.all.each do |event|

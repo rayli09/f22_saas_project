@@ -10,6 +10,10 @@ Background: events in database
     | Enjoy Lunch at Junzi | Daemon Targaryen | 2022-10-30 00:00:00 UTC | open   | 1      | 2 |
     | TestEvent            | testuser         | 2022-11-05 00:00:00 UTC | open   | 10     | 2 |
 
+  Given the following users exist:
+    | username         | password | email                     |
+    | Daemon Targaryen | dt123    | daemontargaryen@gmail.com |
+
 Scenario: the user successfully deletes his own event
   Given I logged in as "testuser"
   When I go to the home page
