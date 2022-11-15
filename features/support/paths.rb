@@ -25,6 +25,9 @@ module NavigationHelpers
     when /^the post event page$/ then '/events/new'
     when /^the event details page for "(.*)"$/ then "/events/#{Event.find_by(title:$1).id}"
     when /^the edit event page for "(.*)"$/ then "/events/#{Event.find_by(title:$1).id}/edit"
+    when /^the myProfile page$/ then '/myProfile'
+    when /^the user profile page for "(.*)"$/ then "/users/#{User.find_by(username:$1).id}"
+    when /^the edit user page for "(.*)"$/ then "/users/#{User.find_by(username:$1).id}/edit"
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

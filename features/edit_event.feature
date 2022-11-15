@@ -39,6 +39,19 @@ Scenario: the user fails to update his own event's Maximum Number of Attendees
   Then I should be on the edit event page for "TestEvent"
   And I should see "Field 'Maximum Number of Attendees' must be correctly filled in."
 
+Scenario: the user fails to update his own event's Event Time
+  Given I logged in as "testuser"
+  When I go to the home page
+  And I follow "TestEvent"
+  Then I should see "Edit"
+  Then I follow "Edit"
+  And I should see "Edit Event"
+  Then I fill in "Maximum Number of Attendees" with "4"
+  And I fill in "TestEvent" Event Time with "2022,October,15"
+  And I press "Update Event Info"
+  Then I should be on the edit event page for "TestEvent"
+  And I should see "Field 'Event Time' must be correctly filled in."
+
 Scenario: the user cannot edit the event that he doesn't host
   Given I logged in as "testuser"
   When I go to the home page
