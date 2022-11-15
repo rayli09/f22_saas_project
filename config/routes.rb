@@ -16,6 +16,8 @@ Rottenpotatoes::Application.routes.draw do
   match '/myEvents', to: 'events#myEvents', as: 'myEvents', via: :get 
   match '/search_result', to: 'events#index', as: 'search_result', via: :get
   match '/join', to: 'events#join', as: 'join', via: :get
-  
+  match '/events/:id/ratePeople', to: 'events#ratePeople', as: 'rate', via: :get
+  match '/events/:id/rateUser', to: 'users#rateUser', as: 'rate_user', via: :put
+
   get '/auth/:provider/callback' => 'sessions#omniauth'
 end

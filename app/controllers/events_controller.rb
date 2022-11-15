@@ -6,10 +6,12 @@ class EventsController < ApplicationController
       @event = Event.find(id) # look up event by unique ID
       host = User.find_by(username: @event.host)
       @user_rating = host.nil? ? 5 : host.rating
-      @join_text = @event.people.include?(u) ? :Unjoin : :Join
+      @is_user_joined = @event.people.include?(u)
+      @join_text = @is_user_joined ? :Unjoin : :Join
       @join_btn_style = get_join_button_style(u)
       @is_viewer_host = @event.host == u
       @username = u
+      @rate_btn_style = get_rate_button_style(u)
     end
   
     def index
@@ -20,8 +22,8 @@ class EventsController < ApplicationController
       q = params[:q].to_s.strip
       
       if not q.blank?
+        # TODO issue #70
         event1 = Event.find_event_by_date(params[:select][:year], params[:select][:month])
-        # event2 = Event.find_event_by_rating(params[:rating_selected])
         event3 = Event.find_event_by_status(params[:status_selected])
         event4 = Event.find_event_by_name(q)
         @events = [ event1, event3, event4 ].reject( &:nil? ).reduce( :& )
@@ -108,6 +110,16 @@ class EventsController < ApplicationController
       @join_events = [] if @join_events.nil? or @join_events.empty?
     end
 
+    def ratePeople
+      @event = Event.find(params[:id])
+      u = current_user.username
+      # @can_user_rate = !@event.rated_users.include?(u)
+      @rate_btn_style = get_rate_button_style(u)
+      puts "btn style"
+      puts @rate_btn_style
+      @is_viewer_host = @event.host == u
+    end
+
     # TODO refactor this method to set required params
     private
     # Making "internal" methods private is not required, but is a common practice.
@@ -139,6 +151,10 @@ class EventsController < ApplicationController
       return 'btn btn-secondary col-2' if @event.people.include?(uname)
       return 'btn btn-success col-2 disabled' if @event.people.size >= @event.attendee_limit or @event.status == "closed"
       return 'btn btn-success col-2'
+    end
+    def get_rate_button_style(u)
+      return 'btn btn-primary col-2 disabled' if @event.rated_users.include?(u)
+      return 'btn btn-primary col-2'
     end
   end
   

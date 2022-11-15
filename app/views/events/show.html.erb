@@ -54,11 +54,21 @@
   <% if (@is_viewer_host) %>
     <%= link_to 'Edit', edit_event_path(@event), :class => 'btn btn-primary col-2' %>
     <%= link_to 'Delete', event_path(@event), 'data-method' => 'delete', 'data-confirm' => 'Are you sure?', :class => 'btn btn-danger col-2' %>
+    
+    <% if @event.status == "closed" %>
+      <%= link_to 'Rate your attendees', rate_path(@event, @is_viewer_host), :class => @rate_btn_style %>
+    <% end %>
+
   <% end %>
   <%= link_to 'Back to event list', events_path, :class => 'btn btn-primary col-2' %>
   <%# Join: if user is not host && there's space %>
   <% if (!@is_viewer_host) %>
   <%= link_to @join_text, join_path({:id=>@event.id}), :class => @join_btn_style, :id => 'join_btn'%>
+  
+    <% if @event.status == "closed" && @is_user_joined %>
+        <%= link_to 'Rate your host', rate_path(@event, @is_viewer_host), :class => @rate_btn_style %>
+    <% end %>
+
   <% end %>
 </div>
 <br>

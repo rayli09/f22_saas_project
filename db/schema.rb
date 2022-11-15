@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20221113213413) do
     t.integer  "attendee_limit"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "rated_users"
   end
 
   create_table "events_users", id: false, force: :cascade do |t|
@@ -45,7 +46,8 @@ ActiveRecord::Schema.define(version: 20221113213413) do
     t.string   "password_digest"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.integer  "rating"
+    t.integer  "rating",                 default: 5,  null: false
+    t.integer  "num_rating_got",         default: 1,  null: false
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"

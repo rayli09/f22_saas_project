@@ -12,6 +12,7 @@ class CreateEvents < ActiveRecord::Migration
       # Add fields that let Rails automatically keep track
       # of when movies are added or modified:
       t.timestamps
+      t.text :rated_users
     end
   end
 
