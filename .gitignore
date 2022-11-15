@@ -86,3 +86,4 @@ yarn-debug.log*
 .make.db-migrate
 .make.db-setup
 .make.init
+.DS_Store
