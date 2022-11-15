@@ -13,6 +13,11 @@ Background: events in database
   | Enjoy Lunch at Junzi      | Daemon Targaryen  | 1      | 2              |
   | Lunch at Max Cafe         | Mysaria           | 3      | 2              |
 
+  Given the following users exist:
+    | username          | password | email                     |
+    | Daemon Targaryen  | dt123    | daemontargaryen@gmail.com |
+    | Mysaria           | my456    | mysaria@gmail.com         |
+
 Scenario: see all events on home page
   Given I logged in as "Alicent Hightower"
   When I go to the home page
