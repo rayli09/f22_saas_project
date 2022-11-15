@@ -27,12 +27,12 @@
           <li>
             <%= link_to "My Events", myEvents_path(@username) %>
           </li>
-<!--          <li>-->
-            <%#= link_to "My Profile", user_path(current_user) %>
-<!--          </li>-->
+          <li>
+            <%= link_to "My Profile", myProfile_path(@username) %>
+          </li>
           <li>
             <% if logged_in? %>
-              <%= link_to  current_user.username, logout_path %>
+              <%= link_to  "Logout " + current_user.username, logout_path %>
             <%else%>
               <%= link_to "Login/Signup", login_signup_path %>
             <%end%>

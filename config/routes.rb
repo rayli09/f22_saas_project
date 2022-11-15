@@ -2,6 +2,8 @@ Rottenpotatoes::Application.routes.draw do
   resources :users do
   end
 
+  match '/myProfile', to: 'users#myProfile', as: 'myProfile', via: :get
+
   get 'login', to: 'sessions#new', as: 'sign_up'
   post 'login', to: 'sessions#create', as: 'log_in'
   get 'welcome', to: 'sessions#welcome', as: "login_signup"

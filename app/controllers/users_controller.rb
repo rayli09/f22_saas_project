@@ -25,6 +25,11 @@ class UsersController < ApplicationController
     @join_events = [] if @join_events.nil? or @join_events.empty?
   end
 
+  def myProfile
+    @username = current_user.username
+    redirect_to user_path(current_user)
+  end
+
   def edit
     @user = User.find(params[:id])
   end
