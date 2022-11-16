@@ -29,6 +29,13 @@ Given /I logged in as "([^"]*)"$/ do |username|
     click_button "Login"
 end
 
+Given /I signed in as "([^"]*)" with "([^"]*)"$/ do |username, password|
+  visit '/login'
+  fill_in "username", :with => username
+  fill_in "password", :with => password
+  click_button "Login"
+end
+
 Given /I hacked in as "([^"]*)"$/ do |username|
   @user = User.create!({:username => username, :password => 'test'})
   visit '/login'
