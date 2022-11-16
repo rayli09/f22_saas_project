@@ -4,6 +4,10 @@ class SessionsController < ApplicationController
   end
 
   def create
+    if cannot_login? params
+      flash[:warning] = 'fields cannot be null'
+      redirect_to '/login' and return
+    end
     @user = User.find_by(username: params[:username])
     if @user && @user.authenticate(params[:password])
        session[:user_id] = @user.id
@@ -33,5 +37,9 @@ class SessionsController < ApplicationController
  private
  def auth
    request.env['omniauth.auth']
+ end
+ private 
+ def cannot_login?(params)
+  params[:username].nil? or params[:password].blank? or params[:password].nil? or params[:password].blank?
  end
 end

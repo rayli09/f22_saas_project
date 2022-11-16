@@ -6,6 +6,10 @@ class UsersController < ApplicationController
   end
 
   def create
+    if cannot_create_user?(user_params)
+      flash[:warning] = 'fields cannot be empty'
+      redirect_to '/users/new?' and return
+    end
     if User.find_by(username: user_params["username"])
       flash[:warning] = "username already exists"
       redirect_to '/users/new?' and return
@@ -77,5 +81,9 @@ class UsersController < ApplicationController
     cnt = u.num_rating_got
     u.update_attribute(:rating, ((old_r * cnt + new_r.to_i)/(cnt+1)).floor)
     u.update_attribute(:num_rating_got, cnt + 1)
+  end
+  private
+  def cannot_create_user?(user_params)
+    user_params[:username].nil? or user_params[:username].blank? or user_params[:password].nil? or user_params[:password].blank?
   end
 end

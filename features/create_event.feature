@@ -21,6 +21,8 @@ Scenario: the user logout
 Scenario: the user doesn't exist
   Given I hacked in as "FakeUser"
   When I go to the login page
+  And I fill in "username" with "doesnotexist"
+  And I fill in "password" with "doesnotexist"
   And I press "Login"
   Then I should be on the login page
   And I should see "User does not exist"
