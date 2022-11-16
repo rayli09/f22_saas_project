@@ -213,4 +213,18 @@ describe EventsController do
         end
 
     end 
+    describe "#ratePeople" do
+        let!(:event) {FactoryGirl.create(:event)}
+        let!(:user) {FactoryGirl.build(:user, username: 'Ben')}
+        before do
+            sign_in user
+            get :ratePeople, {:id=>event.id}
+        end
+
+        context "attendee goes to event page" do
+            it "should return ratePeople template" do
+                expect(response).to render_template("ratePeople")
+            end 
+        end
+    end 
 end
