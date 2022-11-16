@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe SessionsController, type: :controller do
-# describe SessionsController do
+  
   describe "GET #new" do
     it "goes to the login page" do
       get :new
@@ -11,10 +11,7 @@ RSpec.describe SessionsController, type: :controller do
 
   describe "POST #create" do
     let!(:user) {FactoryGirl.build(:user)}
-    # before do
-    #   sign_in user
-    #   post :create, {:username=>user.username, :password=>user.password}
-    # end
+
     it "redirects to welcome if user validates" do
       sign_in user
       post :create, {:username=>user.username, :password=>user.password}
@@ -22,6 +19,12 @@ RSpec.describe SessionsController, type: :controller do
     end
     it "redirects to login if user fails to validate" do
       post :create, {:username=>user.username, :password=>user.password}
+      expect(response).to redirect_to '/login'
+    end
+    it "fails to login due to empty fields" do
+      sign_in user
+      post :create, {:username=>user.username, :password=>nil}
+      expect(flash[:warning]).to be_present
       expect(response).to redirect_to '/login'
     end
   end
