@@ -24,6 +24,12 @@ RSpec.describe SessionsController, type: :controller do
       post :create, {:username=>user.username, :password=>user.password}
       expect(response).to redirect_to '/login'
     end
+    it "fails to login due to empty fields" do
+      sign_in user
+      post :create, {:username=>user.username, :password=>nil}
+      expect(flash[:warning]).to be_present
+      expect(response).to redirect_to '/login'
+    end
   end
 
   describe "GET #welcome" do
