@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe SessionsController, type: :controller do
-# describe SessionsController do
+  
   describe "GET #new" do
     it "goes to the login page" do
       get :new
@@ -11,10 +11,7 @@ RSpec.describe SessionsController, type: :controller do
 
   describe "POST #create" do
     let!(:user) {FactoryGirl.build(:user)}
-    # before do
-    #   sign_in user
-    #   post :create, {:username=>user.username, :password=>user.password}
-    # end
+
     it "redirects to welcome if user validates" do
       sign_in user
       post :create, {:username=>user.username, :password=>user.password}
