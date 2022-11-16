@@ -20,6 +20,11 @@ Scenario: a new user successfully creates user info
   And I press "Create User"
   Then I should be on the welcome page
 
+Scenario: failed to register with empty fields
+  When I go to the new user page
+  And I press "Create User"
+  Then I should see "fields cannot be empty"
+
 Scenario: a new user fails to create user info due to duplicate username
   When I go to the new user page
   And I fill in "Username" with "Daemon Targaryen"
@@ -27,7 +32,3 @@ Scenario: a new user fails to create user info due to duplicate username
   And I press "Create User"
   Then I should be on the new user page
   And I should see "username already exists"
-
-Scenario: a new user successfully uses Google to SSO login
-  When I go to the login_signup page
-  And I perform Google SSO
