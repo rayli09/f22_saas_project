@@ -11,7 +11,6 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe "POST #create" do
-    let!(:user) {FactoryGirl.create(:user)}
 
     context "When successfully create a new user" do
       it "should store the new user in the database and go to welcome" do
@@ -23,6 +22,7 @@ RSpec.describe UsersController, type: :controller do
 
     context "When fails to create a new user due to duplicate username" do
       it "should not store the new user in the database and go to new user page" do
+        user = User.create({:username => "testuser", :password => "12345"})
         params = ActionController::Parameters.new(:username => "testuser", :password => "test")
         expect{post :create, {:user => params}}.to change{User.count}.by(0)
         expect(response).to redirect_to '/users/new?'
