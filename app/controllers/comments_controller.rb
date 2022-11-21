@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-    before_action only: [:edit, :update, :destroy, :create, :reactLike, :reactUp, :reactDown]
+    before_action only: [:edit, :update, :destroy, :create, :react]
     before_action :set_event
 
   # GET /comments/1/edit
