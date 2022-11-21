@@ -100,15 +100,15 @@
         </td>
         <td>
           <%= button_to '❤️', react_path(@event, comment.id, 0), :method => :put%>
-          <%= comment.reactions.count_likes(comment.id) %>
+          <%= comment.reactions.count_reacts(comment.id, 0) %>
         </td>
         <td>
           <%= button_to '👍', react_path(@event, comment.id, 1), :method => :put %>
-          <%= comment.reactions.count_ups(comment.id) %>
+          <%= comment.reactions.count_reacts(comment.id, 1) %>
         </td>
         <td>
           <%= button_to '👎', react_path(@event, comment.id, 2), :method => :put %>
-          <%= comment.reactions.count_downs(comment.id) %>
+          <%= comment.reactions.count_reacts(comment.id, 2) %>
         </td>
       </tr>
     <% end %>
