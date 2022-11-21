@@ -98,6 +98,18 @@
             <%= link_to 'Delete', event_comment_path(@event, comment.id), 'data-method' => 'delete', 'data-confirm' => 'Are you sure?', :class => 'btn btn-danger col-4' %>
           <% end %>
         </td>
+        <td>
+          <%= button_to '❤️', react_path(@event, comment.id, 0), :method => :put%>
+          <%= comment.reactions.count_likes(comment.id) %>
+        </td>
+        <td>
+          <%= button_to '👍', react_path(@event, comment.id, 1), :method => :put %>
+          <%= comment.reactions.count_ups(comment.id) %>
+        </td>
+        <td>
+          <%= button_to '👎', react_path(@event, comment.id, 2), :method => :put %>
+          <%= comment.reactions.count_downs(comment.id) %>
+        </td>
       </tr>
     <% end %>
   </tbody>
