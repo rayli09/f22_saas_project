@@ -43,14 +43,14 @@ class CommentsController < ApplicationController
         redirect_to event_path(@event)
     end
 
-  # user like/thumb-up/thumb-down or undo the reaction to the comment
+  # user thumb-up/like/laugh or undo the reaction to the comment
     def react
         comment_id = params[:id]
-        dictionary = { 0 => "liked", 1 => "thumb-uped", 2 => "thumb-downed" }
+        dictionary = { 0 => "thumb-uped", 1 => "liked", 2 => "laughed" }
         action = params[:action_id].to_i
         user_id = User.find_by(username: current_user.username).id
         record = Reaction.find_by(user_id: user_id, comment_id: comment_id, action: action)
-        # the user didn't click 'like' before
+        # the user didn't click the reaction before
         if record.nil?
             reaction = current_user.reactions.create(user_id: user_id, comment_id: comment_id, action: action)
             reaction.save

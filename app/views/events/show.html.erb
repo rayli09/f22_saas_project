@@ -98,18 +98,37 @@
             <%= link_to 'Delete', event_comment_path(@event, comment.id), 'data-method' => 'delete', 'data-confirm' => 'Are you sure?', :class => 'btn btn-danger col-4' %>
           <% end %>
         </td>
+      </tr>
+      <tr>
         <td>
-          <%= button_to '❤️', react_path(@event, comment.id, 0), :method => :put%>
-          <%= comment.reactions.count_reacts(comment.id, 0) %>
+          <div class="row">
+            <div class="col-md-2">
+              <%= button_to '', react_path(@event, comment.id, 0), :method => :put, :id => 'thumbup' %>
+            </div>
+            <div class="col-md-2">
+              <%= button_to '', react_path(@event, comment.id, 1), :method => :put, :id => "like" %>
+            </div>
+            <div class="col-md-2">
+              <%= button_to '', react_path(@event, comment.id, 2), :method => :put, :id => "laugh" %>
+            </div>
+          </div>
         </td>
-        <td>
-          <%= button_to '👍', react_path(@event, comment.id, 1), :method => :put %>
-          <%= comment.reactions.count_reacts(comment.id, 1) %>
-        </td>
-        <td>
-          <%= button_to '👎', react_path(@event, comment.id, 2), :method => :put %>
-          <%= comment.reactions.count_reacts(comment.id, 2) %>
-        </td>
+        <% if comment.reactions.count_reacts(comment.id)>0 %>
+          <td>
+            <% comment.reactions.find_people(comment.id).each do |name| %>
+              <%= name + ", " %>
+            <% end %>
+            <span>and others</span>
+          </td>
+          <td>
+            <%= comment.reactions.count_reacts(comment.id) %>
+            <span> Reactions</span>
+          </td>
+        <% else %>
+          <td>
+            <span>👈 Be the first one to react</span>
+          </td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
