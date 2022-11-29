@@ -99,9 +99,14 @@ class EventsController < ApplicationController
     end
     def promote
       @event = Event.find(params[:id])
-      # TODO check balance, promote if allowed
-      flash[:notice]='promoted!'
-      redirect_to event_path(@event)
+      host = User.find_by(username: @event.host)
+      if host.promote_event
+        flash[:notice]='promoted!'
+        # TODO change button style
+        redirect_to event_path(@event) and return
+      end
+      flash[:warning]='You don\'t have enough coins!'
+      
     end
     def destroy
       @event = Event.find(params[:id])
