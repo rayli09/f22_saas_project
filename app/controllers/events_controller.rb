@@ -168,7 +168,7 @@ class EventsController < ApplicationController
       return 'btn btn-primary col-2'
     end
     def get_promote_btn_style(e)
-      return 'btn btn-info col-2 disabled' if e.promoted?
+      return 'btn btn-secondary col-2 disabled' if e.promoted?
       return 'btn btn-info col-2'
     end
   end

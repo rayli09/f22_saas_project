@@ -6,6 +6,10 @@ class Event < ActiveRecord::Base
     serialize :rated_users, Array
     after_initialize :init_event
 
+    def promotion_banner_style
+        return 'table-success' if self.promoted?
+        return ''
+    end
     def self.find_all_host_events(username)
         Event.where(:host => username)
     end
