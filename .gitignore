@@ -87,3 +87,4 @@ yarn-debug.log*
 .make.db-setup
 .make.init
 .DS_Store
+f22_saas_project.code-workspace

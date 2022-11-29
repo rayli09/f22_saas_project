@@ -13,6 +13,7 @@ class CreateEvents < ActiveRecord::Migration
       # of when movies are added or modified:
       t.timestamps
       t.text :rated_users
+      t.boolean :promoted?, default: false
     end
   end
 

@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20221113213413) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "rated_users"
+    t.boolean  "promoted?",      default: false
   end
 
   create_table "events_users", id: false, force: :cascade do |t|
@@ -44,12 +45,13 @@ ActiveRecord::Schema.define(version: 20221113213413) do
   create_table "users", force: :cascade do |t|
     t.string   "username"
     t.string   "password_digest"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.integer  "rating",                 default: 5,  null: false
-    t.integer  "num_rating_got",         default: 1,  null: false
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.integer  "rating",                 default: 5,   null: false
+    t.integer  "num_rating_got",         default: 1,   null: false
+    t.integer  "coins",                  default: 100, null: false
+    t.string   "email",                  default: "",  null: false
+    t.string   "encrypted_password",     default: "",  null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"

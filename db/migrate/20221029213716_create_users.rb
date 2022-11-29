@@ -7,6 +7,8 @@ class CreateUsers < ActiveRecord::Migration
       t.integer :rating, default: 5, null:false
       # number of ratings received for user u
       t.integer :num_rating_got, default: 1, null:false
+      # coins are used for promotion
+      t.integer :coins, default: 100, null:false
     end
   end
 end

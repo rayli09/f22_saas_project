@@ -37,7 +37,11 @@
   </thead>
   <tbody>
     <% @events.each do |event| %>
-      <tr>
+    <% if event.promoted?  %>
+      <tr class="table-danger">
+    <% else  %>
+      <tr class="">
+    <% end  %>
         <td>
           <%# <%= event.title %>
           <%= link_to event.title, event_path(event)%>
