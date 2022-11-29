@@ -5,6 +5,7 @@ class Event < ActiveRecord::Base
     serialize :people, Array
     serialize :rated_users, Array
     after_initialize :init_event
+    default_scope {order(promoted?: :DESC, event_time: :ASC)}
 
     def promotion_banner_style
         return 'table-success' if self.promoted?
