@@ -8,6 +8,7 @@ class EventsController < ApplicationController
       @is_user_joined = @event.people.include?(u)
       @join_text = @is_user_joined ? :Unjoin : :Join
       @join_btn_style = get_join_button_style(u)
+      @promote_btn_style = get_promote_btn_style(@event)
       @is_viewer_host = @event.host == u
       @username = u
       @rate_btn_style = get_rate_button_style(u)
@@ -101,8 +102,8 @@ class EventsController < ApplicationController
       @event = Event.find(params[:id])
       host = User.find_by(username: @event.host)
       if host.promote_event
+        @event.update_attribute(:promoted?, true)
         flash[:notice]='promoted!'
-        # TODO change button style
         redirect_to event_path(@event) and return
       end
       flash[:warning]='You don\'t have enough coins!'
@@ -165,6 +166,10 @@ class EventsController < ApplicationController
     def get_rate_button_style(u)
       return 'btn btn-primary col-2 disabled' if @event.rated_users.include?(u)
       return 'btn btn-primary col-2'
+    end
+    def get_promote_btn_style(e)
+      return 'btn btn-info col-2 disabled' if e.promoted?
+      return 'btn btn-info col-2'
     end
   end
   
