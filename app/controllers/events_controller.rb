@@ -97,7 +97,12 @@ class EventsController < ApplicationController
         redirect_to edit_event_path(@event)
       end
     end
-
+    def promote
+      @event = Event.find(params[:id])
+      # TODO check balance, promote if allowed
+      flash[:notice]='promoted!'
+      redirect_to event_path(@event)
+    end
     def destroy
       @event = Event.find(params[:id])
       @event.destroy
@@ -123,10 +128,7 @@ class EventsController < ApplicationController
       @is_viewer_host = @event.host == u
     end
 
-    # TODO refactor this method to set required params
     private
-    # Making "internal" methods private is not required, but is a common practice.
-    # This helps make clear which methods respond to requests, and which ones do not.
     def event_params
       params.require(:event).permit(:title, :host, :joined, :people, :status, :event_time, :attendee_limit, :description, :q)
     end
