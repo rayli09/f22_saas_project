@@ -11,4 +11,11 @@ class User < ActiveRecord::Base
           user.password = SecureRandom.hex
         end
     end
+    def promote_event
+      if self.coins >= 10
+        update_attribute(:coins, self.coins - 10)
+        return true
+      end
+      return false
+    end
 end
