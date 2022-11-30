@@ -16,8 +16,7 @@ Rottenpotatoes::Application.routes.draw do
   
   # map '/' to be a redirect to '/events'
   root :to => redirect('/welcome')
-  
-  match '/myEvents', to: 'events#myEvents', as: 'myEvents', via: :get 
+
   match '/search_result', to: 'events#index', as: 'search_result', via: :get
   match '/join', to: 'events#join', as: 'join', via: :get
   match '/events/:id/promote', to: 'events#promote', as: 'promote', via: :get
