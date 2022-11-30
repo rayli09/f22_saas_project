@@ -92,13 +92,13 @@
   <tbody>
     <% @event.comments.each do |comment| %>
       <tr>
-        <td>
-          <%= comment.user.username %>
+        <td class='col-md-2'>
+          <%= link_to comment.user.username, user_path(comment.user.id) %>&nbsp;&nbsp;&nbsp;
         </td>
-        <td>
+        <td class='col-md-6'>
           <%= comment.content %>
         </td>
-        <td>
+        <td class='col-md-2'>
           <% if comment.user.username == @username %>
             <%= link_to 'Edit', edit_event_comment_path(@event, comment.id), :class => 'btn btn-outline-secondary col-4' %>
             <%= link_to 'Delete', event_comment_path(@event, comment.id), 'data-method' => 'delete', 'data-confirm' => 'Are you sure?', :class => 'btn btn-outline-danger col-4' %>
@@ -106,7 +106,7 @@
         </td>
       </tr>
       <tr class="bottom">
-        <td>
+        <td class='col-md-2'>
           <div class="row">
             <% if comment.reactions.is_reacted(comment.id, @user_id) %>
               <% if comment.reactions.is_thumbuped(comment.id, @user_id) %>
@@ -138,18 +138,18 @@
           </div>
         </td>
         <% if comment.reactions.count_reacts(comment.id)>0 %>
-          <td>
+          <td class='col-md-6'>
             <% comment.reactions.find_people(comment.id).each do |name| %>
               <%= name + ", " %>
             <% end %>
             <span>and others</span>
           </td>
-          <td>
+          <td class='col-md-2'>
             <%= comment.reactions.count_reacts(comment.id) %>
             <span> Reactions</span>
           </td>
         <% else %>
-          <td>
+          <td class='col-md-8'>
             <span>👈 Be the first one to react</span>
           </td>
           <td></td>
