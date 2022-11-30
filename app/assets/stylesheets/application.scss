@@ -70,3 +70,34 @@ details[open] summary {
     margin-bottom: .5em;
 }
 
+#thumbup {
+    background: image-url("emoji-thumbup.png") no-repeat center center;
+    background-size: cover;
+    height: 40px;
+    width: 40px;
+    border: white;
+}
+
+#like {
+    background: image-url("emoji-like.png") no-repeat center center;
+    background-size: cover;
+    height: 40px;
+    width: 40px;
+    border: white;
+}
+
+#laugh {
+    background: image-url("emoji-laugh.png") no-repeat center center;
+    background-size: cover;
+    height: 40px;
+    width: 40px;
+    border: white;
+}
+
+.borderless td {
+    border: none;
+}
+ 
+.bottom {
+    border-bottom: 3px solid lightblue;
+}

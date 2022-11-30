@@ -16,6 +16,7 @@ class EventsController < ApplicationController
       @event.people.each do |person|
         @attendees[person] = User.find_by(username: person)
       end
+      @user_id = User.find_by(username: u).id
     end
   
     def index

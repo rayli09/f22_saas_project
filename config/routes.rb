@@ -11,7 +11,7 @@ Rottenpotatoes::Application.routes.draw do
   get 'logout', to: 'sessions#logout', as: 'logout'
 
   resources :events do
-    resources :comments, except: ['show']
+    resources :comments
   end 
   
   # map '/' to be a redirect to '/events'
@@ -23,6 +23,8 @@ Rottenpotatoes::Application.routes.draw do
   match '/events/:id/promote', to: 'events#promote', as: 'promote', via: :get
   match '/events/:id/ratePeople', to: 'events#ratePeople', as: 'rate', via: :get
   match '/events/:id/rateUser', to: 'users#rateUser', as: 'rate_user', via: :put
+
+  match '/events/:event_id/comments/:id/react/:action_id', to: 'comments#react', as: 'react', via: :put
 
   get '/auth/:provider/callback' => 'sessions#omniauth', as: 'oauth'
 end

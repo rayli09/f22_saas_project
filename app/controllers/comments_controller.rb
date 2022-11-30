@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-    before_action only: [:edit, :update, :destroy, :create]
+    before_action only: [:edit, :update, :destroy, :create, :react]
     before_action :set_event
 
   # GET /comments/1/edit
@@ -40,6 +40,25 @@ class CommentsController < ApplicationController
         @comment = Comment.find(params[:id])
         @comment.destroy
         flash[:notice] = "Comment was deleted."
+        redirect_to event_path(@event)
+    end
+
+  # user thumb-up/like/laugh or undo the reaction to the comment
+    def react
+        comment_id = params[:id]
+        dictionary = { 0 => "thumb-uped", 1 => "liked", 2 => "laughed" }
+        action = params[:action_id].to_i
+        user_id = User.find_by(username: current_user.username).id
+        record = Reaction.find_by(user_id: user_id, comment_id: comment_id, action: action)
+        # the user didn't click the reaction before
+        if record.nil?
+            reaction = current_user.reactions.create(user_id: user_id, comment_id: comment_id, action: action)
+            reaction.save
+            flash[:notice] = "You " + dictionary[action] + " the comment."
+        else
+            record.destroy
+            flash[:warning] = "You un" + dictionary[action] +  " the comment."
+        end
         redirect_to event_path(@event)
     end
 

@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
     has_secure_password
     has_many :comments, :dependent => :destroy
+    has_many :reactions, :dependent => :destroy
     has_and_belongs_to_many :events
 
     def self.from_omniauth(auth)
