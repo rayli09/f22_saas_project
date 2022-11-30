@@ -9,6 +9,9 @@ class CreateUsers < ActiveRecord::Migration
       t.integer :num_rating_got, default: 1, null:false
       # coins are used for promotion
       t.integer :coins, default: 100, null:false
+      # privacy control for user profile
+      t.boolean :show_email, default: true, null:false
+      t.boolean :show_my_events, default: true, null:false
     end
   end
 end

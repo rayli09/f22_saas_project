@@ -4,6 +4,12 @@
 <%= form_tag user_path(@user), :method => :put do %>
   <%= label :user, :email, 'Email', :class => 'col-form-label' %>
   <%= text_field :user, :email, :class => 'form-control' %>
+  <%= label :user, :show_email, 'Make Email Public to Others', :class => 'col-form-label' %>
+  <%= check_box :user, :show_email, {}, 'true', 'false' %>
+  <br>
+  <%= label :user, :show_my_events, 'Make My Hosted/Joined Events Public to Others', :class => 'col-form-label' %>
+  <%= check_box :user, :show_my_events, {}, 'true', 'false' %>
+  <br>
   <br>
   <%= submit_tag 'Update User Profile', :class => 'btn btn-primary' %>
   <%= link_to 'Cancel', user_path(@user), :class => 'btn btn-secondary' %>

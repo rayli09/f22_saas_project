@@ -71,7 +71,7 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:username, :password, :email)
+    params.require(:user).permit(:username, :password, :email, :show_email, :show_my_events)
   end
   private
   def update_user_rating(u, new_r)
