@@ -76,8 +76,8 @@
 
 <br>
 <h3 class="details_padding">📒Comments </h3>
-<table class="table table-striped col-md-12" id="comments">
-  <thead>
+<table class="table col-md-12 borderless" id="comments">
+  <thead class="bottom">
     <tr>
       <th>👤User</th>
       <th>🖊️Comment</th>
@@ -100,18 +100,36 @@
           <% end %>
         </td>
       </tr>
-      <tr>
+      <tr class="bottom">
         <td>
           <div class="row">
-            <div class="col-md-2">
-              <%= button_to '', react_path(@event, comment.id, 0), :method => :put, :id => 'thumbup' %>
-            </div>
-            <div class="col-md-2">
-              <%= button_to '', react_path(@event, comment.id, 1), :method => :put, :id => "like" %>
-            </div>
-            <div class="col-md-2">
-              <%= button_to '', react_path(@event, comment.id, 2), :method => :put, :id => "laugh" %>
-            </div>
+            <% if comment.reactions.is_reacted(comment.id, @user_id) %>
+              <% if comment.reactions.is_thumbuped(comment.id, @user_id) %>
+                <div class="col-md-2">
+                  <%= button_to '', react_path(@event, comment.id, 0), :method => :put, :id => 'thumbup' %>
+                </div>
+              <% end %>
+              <% if comment.reactions.is_liked(comment.id, @user_id) %>
+                <div class="col-md-2">
+                  <%= button_to '', react_path(@event, comment.id, 1), :method => :put, :id => "like" %>
+                </div>
+              <% end %>
+              <% if comment.reactions.is_laughed(comment.id, @user_id) %>
+                <div class="col-md-2">
+                  <%= button_to '', react_path(@event, comment.id, 2), :method => :put, :id => "laugh" %>
+                </div>
+              <% end %>
+            <% else %>
+              <div class="col-md-2">
+                <%= button_to '', react_path(@event, comment.id, 0), :method => :put, :id => 'thumbup' %>
+              </div>
+              <div class="col-md-2">
+                <%= button_to '', react_path(@event, comment.id, 1), :method => :put, :id => "like" %>
+              </div>
+              <div class="col-md-2">
+                <%= button_to '', react_path(@event, comment.id, 2), :method => :put, :id => "laugh" %>
+              </div>
+            <% end %>
           </div>
         </td>
         <% if comment.reactions.count_reacts(comment.id)>0 %>
@@ -129,6 +147,7 @@
           <td>
             <span>👈 Be the first one to react</span>
           </td>
+          <td></td>
         <% end %>
       </tr>
     <% end %>

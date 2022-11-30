@@ -93,3 +93,11 @@ details[open] summary {
     width: 40px;
     border: white;
 }
+
+.borderless td {
+    border: none;
+}
+ 
+.bottom {
+    border-bottom: 3px solid lightblue;
+}
