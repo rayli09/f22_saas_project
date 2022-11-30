@@ -180,23 +180,6 @@ describe EventsController do
         end
     end
 
-    describe "#myEvents" do
-        let!(:event) {FactoryGirl.create(:event)}
-        let!(:user) {FactoryGirl.build(:user)}
-        before do
-            sign_in user
-            get :myEvents
-        end
-
-        context "When go to the myEvents page" do
-            it "should render myEvents template and show hosted/joined events" do
-                expect(response).to render_template("myEvents")
-                Event.find_all_host_events(user.username)
-                Event.find_all_join_events(user.username)
-            end 
-        end
-
-    end 
     describe "#join" do
         let!(:event) {FactoryGirl.create(:event)}
         let!(:user) {FactoryGirl.build(:user)}

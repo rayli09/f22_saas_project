@@ -44,16 +44,6 @@ Given /I hacked in as "([^"]*)"$/ do |username|
   click_button "Login"
 end
 
-Given /I hosted the event "([^"]*)"$/ do |title|
-    Event.create!({:title => title, :host => @user.username, :joined => 0})
-end
-
-Given /I joined the event "([^"]*)"$/ do |title|
-  step %{I am on the home page}
-  step %{I follow "#{title}"}
-  step %{I follow "Join"}
-end
-
 And /I fill in "([^"]*)" Event Time with "([^"]*),([^"]*),([^"]*)"$/ do |title, year, month, day|
   event = Event.find_by(title: title)
   visit "/events/#{event.id}/edit"

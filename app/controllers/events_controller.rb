@@ -99,6 +99,7 @@ class EventsController < ApplicationController
         redirect_to edit_event_path(@event)
       end
     end
+
     def promote
       @event = Event.find(params[:id])
       host = User.find_by(username: @event.host)
@@ -108,21 +109,13 @@ class EventsController < ApplicationController
         redirect_to event_path(@event) and return
       end
       flash[:warning]='You don\'t have enough coins!'
-      
     end
+
     def destroy
       @event = Event.find(params[:id])
       @event.destroy
       flash[:notice] = "Event '#{@event.title}' was deleted."
       redirect_to events_path
-    end
-  
-    def myEvents
-      @username = current_user.username # TODO: session[:username]
-      @host_events = Event.find_all_host_events(@username)
-      @host_events = [] if @host_events.nil? or @host_events.empty?
-      @join_events = Event.find_all_join_events(@username)
-      @join_events = [] if @join_events.nil? or @join_events.empty?
     end
 
     def ratePeople
