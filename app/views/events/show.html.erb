@@ -100,8 +100,8 @@
         </td>
         <td>
           <% if comment.user.username == @username %>
-            <%= link_to 'Edit', edit_event_comment_path(@event, comment.id), :class => 'btn btn-secondary col-4' %>
-            <%= link_to 'Delete', event_comment_path(@event, comment.id), 'data-method' => 'delete', 'data-confirm' => 'Are you sure?', :class => 'btn btn-danger col-4' %>
+            <%= link_to 'Edit', edit_event_comment_path(@event, comment.id), :class => 'btn btn-outline-secondary col-4' %>
+            <%= link_to 'Delete', event_comment_path(@event, comment.id), 'data-method' => 'delete', 'data-confirm' => 'Are you sure?', :class => 'btn btn-outline-danger col-4' %>
           <% end %>
         </td>
       </tr>
