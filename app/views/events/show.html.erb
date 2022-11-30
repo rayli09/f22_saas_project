@@ -19,7 +19,12 @@
   </li>
   <li>
     ⏳&nbsp;<b>Event Status</b>
-    &nbsp;<%= @event.status %>
+     <% if @event.status == 'open' %>
+          &nbsp;<span class="badge bg-success"><%= @event.status %></span>
+          <% else  %>
+          &nbsp;<span class="badge bg-secondary"><%= @event.status %></span>
+          <% end  %>
+    
   </li>
   <li>
     🧐&nbsp;<b>Maximum Number of Attendees</b>
@@ -52,8 +57,8 @@
 
 <div class="row">
   <% if @is_viewer_host %>
-    <%= link_to 'Edit', edit_event_path(@event), :class => 'btn btn-primary col-2' %>
-    <%= link_to 'Delete', event_path(@event), 'data-method' => 'delete', 'data-confirm' => 'Are you sure?', :class => 'btn btn-danger col-2' %>
+    <%= link_to 'Edit', edit_event_path(@event), :class => 'btn btn-outline-primary col-2' %>
+    <%= link_to 'Delete', event_path(@event), 'data-method' => 'delete', 'data-confirm' => 'Are you sure?', :class => 'btn btn-outline-danger col-2' %>
     <%= link_to 'Promote', promote_path(@event), :class => @promote_btn_style %>
     
     <% if @event.status == "closed" %>
@@ -61,7 +66,7 @@
     <% end %>
 
   <% end %>
-  <%= link_to 'Back to event list', events_path, :class => 'btn btn-primary col-2' %>
+  <%= link_to 'Back to event list', events_path, :class => 'btn btn-outline-primary col-2' %>
   <%# Join: if user is not host && there's space %>
   <% if !@is_viewer_host %>
   <%= link_to @join_text, join_path({:id=>@event.id}), :class => @join_btn_style, :id => 'join_btn'%>

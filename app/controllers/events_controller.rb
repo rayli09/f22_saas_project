@@ -165,12 +165,12 @@ class EventsController < ApplicationController
       return 'btn btn-success col-2'
     end
     def get_rate_button_style(u)
-      return 'btn btn-primary col-2 disabled' if @event.rated_users.include?(u)
-      return 'btn btn-primary col-2'
+      return 'btn btn-outline-primary col-2 disabled' if @event.rated_users.include?(u)
+      return 'btn btn-outline-primary col-2'
     end
     def get_promote_btn_style(e)
-      return 'btn btn-secondary col-2 disabled' if e.promoted?
-      return 'btn btn-info col-2'
+      return 'btn btn-outline-secondary col-2 disabled' if e.promoted?
+      return 'btn btn-outline-info col-2'
     end
   end
   
