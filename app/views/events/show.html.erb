@@ -1,6 +1,7 @@
 <!--  This file is app/views/events/show.html.erb -->
 <h2>Details about <em><%= @event.title %></em></h2>
-
+<div class='row'>
+<div class='col-6'>
 <ul id="details">
   <li>
     🗣&nbsp;<b>Host</b>
@@ -19,7 +20,11 @@
   </li>
   <li>
     ⏳&nbsp;<b>Event Status</b>
-    &nbsp;<%= @event.status %>
+     <% if @event.status == 'open' %>
+          &nbsp;<span class="badge bg-success"><%= @event.status %></span>
+          <% else  %>
+          &nbsp;<span class="badge bg-secondary"><%= @event.status %></span>
+          <% end  %>
   </li>
   <li>
     🧐&nbsp;<b>Maximum Number of Attendees</b>
@@ -46,14 +51,21 @@
 
 <h3>Description:</h3>
 <p id="description">
+  <div class='card card-body'>
   <%= @event.description %>
+  </div>
 </p>
+</div>
+<div class='col-6'>
+  <%# <img src="https://picsum.photos/200/300" class="rounded mx-auto d-block"> %>
+</div>
+</div>
 <br>
 
 <div class="row">
   <% if @is_viewer_host %>
-    <%= link_to 'Edit', edit_event_path(@event), :class => 'btn btn-primary col-2' %>
-    <%= link_to 'Delete', event_path(@event), 'data-method' => 'delete', 'data-confirm' => 'Are you sure?', :class => 'btn btn-danger col-2' %>
+    <%= link_to 'Edit', edit_event_path(@event), :class => 'btn btn-outline-primary col-2' %>
+    <%= link_to 'Delete', event_path(@event), 'data-method' => 'delete', 'data-confirm' => 'Are you sure?', :class => 'btn btn-outline-danger col-2' %>
     <%= link_to 'Promote', promote_path(@event), :class => @promote_btn_style %>
     
     <% if @event.status == "closed" %>
@@ -61,7 +73,7 @@
     <% end %>
 
   <% end %>
-  <%= link_to 'Back to event list', events_path, :class => 'btn btn-primary col-2' %>
+  <%= link_to 'Back to event list', events_path, :class => 'btn btn-outline-primary col-2' %>
   <%# Join: if user is not host && there's space %>
   <% if !@is_viewer_host %>
   <%= link_to @join_text, join_path({:id=>@event.id}), :class => @join_btn_style, :id => 'join_btn'%>
@@ -76,6 +88,14 @@
 
 <br>
 <h3 class="details_padding">📒Comments </h3>
+<%# <p>
+  <a class="btn btn-outline-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    Comments
+  </a>
+</p> %>
+<%# <div class="collapse" id="collapseExample">
+  <div class="card card-body"> %>
+
 <table class="table col-md-12 borderless" id="comments">
   <thead class="bottom">
     <tr>
@@ -87,21 +107,23 @@
   <tbody>
     <% @event.comments.each do |comment| %>
       <tr>
-        <td>
-          <%= comment.user.username %>
+        <td class='col-md-2'>
+          <%= link_to comment.user.username, user_path(comment.user.id) %>&nbsp;&nbsp;&nbsp;
         </td>
-        <td>
+        <td class='col-md-6'>
+        <div class='lead'>
           <%= comment.content %>
+          </div>
         </td>
-        <td>
+        <td class='col-md-2'>
           <% if comment.user.username == @username %>
-            <%= link_to 'Edit', edit_event_comment_path(@event, comment.id), :class => 'btn btn-secondary col-4' %>
-            <%= link_to 'Delete', event_comment_path(@event, comment.id), 'data-method' => 'delete', 'data-confirm' => 'Are you sure?', :class => 'btn btn-danger col-4' %>
+            <%= link_to 'Edit', edit_event_comment_path(@event, comment.id), :class => 'btn btn-outline-secondary col-4' %>
+            <%= link_to 'Delete', event_comment_path(@event, comment.id), 'data-method' => 'delete', 'data-confirm' => 'Are you sure?', :class => 'btn btn-outline-danger col-4' %>
           <% end %>
         </td>
       </tr>
       <tr class="bottom">
-        <td>
+        <td class='col-md-2'>
           <div class="row">
             <% if comment.reactions.is_reacted(comment.id, @user_id) %>
               <% if comment.reactions.is_thumbuped(comment.id, @user_id) %>
@@ -133,18 +155,20 @@
           </div>
         </td>
         <% if comment.reactions.count_reacts(comment.id)>0 %>
-          <td>
+          <td class='col-md-6'>
+          <p><small>
             <% comment.reactions.find_people(comment.id).each do |name| %>
               <%= name + ", " %>
             <% end %>
             <span>and others</span>
+          </small></p>
           </td>
-          <td>
+          <td class='col-md-2'>
             <%= comment.reactions.count_reacts(comment.id) %>
             <span> Reactions</span>
           </td>
         <% else %>
-          <td>
+          <td class='col-md-8'>
             <span>👈 Be the first one to react</span>
           </td>
           <td></td>
@@ -160,3 +184,5 @@
   <br>
   <%= submit_tag 'Post Comment', :class => 'btn btn-primary' %>
 <% end %>
+  <%# </div>
+</div> %>

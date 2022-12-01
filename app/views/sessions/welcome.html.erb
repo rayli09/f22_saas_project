@@ -1,15 +1,24 @@
-<h1>Welcome</h1>
-<% if logged_in? %>
-    <h1>You are Logged In, <%= current_user.username %></h1>
+<div class="jumbotron">
+  <h1 class="display-4">Welcome To WeMeet!</h1>
+  <p class="lead">This is a service for you to host and find events of your interest. With additional features like promotion, privacy, and socialization, you'll love it!</p>
+  <hr class="my-4">
+  <% if logged_in? %>
+    <h1>You are Logged in, <%= current_user.username %></h1>
+    <p>Click on the Nav bar items to begin.</p>    
 <% else %>
+  <p>To begin using our service, please login/signup first.</p>
+    <%# <h1>Welcome To WeMeet!</h1> %>
+    <%# <p>Please login to use our service.</p> %>
     <div class = "row">
-    <div class = "col-md-6">
-    <%= button_to "Login", '/login', method: :get, :class => 'btn btn-primary btn-block ' %>
-    <%= button_to "Sign Up", '/users/new', method: :get, :class => 'btn btn-secondary btn-block' %>
-    <%= button_to "Log In with Google", '/auth/google_oauth2', :class => "btn btn-primary btn-lg btn-block" %>
+    <div class = "col-6">
+    <%= button_to "Login", '/login', method: :get, :class => 'btn btn-outline-primary btn-block ' %>
+    <br>
+    <%= button_to "Sign Up", '/users/new', method: :get, :class => 'btn btn-outline-secondary btn-block' %>
+    <br>
+    <%= button_to "Log In with Google", '/auth/google_oauth2', :class => "btn btn-outline-primary btn-lg btn-block" %>
     </div>
     </div>
-    <%# <%= link_to  image_tag("btn_google_signin_dark_normal_web@2x.png"), '/auth/google_oauth2' %>
-    <%# = link_to '/auth/google_oauth2', :class => "button_with_image_save" %>
-
 <%end%>
+</div>
+
+

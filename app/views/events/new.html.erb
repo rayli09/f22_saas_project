@@ -1,6 +1,6 @@
 <!--  This file is app/views/events/new.html.erb -->
 <h2>Post New Event</h2>
-
+<div class='col-8'>
 <%= form_tag events_path, :class => 'form' do %>
   <div class="row">
     <div class="col-md-6">
@@ -18,5 +18,6 @@
   </div>
   <br/>
   <%= submit_tag 'Post Event', :class => 'btn btn-primary' %>
-  <%= link_to 'Cancel', events_path, :class => 'btn btn-secondary' %>
+  <%= link_to 'Cancel', events_path, :class => 'btn btn-outline-secondary' %>
 <% end %>
+</div>
