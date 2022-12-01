@@ -14,6 +14,7 @@ class CreateEvents < ActiveRecord::Migration
       t.timestamps
       t.text :rated_users
       t.boolean :promoted?, default: false
+      t.string :category
     end
   end
 

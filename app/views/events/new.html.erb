@@ -14,6 +14,10 @@
       <%= text_field :event, :attendee_limit, :class => 'form-control' %>
       <%= label :event, :description, 'Event Description', :class => 'col-form-label'  %>
       <%= text_field :event, :description, :class => 'form-control' %>
+      <%= label :event, :category, 'Event Category', :class => 'col-form-label' %>
+      <br>
+      <%= select :event, :category, [ "Food","Entertainment","Sports","Academic","Other"], {}, {:class => 'form-control col-1'} %>
+      <br>
     </div>
   </div>
   <br/>
