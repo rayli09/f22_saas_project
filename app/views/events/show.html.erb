@@ -1,6 +1,7 @@
 <!--  This file is app/views/events/show.html.erb -->
 <h2>Details about <em><%= @event.title %></em></h2>
-
+<div class='row'>
+<div class='col-6'>
 <ul id="details">
   <li>
     🗣&nbsp;<b>Host</b>
@@ -24,7 +25,6 @@
           <% else  %>
           &nbsp;<span class="badge bg-secondary"><%= @event.status %></span>
           <% end  %>
-    
   </li>
   <li>
     🧐&nbsp;<b>Maximum Number of Attendees</b>
@@ -53,6 +53,11 @@
 <p id="description">
   <%= @event.description %>
 </p>
+</div>
+<div class='col-6'>
+  <%# <img src="https://picsum.photos/200/300" class="rounded mx-auto d-block"> %>
+</div>
+</div>
 <br>
 
 <div class="row">
