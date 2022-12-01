@@ -2,18 +2,22 @@
 <h2>Edit Event</h2>
 
 <%= form_tag event_path(@event), :method => :put do %>
-  <%= label :event, :title, 'Title', :class => 'col-form-label' %>
-  <%= text_field :event, :title, :class => 'form-control' %>
-  <br>
-  <%= label :event, :event_time, 'Event Time', :class => 'col-form-label'  %>
-  <%= date_select :event, :event_time, {}, :class => 'form-control col-2 d-inline' %>
-  <br>
-  <%= label :event, :attendee_limit, 'Maximum Number of Attendees', :class => 'col-form-label'  %>
-  <%= text_field :event, :attendee_limit, :class => 'form-control' %>
-  <%= label :event, :description, 'Event Description', :class => 'col-form-label'  %>
-  <%= text_field :event, :description, :class => 'form-control' %>
-  <%= label :event, :status, 'Status', :class => 'col-form-label'  %>
-  <%= select :event, :status, [:open, :closed], {}, {:class => 'form-control col-1'} %>
+  <div class="row">
+    <div class="col-md-6">
+      <%= label :event, :title, 'Title', :class => 'col-form-label' %>
+      <%= text_field :event, :title, :class => 'form-control' %>
+      <br>
+      <%= label :event, :event_time, 'Event Time', :class => 'col-form-label'  %>
+      <%= date_select :event, :event_time, {}, :class => 'form-control col-2 d-inline' %>
+      <br>
+      <%= label :event, :attendee_limit, 'Maximum Number of Attendees', :class => 'col-form-label'  %>
+      <%= text_field :event, :attendee_limit, :class => 'form-control' %>
+      <%= label :event, :description, 'Event Description', :class => 'col-form-label'  %>
+      <%= text_field :event, :description, :class => 'form-control' %>
+      <%= label :event, :status, 'Status', :class => 'col-form-label'  %>
+      <%= select :event, :status, [:open, :closed], {}, {:class => 'form-control col-1'} %>
+    </div>
+  </div>
   <br/>
   <%= submit_tag 'Update Event Info', :class => 'btn btn-primary' %>
   <%= link_to 'Cancel', event_path(@event), :class => 'btn btn-secondary' %>

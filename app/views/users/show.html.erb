@@ -8,7 +8,11 @@
   </li>
   <li>
     📧&nbsp;<b>Email</b>
-    &nbsp;<%= @user.email %>
+    <% if @user.show_email or @is_viewer_user %>
+      &nbsp;<%= @user.email %>
+    <% else %>
+      &nbsp;set private by user 🔒
+    <% end %>
   </li>
   <li>
     ✏️&nbsp;<b>Host Rating</b>
@@ -41,81 +45,99 @@
 <div class="container-fluid">
   <div class="row">
 
-            <div class="col-md-6">
-            <h2>Hosted👑</h2>
-            <% if (@host_events.empty?) %>            
-                You haven't hosted any event. <%= link_to "HOST NOW🤗", new_event_path() %>
-            <% else %>
-            <table class="table table-striped col-md-12" id="events">
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Status</th>
-                        <th>Details</th>
-                        <th>Rate</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                        <% @host_events.each do |event| %>
-                        <tr>
-                        <td>
-                            <%= event.title %>
-                        </td>
-                        <td>
-                            <%= event.status %>
-                        </td>
-                        <td>
-                            <%= link_to "Details", event_path(event), :class => 'btn btn-outline-secondary'%>
-                        </td>
-                        <td>
-                            <!-- <%= link_to "Rate", event_path(event), :class => 'btn btn-primary'%>-->
-                        </td>
-                        </tr>
-                        <% end %>
-                </tbody>
-            </table>
+    <% if @user.show_my_events or @is_viewer_user %>
+      <br>
+      <div class="col-md-6">
+        <h4>Hosted👑</h4>
+        <table class="table table-striped col-md-12" id="events">
+          <thead>
+          <tr>
+            <th>Title</th>
+            <th>Status</th>
+            <th>Details</th>
+            <th>Rate</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% if @host_events.empty? %>
+            <tr>
+              <td><em><%= @user.username %></em> hasn't hosted any event</td>
+              <td>
+                <% if @is_viewer_user %>
+                  <%= link_to "HOST NOW🤗", new_event_path() %>
+                <% end %>
+              </td>
+              <td></td>
+              <td></td>
+            </tr>
+          <% else %>
+            <% @host_events.each do |event| %>
+              <tr>
+                <td>
+                  <%= event.title %>
+                </td>
+                <td>
+                  <%= event.status %>
+                </td>
+                <td>
+                  <%= link_to "Details", event_path(event), :class => 'btn btn-primary'%>
+                </td>
+                <td>
+                  <!-- <%= link_to "Rate", event_path(event), :class => 'btn btn-primary'%>-->
+                </td>
+              </tr>
             <% end %>
-        </div>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
 
-        <div class="col-md-6">
-            <h2>Joined🙌</h2>
-                <% if (@join_events.empty?) %>
-                    You haven't joined any event. <%= link_to "JOIN NOW👋", events_path %>
-                <% else %>
-            <table class="table table-striped col-md-12" id="events">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Status</th>
-                    <th>Details</th>
-                    <th>Rate</th>
-                </tr>
-            </thead>
-            <tbody>
-                    <% @join_events.each do |event| %>
-                    <tr>
-                    <td>
-                        <%= event.title %>
-                    </td>
-                    <td>
-                        <% if event.status == 'open' %>
-                        &nbsp;<span class="badge bg-success"><%= event.status %></span>
-                        <% else  %>
-                        &nbsp;<span class="badge bg-secondary"><%= event.status %></span>
-                        <% end  %>
-                    </td>
-                    <td>
-                        <%= link_to "Details", event_path(event), :class => 'btn btn-outline-secondary'%>
-                    </td>
-                    <td>
-                       <!-- <%= link_to "Rate", event_path(event), :class => 'btn btn-primary'%>-->
-                    </td>
-                    </tr>
-                    <% end %>
-            </tbody>
-            </table>
+      <div class="col-md-6">
+        <h4>Joined🙌</h4>
+        <table class="table table-striped col-md-12" id="events">
+          <thead>
+          <tr>
+            <th>Title</th>
+            <th>Status</th>
+            <th>Details</th>
+            <th>Rate</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% if @join_events.empty? %>
+            <tr>
+              <td><em><%= @user.username %></em> hasn't joined any event</td>
+              <td>
+                <% if @is_viewer_user %>
+                  <%= link_to "JOIN NOW👋", events_path %>
+                <% end %>
+              </td>
+              <td></td>
+              <td></td>
+            </tr>
+          <% else %>
+            <% @join_events.each do |event| %>
+              <tr>
+                <td>
+                  <%= event.title %>
+                </td>
+                <td>
+                  <%= event.status %>
+                </td>
+                <td>
+                  <%= link_to "Details", event_path(event), :class => 'btn btn-primary'%>
+                </td>
+                <td>
+                  <!-- <%= link_to "Rate", event_path(event), :class => 'btn btn-primary'%>-->
+                </td>
+              </tr>
             <% end %>
-        </div>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% else %>
+      &nbsp;set private by user 🔒
+    <% end %>
   </div>
 </div>
