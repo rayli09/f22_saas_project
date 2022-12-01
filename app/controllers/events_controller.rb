@@ -29,9 +29,10 @@ class EventsController < ApplicationController
       if not q.blank?
         # TODO issue #70
         event1 = Event.find_event_by_date(params[:select][:year], params[:select][:month])
+        event2 = Event.find_event_by_category(params[:category_selected])
         event3 = Event.find_event_by_status(params[:status_selected])
         event4 = Event.find_event_by_name(q)
-        @events = [ event1, event3, event4 ].reject( &:nil? ).reduce( :& )
+        @events = [ event1, event2, event3, event4 ].reject( &:nil? ).reduce( :& )
         @users = {}
         @events.each do |event|
           u = User.find_by(username: event.host)
@@ -130,7 +131,7 @@ class EventsController < ApplicationController
 
     private
     def event_params
-      params.require(:event).permit(:title, :host, :joined, :people, :status, :event_time, :attendee_limit, :description, :q)
+      params.require(:event).permit(:title, :host, :joined, :people, :status, :event_time, :attendee_limit, :description, :q, :category)
     end
 
     private

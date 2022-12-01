@@ -16,6 +16,8 @@
       <%= text_field :event, :description, :class => 'form-control' %>
       <%= label :event, :status, 'Status', :class => 'col-form-label'  %>
       <%= select :event, :status, [:open, :closed], {}, {:class => 'form-control col-1'} %>
+      <%= label :event, :category, 'Category', :class => 'col-form-label'  %>
+      <%= select :event, :category, [ "Food","Entertainment","Sports","Academic","Other"], {}, {:class => 'form-control col-1'} %>
     </div>
   </div>
   <br/>

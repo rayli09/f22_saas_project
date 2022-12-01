@@ -33,14 +33,13 @@ class Event < ActiveRecord::Base
         end
     end
 
-    # def self.find_event_by_rating(rating)
-    #     if rating == "Rating"
-    #         return nil
-    #     else 
-    #         # https://stackoverflow.com/questions/23633301/how-to-query-a-model-based-on-attribute-of-another-model-which-belongs-to-the-fi
-    #         Event.joins(:users).where("users.rating = ?", rating)
-    #     end
-    # end
+    def self.find_event_by_category(category)
+        if category == "Category"
+            return nil
+        else
+            return Event.where("category = ?", "#{category}")
+        end
+    end
 
     def self.find_event_by_status(status)
         if status == "Status"

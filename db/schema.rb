@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20221121210951) do
     t.datetime "updated_at"
     t.text     "rated_users"
     t.boolean  "promoted?",      default: false
+    t.string   "category"
   end
 
   create_table "events_users", id: false, force: :cascade do |t|
