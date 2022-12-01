@@ -2,16 +2,20 @@
 <h2>Post New Event</h2>
 
 <%= form_tag events_path, :class => 'form' do %>
-  <%= label :event, :title, 'Title', :class => 'col-form-label' %>
-  <%= text_field :event, :title, :class => 'form-control' %>
-  <br>
-  <%= label :event, :event_time, 'Event Time', :class => 'col-form-label'  %>
-  <%= date_select :event, :event_time, {}, :class => 'form-control col-2 d-inline' %>
-  <br>
-  <%= label :event, :attendee_limit, 'Maximum Number of Attendees', :class => 'col-form-label'  %>
-  <%= text_field :event, :attendee_limit, :class => 'form-control' %>
-  <%= label :event, :description, 'Event Description', :class => 'col-form-label'  %>
-  <%= text_field :event, :description, :class => 'form-control' %>
+  <div class="row">
+    <div class="col-md-6">
+      <%= label :event, :title, 'Title', :class => 'col-form-label' %>
+      <%= text_field :event, :title, :class => 'form-control' %>
+      <br>
+      <%= label :event, :event_time, 'Event Time', :class => 'col-form-label'  %>
+      <%= date_select :event, :event_time, {}, :class => 'form-control col-2 d-inline' %>
+      <br>
+      <%= label :event, :attendee_limit, 'Maximum Number of Attendees', :class => 'col-form-label'  %>
+      <%= text_field :event, :attendee_limit, :class => 'form-control' %>
+      <%= label :event, :description, 'Event Description', :class => 'col-form-label'  %>
+      <%= text_field :event, :description, :class => 'form-control' %>
+    </div>
+  </div>
   <br/>
   <%= submit_tag 'Post Event', :class => 'btn btn-primary' %>
   <%= link_to 'Cancel', events_path, :class => 'btn btn-secondary' %>
