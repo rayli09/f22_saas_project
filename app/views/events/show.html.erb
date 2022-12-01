@@ -51,7 +51,9 @@
 
 <h3>Description:</h3>
 <p id="description">
+  <div class='card card-body'>
   <%= @event.description %>
+  </div>
 </p>
 </div>
 <div class='col-6'>
@@ -85,20 +87,15 @@
 <br>
 
 <br>
-<p>
-  <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-    Link with href
-  </a>
-  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-    Button with data-target
-  </button>
-</p>
-<div class="collapse" id="collapseExample">
-  <div class="card card-body">
-    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-  </div>
-</div>
 <h3 class="details_padding">📒Comments </h3>
+<%# <p>
+  <a class="btn btn-outline-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    Comments
+  </a>
+</p> %>
+<%# <div class="collapse" id="collapseExample">
+  <div class="card card-body"> %>
+
 <table class="table col-md-12 borderless" id="comments">
   <thead class="bottom">
     <tr>
@@ -114,7 +111,9 @@
           <%= link_to comment.user.username, user_path(comment.user.id) %>&nbsp;&nbsp;&nbsp;
         </td>
         <td class='col-md-6'>
+        <div class='lead'>
           <%= comment.content %>
+          </div>
         </td>
         <td class='col-md-2'>
           <% if comment.user.username == @username %>
@@ -157,10 +156,12 @@
         </td>
         <% if comment.reactions.count_reacts(comment.id)>0 %>
           <td class='col-md-6'>
+          <p><small>
             <% comment.reactions.find_people(comment.id).each do |name| %>
               <%= name + ", " %>
             <% end %>
             <span>and others</span>
+          </small></p>
           </td>
           <td class='col-md-2'>
             <%= comment.reactions.count_reacts(comment.id) %>
@@ -183,3 +184,5 @@
   <br>
   <%= submit_tag 'Post Comment', :class => 'btn btn-primary' %>
 <% end %>
+  <%# </div>
+</div> %>
