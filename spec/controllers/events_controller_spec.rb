@@ -178,6 +178,34 @@ describe EventsController do
                 Event.find_event_by_name('David')
             end
         end
+
+        context "When search date" do
+            it "should render event related to a date" do
+                get :index, :q => 'David', :select => {:year => "2022", :month => "11"}
+                expect(Event).to receive(:find_event_by_date).with("2022","11").and_return(event)
+                Event.find_event_by_date("2022","11")
+            end
+
+            it "should render event related to a month" do
+                get :index, :q => 'David', :select => {:year => "", :month => "11"}
+                expect(Event).to receive(:find_event_by_date).with("","11").and_return(event)
+                Event.find_event_by_date("","11")
+            end
+
+            it "should render event related to a year" do
+                get :index, :q => 'David', :select => {:year => "2022", :month => ""}
+                expect(Event).to receive(:find_event_by_date).with("2022","").and_return(event)
+                Event.find_event_by_date("2022","")
+            end
+        end
+
+        context "When search status" do
+            it "should render event related to a status" do
+                get :index, :q => 'David',:select => {:year => "2022", :month => ""}, :status_selected => "Open"
+                expect(Event).to receive(:find_event_by_status).with('Open').and_return(event)
+                Event.find_event_by_status('Open')
+            end
+        end
     end
 
     describe "#join" do

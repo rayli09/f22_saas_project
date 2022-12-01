@@ -129,17 +129,27 @@ RSpec.describe UsersController, type: :controller do
   describe "PUT #rateUser" do
     let!(:event) {FactoryGirl.create(:event)}
     let!(:user) {FactoryGirl.build(:user, username: 'David')}
+    let!(:attendee) {FactoryGirl.build(:user, id: '2', username: 'Test')}
     before do
       sign_in user
       put :rateUser, {:id => event.id}
     end
 
-    context "When successfully update an existing user profile" do
-      it "should store the update in the database and redirect to user profile page" do
+    context "When host rates attendee" do
+      it "rateing of attendee should change" do
         # rating = ActionController::Parameters.new(:David => "1")
         put :rateUser, {:id => event.id, :David => "1"}
         user.reload
         expect(user.rating).to eq(1)
+        expect(response).to redirect_to("/events/1")
+      end
+    end
+
+    context "When attendee rates host" do
+      it "host rating should change" do
+        sign_in attendee
+        put :rateUser, {:id => event.id, :David => "1"}
+        expect(user.rating).to eq(2)
         expect(response).to redirect_to("/events/1")
       end
     end
