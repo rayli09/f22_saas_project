@@ -38,13 +38,16 @@
   <tbody>
     <% @events.each do |event| %>
     <% if event.promoted?  %>
-      <tr class="table-danger">
+      <tr class="table-danger border border-danger border-4">
     <% else  %>
       <tr class="">
     <% end  %>
         <td>
-          <%# <%= event.title %>
-          <%= link_to event.title, event_path(event)%>
+          <% if event.promoted?  %>
+            <%= link_to event.title, event_path(event), :class=>""%>
+          <% else  %>
+            <%= link_to event.title, event_path(event)%>
+          <% end  %>
         </td>
         <td>
           <%= link_to event.host, user_path(@users.fetch(event.host)) %>
