@@ -4,11 +4,26 @@
 <%= form_tag user_path(@user), :method => :put do %>
   <%= label :user, :email, 'Email', :class => 'col-form-label' %>
   <%= text_field :user, :email, :class => 'form-control' %>
-  <%= label :user, :show_email, 'Make Email Public to Others', :class => 'col-form-label' %>
-  <%= check_box :user, :show_email, {}, 'true', 'false' %>
   <br>
-  <%= label :user, :show_my_events, 'Make My Hosted/Joined Events Public to Others', :class => 'col-form-label' %>
-  <%= check_box :user, :show_my_events, {}, 'true', 'false' %>
+  <div class="form-check form-switch">
+    <label class="form-check-label" for="user_show_email">Make Email Public to Others</label>
+    <input id="user_show_email_hidden" name="user[show_email]" type="hidden" value="false" class="form-check-input" />
+    <% if @user.show_email %>
+      <input id="user_show_email" name="user[show_email]" type="checkbox" class="form-check-input" role="switch" checked />
+    <% else %>
+      <input id="user_show_email" name="user[show_email]" type="checkbox" class="form-check-input" role="switch" />
+    <% end %>
+  </div>
+  <br>
+  <div class="form-check form-switch">
+    <label class="form-check-label" for="user_show_my_events">Make My Hosted/Joined Events Public to Others</label>
+    <input id="user_show_my_events_hidden" name="user[show_my_events]" type="hidden" value="false" class="form-check-input" />
+    <% if @user.show_my_events %>
+      <input id="user_show_my_events" name="user[show_my_events]" type="checkbox" class="form-check-input" role="switch" checked />
+    <% else %>
+      <input id="user_show_my_events" name="user[show_my_events]" type="checkbox" class="form-check-input" role="switch" />
+    <% end %>
+  </div>
   <br>
   <br>
   <%= submit_tag 'Update User Profile', :class => 'btn btn-primary' %>
