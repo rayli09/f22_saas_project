@@ -76,3 +76,11 @@ Given /I commented the event "([^"]*)" with "([^"]*)"$/ do |title, content|
   step %{I fill in "comment[content]" with "#{content}"}
   step %{I press "Post Comment"}
 end
+
+Then /^I should not see "([^"]*)" button/ do |name|
+  should have_no_button name
+end
+
+Then /^I should see "([^"]*)" button/ do |name|
+  find_button(name).should_not be_nil
+end
