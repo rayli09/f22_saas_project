@@ -90,5 +90,27 @@ describe CommentsController do
             end
         end
     end
+
+    describe '#react' do
+        let!(:event) {FactoryGirl.create(:event)}
+        let!(:user) {FactoryGirl.create(:user)}
+        let!(:comment) {FactoryGirl.create(:comment)}
+        before do
+            sign_in user
+        end
+
+        context 'When successfully react thumbup to a comment' do
+            it 'should show the current reaction in the same page and cancel the reaction if reacted again' do
+                put :react, {:id => comment.id, :event_id => event.id, :action_id => 0}
+                expect(comment.reactions.count).to equal(1)
+                expect(user.reactions.count).to equal(1)
+                expect(response).to redirect_to(event_path(event))
+                put :react, {:id => comment.id, :event_id => event.id, :action_id => 0}
+                expect(comment.reactions.count).to equal(0)
+                expect(user.reactions.count).to equal(0)
+                expect(response).to redirect_to(event_path(event))
+            end
+        end
+    end
 end
 end
