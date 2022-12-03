@@ -26,4 +26,14 @@ RSpec.describe Event, type: :model do
             expect(Event.find_event_by_name("foo")).not_to include(event1, event2)
         end
     end
+    describe "promotion_banner_style" do
+        it "should return special css for promoted event" do
+            e1 = Event.create! :title => 'Event A', :promoted? => true
+            expect(e1.promotion_banner_style).to eq('table-success')
+        end
+        it "should not have any styling for unpromoted event" do
+            e2 = Event.create! :title => 'Event B', :promoted? => false
+            expect(e2.promotion_banner_style).to eq('')
+        end
+    end
 end
