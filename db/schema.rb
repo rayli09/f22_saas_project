@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20221121210951) do
     t.text     "rated_users"
     t.boolean  "promoted?",      default: false
     t.string   "category"
+    t.string   "location"
   end
 
   create_table "events_users", id: false, force: :cascade do |t|

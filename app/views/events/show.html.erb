@@ -19,6 +19,10 @@
     &nbsp;<%= @event.event_time.nil? ? "TBD" : @event.event_time.strftime("%m-%d-%Y") %>
   </li>
   <li>
+    📍&nbsp;<b>Event Location</b>
+    &nbsp;<%= @event.location.nil? ? "TBD" : @event.location %>
+  </li>
+  <li>
     ⏳&nbsp;<b>Event Status</b>
      <% if @event.status == 'open' %>
           &nbsp;<span class="badge bg-success"><%= @event.status %></span>

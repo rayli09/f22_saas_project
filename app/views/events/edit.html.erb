@@ -18,6 +18,9 @@
       <%= select :event, :status, [:open, :closed], {}, {:class => 'form-control col-1'} %>
       <%= label :event, :category, 'Category', :class => 'col-form-label'  %>
       <%= select :event, :category, [ "Food","Entertainment","Sports","Academic","Other"], {}, {:class => 'form-control col-1'} %>
+      <br>
+      <%= label :event, :location, 'Event Location', :class => 'col-form-label' %>
+      <%= select :event, :location, ['Butler Library', 'Lerner Hall', 'John Jay', 'Dodge', 'Low Library', 'Uris', 'Mudd', 'Northwest Corner Building', 'International Affairs', 'Kent', 'Philosophy', 'Hamilton', 'Pulitzer', 'Mathematics', 'Avery', 'Fayerweather', 'Schermerhorn', 'Chandler', 'Pupin', 'Schapiro CEPSR', 'Faculty House', 'Barnard', 'Law School', 'Wallach', 'Hartley', 'Wien', 'East Campus', 'Other Off Campus Place'], {}, {:class => 'form-control col-1'} %>
     </div>
   </div>
   <br/>

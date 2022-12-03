@@ -15,6 +15,7 @@ class CreateEvents < ActiveRecord::Migration
       t.text :rated_users
       t.boolean :promoted?, default: false
       t.string :category
+      t.string :location
     end
   end
 
