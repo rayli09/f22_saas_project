@@ -41,6 +41,14 @@ class Event < ActiveRecord::Base
         end
     end
 
+    def self.find_event_by_location(location)
+        if location == "Location"
+            return nil
+        else
+            return Event.where("location = ?", "#{location}")
+        end
+    end
+
     def self.find_event_by_status(status)
         if status == "Status"
             return nil
