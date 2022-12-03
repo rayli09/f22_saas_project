@@ -20,7 +20,11 @@ Then /I should see all the events/ do
     "I should see '#{event.title}'"
   end
 end
-  
+ 
+Given /I log out/ do
+  visit '/logout'
+end
+
 Given /I logged in as "([^"]*)"$/ do |username|
     @user = User.create!({:username => username, :password => 'test'})
     visit '/login'

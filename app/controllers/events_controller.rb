@@ -111,6 +111,7 @@ class EventsController < ApplicationController
         redirect_to event_path(@event) and return
       end
       flash[:warning]='You don\'t have enough coins!'
+      redirect_to event_path(@event)
     end
 
     def destroy

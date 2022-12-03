@@ -237,5 +237,24 @@ describe EventsController do
                 expect(response).to render_template("ratePeople")
             end 
         end
+    end
+    describe "#promote" do
+        let!(:event) {FactoryGirl.create(:event, id: 1)}
+        let!(:event2) {FactoryGirl.create(:event, id: 2, host: 'Jeff')}
+        let!(:user) {FactoryGirl.build(:user, username: 'Ben')}
+        let!(:user2) {FactoryGirl.build(:user, username: 'Jeff', id: 2, coins: 3)}
+        
+        context "event is fresh, not promoted before" do
+            it "successfully promotes if having sufficient coins" do
+                sign_in user
+                get :promote, {:id=>event.id}
+                expect(flash[:notice]).to be_present
+            end
+            it "fails to promote due to coins" do
+                sign_in user2
+                get :promote, {:id=>event2.id}
+                expect(flash[:warning]).to be_present
+            end  
+        end
     end 
 end
