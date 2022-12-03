@@ -7,11 +7,11 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 events = [
-        {:title => 'Go To Gym today afternoon', :host => 'Alicent Hightower', :joined =>'0', :people => [], :status => 0, :description => 'Working out is important', :event_time => '02-Nov-2022', :attendee_limit => 2, :category => 'Sports'},
-        {:title => 'Enjoy Lunch at Junzi', :host => 'Daemon Targaryen', :joined =>'1', :people => ['Mysaria'], :status => 0, :description => 'Let\'s eat together', :event_time => '30-Oct-2022', :attendee_limit => 4, :category => 'Food'},
-        {:title => 'Lunch at Max Cafe', :host => 'Mysaria', :joined =>'3', :people => ['Alicent Hightower', 'Daemon Targaryen', 'testuser'], :status => 1, :description => 'Sandwich and coffee!', :event_time => '05-Nov-2022', :attendee_limit => 5, :category => 'Food'},
-        {:title => 'WTF', :host => 'testuser', :joined =>'3', :people => ['Alicent Hightower', 'Daemon Targaryen', 'Mysaria'], :status => 1, :description => 'WTF IS THIS!', :event_time => '05-Nov-2022', :attendee_limit => 20, :category => 'Other'},
-				{:title => 'Crazy Party', :host => 'Amy Hsu', :joined =>'5', :people => ['Mysaria', 'Daemon Targaryen', 'Alicent Hightower', 'testuser', 'Jackson Wang'], :status => 0, :description => 'Enjoy the EDM', :event_time => '20-Nov-2022', :attendee_limit => 10, :category => 'Entertainment'},
+        {:title => 'Go To Gym today afternoon', :host => 'Alicent Hightower', :joined =>'0', :people => [], :status => 0, :description => 'Working out is important', :event_time => '02-Nov-2022', :attendee_limit => 2, :category => 'Sports', :location => 'Dodge'},
+        {:title => 'Enjoy Lunch at Junzi', :host => 'Daemon Targaryen', :joined =>'1', :people => ['Mysaria'], :status => 0, :description => 'Let\'s eat together', :event_time => '30-Oct-2022', :attendee_limit => 4, :category => 'Food', :location => 'Other Off Campus Place'},
+        {:title => 'Lunch at Max Cafe', :host => 'Mysaria', :joined =>'3', :people => ['Alicent Hightower', 'Daemon Targaryen', 'testuser'], :status => 1, :description => 'Sandwich and coffee!', :event_time => '05-Nov-2022', :attendee_limit => 5, :category => 'Food', :location => 'Other Off Campus Place'},
+        {:title => 'WTF', :host => 'testuser', :joined =>'3', :people => ['Alicent Hightower', 'Daemon Targaryen', 'Mysaria'], :status => 1, :description => 'WTF IS THIS!', :event_time => '05-Nov-2022', :attendee_limit => 20, :category => 'Other', :location => 'Butler Library'},
+				{:title => 'Crazy Party', :host => 'Amy Hsu', :joined =>'5', :people => ['Mysaria', 'Daemon Targaryen', 'Alicent Hightower', 'testuser', 'Jackson Wang'], :status => 0, :description => 'Enjoy the EDM', :event_time => '20-Nov-2022', :attendee_limit => 10, :category => 'Entertainment', :location => 'East Campus'},
 ]
 
 events.each do |event|

@@ -16,6 +16,10 @@
     <%= select_tag "category_selected", options_for_select([ "Category","Food","Entertainment","Sports","Academic","Other"], "Category") %>
     </div>
 
+    <div> Events Location:
+      <%= select_tag "location_selected", options_for_select(['Location', 'Butler Library', 'Lerner Hall', 'John Jay', 'Dodge', 'Low Library', 'Uris', 'Mudd', 'Northwest Corner Building', 'International Affairs', 'Kent', 'Philosophy', 'Hamilton', 'Pulitzer', 'Mathematics', 'Avery', 'Fayerweather', 'Schermerhorn', 'Chandler', 'Pupin', 'Schapiro CEPSR', 'Faculty House', 'Barnard', 'Law School', 'Wallach', 'Hartley', 'Wien', 'East Campus', 'Other Off Campus Place'], "Location") %>
+    </div>
+
     <div> Status of the event:
     <%= select_tag "status_selected", options_for_select(["Status","Open","Closed"], "Status") %>
     </div>
