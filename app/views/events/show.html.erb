@@ -194,3 +194,8 @@
 <% end %>
   <%# </div>
 </div> %>
+
+<script> 
+  data = <%= raw @usernames.compact.to_json %>;
+  $('#comment_content').atwho({at:"@", 'data':data}); 
+</script>

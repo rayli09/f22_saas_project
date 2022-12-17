@@ -17,6 +17,7 @@ class EventsController < ApplicationController
         @attendees[person] = User.find_by(username: person)
       end
       @user_id = User.find_by(username: u).id
+      @usernames = User.pluck(:username)
     end
   
     def index
